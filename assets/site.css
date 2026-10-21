@@ -2,7 +2,11 @@
 :root {
   --bg: #0b0a0c; --bg2: #121014; --card: #161318; --ink: #f2eeef; --muted: #a79da1; --soft: #6f666a;
   --red: #ff3147; --ember: #ffb060; --line: rgba(255, 255, 255, .08); --line-red: rgba(255, 49, 71, .35);
-  --jp: "Noto Serif JP", serif; --ui: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ui: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --jp: "Shippori Mincho B1", "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+  --jpt: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -214,7 +218,7 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 }
 /* language switch + Japanese typography */
 nav a.lang-switch { margin-left: 8px; border: 1px solid var(--line-red); color: #ff8a96; justify-content: center; }
-body.lang-ja { font-family: Inter, "Noto Sans JP", system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.85; }
+body.lang-ja { font-family: "Inter", var(--jpt); line-height: 1.85; }
 body.lang-ja h1 { font-size: 40px; line-height: 1.25; letter-spacing: 0; }
 body.lang-ja h1 .jp, body.lang-ja h2 .jp { font-family: var(--ui); }
 body.lang-ja .lead { font-size: 18px; }
@@ -256,3 +260,33 @@ body.lang-ja .sem h3 { text-transform: none; letter-spacing: 0; }
 .facts.big { display: grid; gap: 10px; font-size: 17px; color: var(--ink); margin-top: 14px; }
 .facts.big li { padding: 12px 16px; border-radius: 12px; background: rgba(20, 12, 15, .6); border: 1px solid var(--line); }
 .sem li.now { color: #fff; font-weight: 600; } .sem li.now::before { content: "●"; color: var(--red); text-shadow: 0 0 10px rgba(255, 49, 71, .8); animation: breathe 2.5s ease-in-out infinite; }
+
+/* Typography (self-hosted fonts, see assets/fonts/fonts.css):
+   Bricolage Grotesque for headings and big numbers, Inter for text, JetBrains Mono for small labels,
+   Shippori Mincho B1 for Japanese accents and big kanji, Zen Kaku Gothic New for Japanese running text. */
+body { font-optical-sizing: auto; font-feature-settings: "cv11", "ss01"; }
+h1, h2, h3, .nm, .stat b, #gate .gate-name, .note h3 { font-family: var(--display); font-optical-sizing: auto; }
+h1 { font-weight: 800; letter-spacing: -1.2px; font-variation-settings: "opsz" 96; }
+h2 { font-weight: 700; letter-spacing: -.5px; }
+h3 { font-weight: 650; letter-spacing: -.2px; }
+.stat b { font-weight: 800; letter-spacing: -1.5px; }
+#gate .gate-name { font-weight: 800; letter-spacing: -1px; }
+.kicker, .tl .when, .note .when, .tag, #gate .gate-kicker, #gate .gate-hint, .stat span {
+  font-family: var(--mono); font-feature-settings: normal; }
+.kicker { letter-spacing: 2.5px; font-weight: 700; }
+#gate .gate-kicker { letter-spacing: 5px; font-weight: 700; }
+.tl .when, .note .when { letter-spacing: .5px; font-weight: 600; }
+.tag { font-weight: 600; letter-spacing: .2px; }
+.btn, #gate .gate-choose button b { font-family: var(--display); font-weight: 700; letter-spacing: .1px; }
+#gate .gate-choose button[data-lang="ja"] b { font-family: var(--jp); font-weight: 800; }
+.jp, .card .g, .mon, #fx .krow, #fx .hot span, .portrait .ph { font-family: var(--jp); }
+.card .g, #fx .krow, #fx .hot span, .mon { font-weight: 800; }
+h1 .jp, h2 .jp, #gate .gate-jp { font-weight: 500; }
+nav a i, h2 .jp.sub { font-family: var(--jpt); }
+.jabox p.jp { font-family: var(--jp); font-weight: 500; }
+/* Japanese pages: Latin stays Inter/Bricolage, Japanese uses Zen Kaku for text and Shippori Mincho for headings */
+body.lang-ja h1, body.lang-ja h2, body.lang-ja h3, body.lang-ja .note h3 { font-family: "Bricolage Grotesque", var(--jp); }
+body.lang-ja h1 { letter-spacing: 0; font-weight: 800; }
+body.lang-ja h2, body.lang-ja h3 { letter-spacing: .02em; }
+body.lang-ja h1 .jp, body.lang-ja h2 .jp { font-family: var(--display); }
+body.lang-ja .kicker { font-family: var(--mono), var(--jpt); }
