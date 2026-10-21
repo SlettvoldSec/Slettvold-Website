@@ -290,3 +290,14 @@ body.lang-ja h1 { letter-spacing: 0; font-weight: 800; }
 body.lang-ja h2, body.lang-ja h3 { letter-spacing: .02em; }
 body.lang-ja h1 .jp, body.lang-ja h2 .jp { font-family: var(--display); }
 body.lang-ja .kicker { font-family: var(--mono), var(--jpt); }
+
+/* header stays on top of the page content (the atmosphere block above sets main/footer to z-index 1);
+   the phone menu gets a solid panel so page text never shows through it */
+header.top { position: sticky; top: 0; z-index: 30; }
+@media (max-width: 860px) {
+  nav { background: #0c0709; box-shadow: 0 18px 40px rgba(0, 0, 0, .6); border-bottom: 1px solid var(--line-red);
+        max-height: calc(100vh - 62px); overflow-y: auto; }
+  nav a { border-radius: 10px; }
+  nav a:active, nav a.on { background: rgba(255, 49, 71, .08); }
+  nav a.lang-switch { align-self: flex-start; margin: 8px 0 0 10px; }
+}
