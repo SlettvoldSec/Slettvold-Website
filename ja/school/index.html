@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学歴 · スレットボルド・トミー</title>
+<meta name="description" content="Noroffのネットワーク＆ITセキュリティ課程：カリキュラム、試験プロジェクト（セキュアなインフラ構築、情報漏えい分析）、Azureの実習、CyberOps、Python。">
+<meta property="og:title" content="学歴 · スレットボルド・トミー">
+<meta property="og:description" content="Noroffのネットワーク＆ITセキュリティ課程：カリキュラム、試験プロジェクト（セキュアなインフラ構築、情報漏えい分析）、Azureの実習、CyberOps、Python。">
+<meta property="og:image" content="https://slettvold.org/assets/og.png">
+<link rel="alternate" hreflang="en" href="https://slettvold.org/school/">
+<link rel="alternate" hreflang="ja" href="https://slettvold.org/ja/school/">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body class="page-school lang-ja" data-lang="ja" data-other="/school/">
+<header class="top"><div class="wrap">
+  <a class="brand" href="/ja/"><span class="mon">ト</span><span class="nm">スレットボルド <b>トミー</b></span></a>
+  <button class="menu" aria-label="メニュー" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <nav><a href="/ja/japan/">日本<i>Japan</i></a><a href="/ja/work/">仕事<i>Work</i></a><a href="/ja/projects/">作品<i>Projects</i></a><a href="/ja/school/" class=on>学校<i>School</i></a><a href="/ja/hobbies/">趣味<i>Hobbies</i></a><a href="/ja/notes/">メモ<i>Notes</i></a><a class="lang-switch" href="/school/" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">English</a></nav>
+</div></header>
+<main class="wrap">
+<div class="kicker">学校</div>
+<h1>ネットワーク＆ITセキュリティ<span class="jp">Network &amp; IT Security</span></h1>
+<p class="lead">Noroff University College（ノロフ）の実践的な高等専門課程で、サーバー、ネットワーク、クラウド、そして何よりセキュリティを学んでいます。仕事をしながらオンラインで学習しており、2027年3月に修了予定です。</p>
+<div class="stats">
+  <div class="stat"><b data-count="120">120</b><span>単位</span></div>
+  <div class="stat"><b data-count="16">16</b><span>科目</span></div>
+  <div class="stat"><b data-count="4">4</b><span>学期</span></div>
+  <div class="stat"><b>2027</b><span>修了予定</span></div>
+</div>
+
+<h2>主な課題・プロジェクト<span class="jp">Selected work</span></h2>
+
+<div class="card case">
+  <div class="case-head"><span class="tag red">試験プロジェクト · 2026年3月</span><span class="tag">VMware · Linux · Nginx · rsync · UFW · SSH</span></div>
+  <h3>LNXE Corp：セキュアな仮想化インフラの設計と構築</h3>
+  <p>架空の社員10名のソフトウェア企業のために、IT環境全体をVMware Workstation Proで設計・構築・検証しました。堅牢化した2台のUbuntuサーバー（NginxのWebサーバーと独立したバックアップサーバー）、LinuxとWindows 11のクライアント、そして分離された有線・無線ネットワークで構成し、Cisco Packet Tracerで設計図を作成しました。</p>
+  <ul>
+    <li>IPアドレス設計とネットワーク分離（内部LANとNAT）で、ラテラルムーブメントを抑制。</li>
+    <li>OSの堅牢化：最小構成、鍵認証のみのSSH（パスワード認証は無効）、最小権限のユーザー管理、ファイル権限、パッチ管理、UFWによるファイアウォール、ログ監視。</li>
+    <li>SSH経由のrsyncによるバックアップと、実際の復元テスト。ランサムウェアを想定したRTO・RPOの設定。</li>
+    <li>外部・内部・無線の脅威に対するリスク分析と、多層防御（Defence in Depth）モデル。</li>
+    <li>接続性、SSHへの攻撃、ファイアウォール、バックアップと復元、無線セキュリティをすべて検証。</li>
+  </ul>
+  <div class="cta" style="margin-top:14px"><a class="btn line" href="/docs/LNXE-Corp-Exam-Project-Tommy-Slettvold.pdf" target="_blank" rel="noopener">レポート全文を読む（PDF・英語・51ページ）</a></div>
+</div>
+
+<div class="card case">
+  <div class="case-head"><span class="tag red">セキュリティと法律 · 2026年4月</span><span class="tag">GDPR · ポリシー · 倫理</span></div>
+  <h3>NordTech Solutions：情報漏えい事件の分析</h3>
+  <p>ノルウェーのクラウド企業で起きたスピアフィッシング攻撃についてのレポートです。盗まれた認証情報でどのように侵入されたか、どのセキュリティ対策が機能しなかったか、そして法的・倫理的な意味を分析しました。</p>
+  <ul>
+    <li>GDPRの観点からの評価：漏えいの通知義務、データ主体の権利、企業の責任。</li>
+    <li>同社のためのITセキュリティポリシーの作成と、再発防止のための提言。</li>
+    <li>カント倫理と功利主義による倫理的考察、攻撃者に適用されるサイバー犯罪の法律。</li>
+  </ul>
+</div>
+
+<div class="grid two">
+  <div class="card"><div class="g">雲</div><h3>Microsoft Azureの実習</h3><p>リソースグループ、仮想ネットワークと仮想マシン、DockerのWebアプリ、App Service上のWordPress、Cloud ShellによるNginx付きLinux VM、Blobストレージ、Microsoft Entra Cloud SyncによるハイブリッドID、ロールベースのアクセス制御、リソースロック、コスト管理、Infrastructure as Code。</p></div>
+  <div class="card"><div class="g">守</div><h3>クラウドセキュリティ</h3><p>Azureでのアイデンティティとアクセス管理、ネットワークセキュリティ、データ保護。最後は実技試験（VM、サイズ、クォータのトラブルシューティング）。</p></div>
+  <div class="card"><div class="g">監</div><h3>CyberOps</h3><p>Ubuntu上でのセキュリティ運用：SIEM、Wiresharkによる通信解析、ブルーチーム（防御）とレッドチーム（攻撃）のツール。</p></div>
+  <div class="card"><div class="g">碼</div><h3>Python</h3><p>実用的なスクリプト：パスワードチェッカー、請求書の計算、2進数変換、CSVファイルからの機器一覧の作成。</p></div>
+</div>
+
+<h2>カリキュラム<span class="jp">The programme</span></h2>
+<div class="courses">
+  <div class="sem"><h3>第1学期</h3><ul><li class="done">ITの基礎</li><li class="done">オペレーティングシステムとファイルシステム</li><li class="done">ネットワークインフラ</li></ul></div>
+  <div class="sem"><h3>第2学期</h3><ul><li class="done">Linux</li><li class="done">Microsoftサーバー技術</li><li class="done">クラウドコンピューティングの基礎</li><li class="done">情報セキュリティ入門</li><li class="done">試験プロジェクト1</li></ul></div>
+  <div class="sem"><h3>第3学期</h3><ul><li class="done">セキュリティと法律</li><li class="done">CyberOps</li><li class="done">クラウドセキュリティ</li></ul></div>
+  <div class="sem"><h3>第4学期</h3><ul><li class="done">プログラミング</li><li class="now">データベース</li><li class="next">エシカルハッキング</li><li class="next">コンピュータフォレンジック</li><li class="next">試験プロジェクト2</li></ul></div>
+</div>
+<p class="small" style="margin-top:10px">✓ 修了 · ● 学習中 · ○ これから。Noroffの課程説明（PNIS、120単位）に基づきます。</p>
+
+<h2>その他<span class="jp">Also</span></h2>
+<ul class="tl">
+  <li class="next"><div class="when">現在</div><h3>Microsoft Azure Fundamentals（AZ-900）</h3><p>資格取得に向けて学習中。</p></li>
+  <li><div class="when">これまで</div><h3>CCNAレベルのネットワーク知識</h3><p>ルーティング、スイッチング、TCP/IP、VPN、DNS。</p></li>
+  <li><div class="when">2008年 – 2012年</div><h3>ノルウェー王立空軍でのICT・通信支援</h3><p>ネットワーク、監視、障害の一次対応を実務で経験。</p></li>
+  <li><div class="when">2004年 – 2006年</div><h3>オーレ・ヴィー高等学校</h3><p>アート・デザイン専攻、のちに情報通信技術（ICT）専攻。</p></li>
+</ul>
+
+<h2>日本語<span class="jp">Japanese</span></h2>
+<p>毎日独学で勉強しています。主に自作の講座アプリ<a href="/onidojo/">Oni Dojo</a>を使い、次はJLPT N4を目指しています。</p>
+</main>
+<footer><div class="wrap">
+  <div><b>トミー・アンドレ・スレットボルド</b> · ノルウェー → 日本</div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="/onidojo/">Oni Dojo</a><a href="/onidojo/privacy.html">プライバシー</a></div>
+  <div class="small">© 2026 · Cookieもトラッキングも使用していません。</div>
+</div></footer>
+<script src="/assets/fx.js" defer></script>
+
+</body>
+</html>

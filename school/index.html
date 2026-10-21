@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School · Tommy Slettvold</title>
+<meta name="description" content="Network &amp; IT Security at Noroff: courses, exam projects (secure infrastructure, data-breach analysis), Azure cloud labs, CyberOps and Python.">
+<meta property="og:title" content="School · Tommy Slettvold">
+<meta property="og:description" content="Network &amp; IT Security at Noroff: courses, exam projects (secure infrastructure, data-breach analysis), Azure cloud labs, CyberOps and Python.">
+<meta property="og:image" content="https://slettvold.org/assets/og.png">
+<link rel="alternate" hreflang="en" href="https://slettvold.org/school/">
+<link rel="alternate" hreflang="ja" href="https://slettvold.org/ja/school/">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body class="page-school lang-en" data-lang="en" data-other="/ja/school/">
+<header class="top"><div class="wrap">
+  <a class="brand" href="/"><span class="mon">ト</span><span class="nm">Tommy <b>Slettvold</b></span></a>
+  <button class="menu" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <nav><a href="/japan/">Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/">Projects<i>作品</i></a><a href="/school/" class=on>School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/">Notes<i>メモ</i></a><a class="lang-switch" href="/ja/school/" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">日本語</a></nav>
+</div></header>
+<main class="wrap">
+<div class="kicker">School</div>
+<h1>Network &amp; IT Security<span class="jp">ネットワーク＆ITセキュリティ</span></h1>
+<p class="lead">A hands-on higher professional degree at Noroff University College: servers, networks, cloud and, above all, security. I study online alongside work, and I graduate in March 2027.</p>
+<div class="stats">
+  <div class="stat"><b data-count="120">120</b><span>credits</span></div>
+  <div class="stat"><b data-count="16">16</b><span>courses</span></div>
+  <div class="stat"><b data-count="4">4</b><span>semesters</span></div>
+  <div class="stat"><b>2027</b><span>graduation</span></div>
+</div>
+
+<h2>Selected work<span class="jp">課題・プロジェクト</span></h2>
+
+<div class="card case">
+  <div class="case-head"><span class="tag red">Exam project · March 2026</span><span class="tag">VMware · Linux · Nginx · rsync · UFW · SSH</span></div>
+  <h3>LNXE Corp — a secure virtualised infrastructure</h3>
+  <p>For a fictional ten-person software start-up, I designed, built and tested the whole IT environment in VMware Workstation Pro: two hardened Ubuntu servers (an Nginx web server and a separate backup server), Linux and Windows 11 clients, and a segmented wired and wireless network, documented in Cisco Packet Tracer.</p>
+  <ul>
+    <li>Network design with an IP plan and segmentation (internal LAN and NAT) to limit lateral movement.</li>
+    <li>Hardening: minimal installs, SSH with keys only (no passwords), least-privilege users, file permissions, patching, host firewall rules with UFW, logging.</li>
+    <li>Backups with rsync over SSH, plus a real restore test, and recovery targets (RTO and RPO) with ransomware in mind.</li>
+    <li>Risk analysis (external, internal and wireless threats) and a defence-in-depth model from the hardware layer to the people using it.</li>
+    <li>Everything validated: connectivity, SSH attacks, firewall rules, backup and restore, wireless security.</li>
+  </ul>
+  <div class="cta" style="margin-top:14px"><a class="btn line" href="/docs/LNXE-Corp-Exam-Project-Tommy-Slettvold.pdf" target="_blank" rel="noopener">Read the full report (PDF, 51 pages)</a></div>
+</div>
+
+<div class="card case">
+  <div class="case-head"><span class="tag red">Security and Law · April 2026</span><span class="tag">GDPR · policy · ethics</span></div>
+  <h3>NordTech Solutions — analysing a data breach</h3>
+  <p>A report on a spear-phishing attack at a Norwegian cloud company: how stolen credentials let the attacker in, which security practices failed, and what it means legally and ethically.</p>
+  <ul>
+    <li>GDPR assessment: breach notification, data subjects' rights, the company's obligations.</li>
+    <li>A rewritten IT security policy for the company, and recommendations against the next attack.</li>
+    <li>Ethics through Kantian and utilitarian lenses, and the cybercrime laws that apply to the attackers.</li>
+  </ul>
+</div>
+
+<div class="grid two">
+  <div class="card"><div class="g">雲</div><h3>Microsoft Azure labs</h3><p>Resource groups, virtual networks and VMs, a Docker web app, WordPress on App Service, a Linux VM with Nginx from Cloud Shell, Blob storage, hybrid identity with Microsoft Entra Cloud Sync, role-based access control, resource locks, cost management and infrastructure as code.</p></div>
+  <div class="card"><div class="g">守</div><h3>Cloud security</h3><p>Identity and access management, network security and data protection in Azure, finished with a practical exam (troubleshooting VMs, sizes and quotas).</p></div>
+  <div class="card"><div class="g">監</div><h3>CyberOps</h3><p>Security operations on Ubuntu: SIEM, Wireshark traffic analysis, and the tools of both the blue team (defence) and the red team (attack).</p></div>
+  <div class="card"><div class="g">碼</div><h3>Python</h3><p>Practical scripts: a password checker, invoice calculations, binary conversion and a device inventory read from CSV files.</p></div>
+</div>
+
+<h2>The programme<span class="jp">カリキュラム</span></h2>
+<div class="courses">
+  <div class="sem"><h3>Semester 1</h3><ul><li class="done">IT Foundations</li><li class="done">Operating and File Systems</li><li class="done">Network Infrastructure</li></ul></div>
+  <div class="sem"><h3>Semester 2</h3><ul><li class="done">Linux</li><li class="done">Microsoft Server Technologies</li><li class="done">Cloud Computing Foundations</li><li class="done">Introduction to Information Security</li><li class="done">Exam Project 1</li></ul></div>
+  <div class="sem"><h3>Semester 3</h3><ul><li class="done">Security and Law</li><li class="done">CyberOps</li><li class="done">Cloud Security</li></ul></div>
+  <div class="sem"><h3>Semester 4</h3><ul><li class="done">Programming</li><li class="now">Databases</li><li class="next">Ethical Hacking</li><li class="next">Computer Forensics</li><li class="next">Exam Project 2</li></ul></div>
+</div>
+<p class="small" style="margin-top:10px">✓ done · ● studying now · ○ still to come. Course plan from Noroff's programme description (PNIS, 120 credits).</p>
+
+<h2>Also<span class="jp">その他</span></h2>
+<ul class="tl">
+  <li class="next"><div class="when">Now</div><h3>Microsoft Azure Fundamentals (AZ-900)</h3><p>Studying for the certification.</p></li>
+  <li><div class="when">Background</div><h3>Networking at CCNA level</h3><p>Routing, switching, TCP/IP, VPN and DNS.</p></li>
+  <li><div class="when">2008 – 2012</div><h3>ICT and communications in the Royal Norwegian Air Force</h3><p>Networks, monitoring and first-line incident response, in practice.</p></li>
+  <li><div class="when">2004 – 2006</div><h3>Ole Vig upper secondary school</h3><p>Art &amp; Design, then Information and Communication Technology.</p></li>
+</ul>
+
+<h2>Japanese<span class="jp">日本語</span></h2>
+<p>Self-study every day, mostly with my own course <a href="/onidojo/">Oni Dojo</a>, aiming at JLPT N4 next.</p>
+</main>
+<footer><div class="wrap">
+  <div><b>Tommy André Slettvold</b> · Norway → 日本</div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="/onidojo/">Oni Dojo</a><a href="/onidojo/privacy.html">Privacy</a></div>
+  <div class="small">© 2026 · No cookies, no tracking.</div>
+</div></footer>
+<script src="/assets/fx.js" defer></script>
+
+</body>
+</html>

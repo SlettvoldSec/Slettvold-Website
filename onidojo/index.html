@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oni Dojo · Learn Japanese with Kurenai</title>
+<meta name="description" content="Learn Japanese from your first hiragana to JLPT N1 with Kurenai, your oni sensei. Guided lessons, natural voices, flashcards and conversations. No ads, no tracking.">
+<link rel="icon" href="favicon.png">
+<meta property="og:title" content="Oni Dojo · Learn Japanese with Kurenai">
+<meta property="og:description" content="From kana to JLPT N1: guided lessons, natural voices, flashcards and conversations. No ads, no tracking.">
+<meta property="og:image" content="https://slettvold.org/onidojo/img/hero.png">
+<style>
+  :root { --bg: #050304; --card: #12080b; --ink: #f6eef0; --muted: #b9a5a8; --red: #ff3147; --ember: #ffb060; --line: rgba(255, 70, 84, .18); }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a { color: #ff8a96; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  header.top { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: 3px; text-decoration: none; color: var(--ink); }
+  .brand img { width: 34px; height: 34px; border-radius: 9px; }
+  .brand span { color: var(--red); }
+  nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 15px; }
+  nav a:hover { color: var(--ink); }
+  .hero { position: relative; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); background: #0a0406; }
+  .hero img { display: block; width: 100%; height: auto; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 22px 0 8px; }
+  .btn { display: inline-block; padding: 14px 22px; border-radius: 12px; font-weight: 800; text-decoration: none; }
+  .btn.primary { background: var(--red); color: #12050a; box-shadow: 0 0 28px rgba(255, 49, 71, .35); }
+  .btn.ghost { border: 1px solid var(--line); color: var(--ink); }
+  .soon { color: var(--ember); font-size: 14px; font-weight: 700; letter-spacing: .5px; }
+  h2 { font-size: 30px; margin: 64px 0 8px; }
+  h2 small { display: block; font-size: 14px; color: var(--red); letter-spacing: 4px; font-weight: 800; margin-bottom: 4px; }
+  .lead { color: var(--muted); max-width: 680px; margin: 0 0 24px; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+  .card .g { font-size: 26px; color: var(--red); text-shadow: 0 0 14px rgba(255, 49, 71, .5); font-family: "Noto Serif JP", serif; }
+  .card b { display: block; margin: 6px 0 4px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .shots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .shots img { width: 100%; border-radius: 18px; border: 1px solid var(--line); }
+  .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .plan { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+  .plan.hot { border-color: var(--red); box-shadow: 0 0 0 1px var(--red), 0 0 30px rgba(255, 49, 71, .2); }
+  .plan .p { font-size: 26px; font-weight: 900; margin: 6px 0; }
+  .plan p { color: var(--muted); margin: 0; font-size: 15px; }
+  footer { margin: 72px 0 0; padding: 26px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+  footer a { color: var(--muted); }
+  @media (max-width: 760px) {
+    nav a:not(.keep) { display: none; }
+    .grid, .plans { grid-template-columns: 1fr; }
+    .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    h2 { font-size: 25px; margin-top: 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#"><img src="img/icon.png" alt="">ONI <span>DOJO</span></a>
+    <nav><a href="#learn">What you learn</a><a href="#premium">Premium</a><a class="keep" href="privacy.html">Privacy</a></nav>
+  </header>
+
+  <div class="hero"><img src="img/hero.png" alt="Oni Dojo — learn Japanese with Kurenai, your oni sensei"></div>
+  <div class="cta-row">
+    <span class="btn primary">Coming soon to Google Play</span>
+    <a class="btn ghost" href="mailto:tommy@slettvold.org?subject=Oni%20Dojo%20beta">Join the beta test</a>
+    <span class="soon">Android · Windows</span>
+  </div>
+
+  <h2 id="learn"><small>鬼道場</small>From your first hiragana to JLPT N1</h2>
+  <p class="lead">Oni Dojo is a complete Japanese course taught by Kurenai 紅, a slightly mischievous oni sensei. Every lesson walks you through new words, grammar, a short dialogue and a checkpoint, and every sentence is voiced.</p>
+  <div class="grid">
+    <div class="card"><div class="g">本</div><b>140 guided lessons</b><p>N5 to N1, with grammar explained in plain English and a checkpoint at the end of every lesson.</p></div>
+    <div class="card"><div class="g">声</div><b>Natural voices</b><p>Over 15,000 recorded clips, so you hear real pitch and rhythm in every word and sentence.</p></div>
+    <div class="card"><div class="g">札</div><b>Flashcards that stick</b><p>Spaced repetition for words, kanji and grammar, plus speaking cards that make you produce the word.</p></div>
+    <div class="card"><div class="g">会</div><b>Talk with Kurenai</b><p>Role-plays you answer by typing or out loud, with several right answers and branching endings.</p></div>
+    <div class="card"><div class="g">読</div><b>Stories at your level</b><p>44 graded stories and 38 culture articles, with a meter that shows how many words you already know.</p></div>
+    <div class="card"><div class="g">静</div><b>No ads, no tracking</b><p>Works offline. No ads, no analytics. An account is optional.</p></div>
+  </div>
+
+  <h2><small>見る</small>A look inside</h2>
+  <div class="shots">
+    <img src="img/01_home.jpg" alt="Home screen with today's dojo" loading="lazy">
+    <img src="img/02b_lesson.jpg" alt="A lesson with new words" loading="lazy">
+    <img src="img/05_talk.jpg" alt="Conversations with Kurenai" loading="lazy">
+    <img src="img/06_story.jpg" alt="A graded story with the known-word meter" loading="lazy">
+  </div>
+
+  <h2 id="premium"><small>プレミアム</small>Free to start</h2>
+  <p class="lead">All kana and the whole N5 course are free, with their stories, flashcards and games. Oni Dojo Premium opens N4 to N1 and every new lesson. One account works on your phone and your PC.</p>
+  <div class="plans">
+    <div class="plan"><b>Free</b><div class="p">0 kr</div><p>Hiragana, katakana and all of N5. No ads, no time limit.</p></div>
+    <div class="plan hot"><b>Premium</b><div class="p">Yearly or monthly</div><p>Everything up to N1, new lessons as they come. Yearly starts with 7 days free. Cancel any time in Google Play.</p></div>
+    <div class="plan"><b>Lifetime</b><div class="p">Pay once</div><p>Everything, forever, without a subscription.</p></div>
+  </div>
+
+  <footer>
+    <span>© 2026 <a href="/">Tommy Slettvold</a>, Norway</span>
+    <a href="privacy.html">Privacy policy</a>
+    <a href="privacy.html#delete">Delete your account</a>
+    <a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a>
+    <span>Voices: VOICEVOX:後鬼, VOICEVOX:玄野武宏, VOICEVOX:雀松朱司, VOICEVOX:冥鳴ひまり</span>
+  </footer>
+</div>
+</body>
+</html>
