@@ -37,7 +37,7 @@
     <h1>Choose a new password</h1>
     <p class="muted" id="who">For your Oni Dojo account.</p>
     <form id="f" autocomplete="on">
-      <label for="p1">New password (at least 8 characters)</label>
+      <label for="p1">New password (at least 8 characters, letters and digits)</label>
       <input id="p1" type="password" autocomplete="new-password" minlength="8" required>
       <label for="p2">Type it again</label>
       <input id="p2" type="password" autocomplete="new-password" minlength="8" required>
@@ -72,6 +72,7 @@
     e.preventDefault(); msg.className = 'msg'; msg.textContent = '';
     const a = document.getElementById('p1').value, b = document.getElementById('p2').value;
     if (a.length < 8) { msg.className = 'msg err'; msg.textContent = 'The password must be at least 8 characters.'; return; }
+    if (!(/[A-Za-z]/.test(a) && /[0-9]/.test(a))) { msg.className = 'msg err'; msg.textContent = 'Use both letters and digits in the password.'; return; }
     if (a !== b) { msg.className = 'msg err'; msg.textContent = 'The two passwords are not the same.'; return; }
     go.disabled = true; go.textContent = 'Saving…';
     try {
