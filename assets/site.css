@@ -8,6 +8,7 @@
   --jp: "Shippori Mincho B1", "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
   --jpt: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
 }
+:root { color-scheme: dark; }   /* the site is dark by design: stops browsers' "force dark" modes from recolouring it (they lightened the SVG diagrams) */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 var(--ui); -webkit-font-smoothing: antialiased; }
