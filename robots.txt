@@ -1,0 +1,6 @@
+# Hello, robots. And hello, human reading robots.txt: you're on the right track.
+User-agent: *
+Disallow: /dojo-vault/
+Disallow: /offline/
+
+Sitemap: https://slettvold.org/sitemap.xml

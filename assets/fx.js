@@ -7,7 +7,33 @@
   if (menu) menu.addEventListener('click', () => menu.setAttribute('aria-expanded', String(document.body.classList.toggle('nav-open'))));
   document.querySelectorAll('[data-set-lang]').forEach((a) => a.addEventListener('click', () => { try { localStorage.setItem('lang', a.dataset.setLang); } catch (e) {} }));
 
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // offline support and instant repeat visits (assets → /sw.js); pages are always fetched fresh when online
+  if ('serviceWorker' in navigator && location.protocol === 'https:') addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+
+  // for the curious ones with DevTools open
+  try {
+    console.log('%c鬼 slettvold.org%c\n[SYSTEM] mainframe accessed… welcome, visitor. 🕶️\n[SYSTEM] no trackers, no cookies, one small secret.\n[HINT]   view the page source. Found the flag? Tell me: https://slettvold.org/contact/',
+      'font: 800 20px system-ui; color: #ff3147; text-shadow: 0 0 8px rgba(255,49,71,.6)', 'font: 13px ui-monospace, monospace; color: #39ff7a; background: #021006; padding: 6px 10px; line-height: 1.6');
+  } catch (e) {}
+
+  // type "matrix" anywhere (outside a text field) for terminal mode; type it again to leave
+  const term = (on) => { document.documentElement.classList.toggle('term', on); try { sessionStorage.setItem('term', on ? '1' : ''); } catch (e) {}
+    document.querySelectorAll('.term-note').forEach((n) => n.remove());
+    if (on) { const n = document.createElement('div'); n.className = 'term-note'; n.textContent = '> terminal mode. type "matrix" again to exit'; document.body.appendChild(n); setTimeout(() => n.remove(), 4000); } };
+  try { if (sessionStorage.getItem('term') === '1') document.documentElement.classList.add('term'); } catch (e) {}
+  let typed = '';
+  addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test((e.target && e.target.tagName) || '')) return;
+    if (e.key.length !== 1) return;
+    typed = (typed + e.key.toLowerCase()).slice(-6);
+    if (typed === 'matrix') { term(!document.documentElement.classList.contains('term')); typed = ''; }
+  });
+  // five quick clicks on the portrait: a little spin
+  const face = document.querySelector('.portrait');
+  if (face) { let n = 0, t = 0; face.addEventListener('click', () => { const now = Date.now(); n = now - t < 600 ? n + 1 : 1; t = now;
+    if (n >= 5) { n = 0; face.classList.remove('spin'); void face.offsetWidth; face.classList.add('spin'); } }); }
+
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('calm');
   const phone = matchMedia('(max-width: 760px)').matches;
   const rows = ['日本　夢　道　挑戦　努力　鬼火　未来', '一歩　守　紅　学　旅　鬼　言葉', '夢　鬼　道場　未来　日本　努力　守'];
   const fx = document.createElement('div'); fx.id = 'fx'; fx.setAttribute('aria-hidden', 'true');

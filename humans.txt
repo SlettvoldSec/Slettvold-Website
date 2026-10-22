@@ -1,0 +1,20 @@
+/* TEAM */
+  Built by: Tommy André Slettvold
+  Role: everything (design, code, words, coffee)
+  Contact: tommy [at] slettvold.org
+  From: Norway, heading for 日本
+  GitHub: https://github.com/SlettvoldSec
+
+/* THANKS */
+  Fonts: Bricolage Grotesque, Inter, JetBrains Mono, Shippori Mincho B1, Zen Kaku Gothic New, Atkinson Hyperlegible (SIL OFL)
+  Voices in Oni Dojo: VOICEVOX
+
+/* SITE */
+  Last update: 2026/10/22
+  Language: English / 日本語
+  Standards: HTML, CSS, a little JavaScript
+  Components: none. No frameworks, no trackers, no cookies.
+  Software: a small Python build script, GitHub Pages, Supabase (EU) for the contact form
+
+/* SECRET */
+  There is one. It starts in the page source.

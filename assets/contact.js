@@ -1,6 +1,12 @@
 /* Contact & feedback form (pages/en|ja/contact.html). Sends the message straight to Tommy's Supabase function in the EU
    (server/functions/feedback); no third-party scripts, no cookies. ?about=app|website|idea|contact preselects the topic. */
 (() => {
+  // live clocks for Norway and Tokyo
+  const clocks = document.querySelectorAll('#clock [data-tz]');
+  const tick = () => clocks.forEach((el) => { try { el.textContent = new Intl.DateTimeFormat(document.documentElement.lang === 'ja' ? 'ja-JP' : 'en-GB',
+    { timeZone: el.dataset.tz, weekday: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date()); } catch (e) {} });
+  if (clocks.length) { tick(); setInterval(tick, 20000); }
+
   const f = document.getElementById('fb'); if (!f) return;
   const ja = document.body.dataset.lang === 'ja';
   const T = ja ? { send: '送信中…', ok: 'ありがとうございます。メッセージを受け取りました。', short: 'メッセージをもう少し詳しく書いてください。',
