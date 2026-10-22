@@ -301,3 +301,60 @@ header.top { position: sticky; top: 0; z-index: 30; }
   nav a:active, nav a.on { background: rgba(255, 49, 71, .08); }
   nav a.lang-switch { align-self: flex-start; margin: 8px 0 0 10px; }
 }
+
+/* contact & feedback form */
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; margin-top: 22px; align-items: start; }
+.contact .other { display: grid; gap: 14px; }
+.form label { display: block; font-size: 14px; color: var(--muted); margin: 14px 0 6px; }
+.form label:first-child { margin-top: 0; }
+.form .opt { color: var(--soft); font-size: 13px; }
+.form input, .form select, .form textarea { width: 100%; padding: 11px 13px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, .14);
+  background: rgba(8, 4, 6, .7); color: var(--ink); font: inherit; font-size: 16px; }
+.form textarea { resize: vertical; min-height: 140px; }
+.form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(255, 49, 71, .2); }
+.form .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form button { margin-top: 16px; border: 0; cursor: pointer; font-size: 16px; }
+.form button:disabled { opacity: .6; cursor: default; }
+.form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.fb-msg { min-height: 22px; margin: 10px 0 0; font-size: 15px; } .fb-msg.err { color: #ff8a96; } .fb-msg.ok { color: #5ee08a; }
+.form.done { text-align: center; padding: 34px 22px; }
+ul.plain { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 6px; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } .form .row2 { grid-template-columns: 1fr; } }
+.prose { max-width: 760px; } .prose h2 { font-size: 21px; margin-top: 30px; } .prose p { color: #e6dde0; }
+/* at a glance (Japan page) and tool stack (Work page) */
+.small.gap { margin-top: 10px; }
+.glance { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+.glance > div { padding: 16px; border-radius: 14px; border: 1px solid var(--line-red); background: linear-gradient(160deg, rgba(42, 9, 16, .7), rgba(14, 10, 12, .7)); }
+.glance span { display: block; font-family: var(--mono), var(--jpt); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--red); }
+.glance b { display: block; font-family: var(--display), var(--jpt); font-size: 18px; margin: 6px 0 2px; line-height: 1.3; }
+.glance i { font-style: normal; color: var(--muted); font-size: 14px; }
+.stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+.stack > div { padding: 18px; border-radius: 14px; border: 1px solid var(--line); background: rgba(20, 12, 15, .7); }
+.stack h3 { font-size: 15px; color: var(--red); margin-bottom: 8px; }
+.stack span { display: inline-block; margin: 4px 6px 0 0; padding: 4px 10px; border-radius: 8px; font-size: 14px; background: rgba(255, 255, 255, .05); border: 1px solid var(--line); }
+@media (max-width: 860px) { .glance { grid-template-columns: 1fr 1fr; } .stack { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .glance { grid-template-columns: 1fr; } }
+/* Oni Dojo on the projects page: screenshot strip and architecture diagram */
+h3.sub { font-size: 20px; margin: 34px 0 10px; }
+.shots { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 18px 2px 14px; margin-top: 8px; scrollbar-color: var(--line-red) transparent; }
+.shots figure { flex: 0 0 200px; margin: 0; scroll-snap-align: start; }
+.shots img { width: 200px; height: auto; border-radius: 18px; border: 1px solid var(--line-red); box-shadow: 0 10px 30px rgba(0, 0, 0, .45); display: block; }
+.shots figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+.shots:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; border-radius: 12px; }
+.archbox { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: rgba(12, 7, 9, .7); padding: 10px; }
+.arch { display: block; width: 100%; min-width: 760px; height: auto; font-family: var(--ui), var(--jpt); }
+.arch .grp { fill: rgba(255, 255, 255, .02); stroke: var(--line); stroke-dasharray: 4 4; }
+.arch .bx { fill: rgba(30, 14, 18, .9); stroke: rgba(255, 255, 255, .14); }
+.arch .bx.hot { stroke: var(--line-red); }
+.arch .g { fill: var(--red); font-family: var(--mono), var(--jpt); font-size: 12px; letter-spacing: 1px; font-weight: 700; }
+.arch .h { fill: var(--ink); font-size: 15px; font-weight: 700; }
+.arch .s { fill: var(--muted); font-size: 12px; }
+.arch .li { font-size: 13px; }
+.arch .ar { stroke: var(--red); stroke-width: 1.6; }
+.arch .ah { fill: var(--red); }
+.arch .al { fill: #ffb0b8; font-size: 11px; }
+@media (max-width: 860px) { .shots figure { flex-basis: 160px; } .shots img { width: 160px; } }
+.arch .ln { stroke: rgba(255, 255, 255, .3); stroke-width: 1.6; }
+.case-fig { margin-top: 16px; }
+
+[hidden] { display: none !important; }

@@ -2,6 +2,11 @@
    a little parallax, glowing cards that follow the pointer, and sections that fade in. Light on phones, paused in
    background tabs, and fully still for people who prefer reduced motion. No libraries, no tracking. */
 (() => {
+  // phone menu and language switch (no inline handlers: the Content-Security-Policy only allows scripts from files)
+  const menu = document.querySelector('header .menu');
+  if (menu) menu.addEventListener('click', () => menu.setAttribute('aria-expanded', String(document.body.classList.toggle('nav-open'))));
+  document.querySelectorAll('[data-set-lang]').forEach((a) => a.addEventListener('click', () => { try { localStorage.setItem('lang', a.dataset.setLang); } catch (e) {} }));
+
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const phone = matchMedia('(max-width: 760px)').matches;
   const rows = ['日本　夢　道　挑戦　努力　鬼火　未来', '一歩　守　紅　学　旅　鬼　言葉', '夢　鬼　道場　未来　日本　努力　守'];

@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
 <title>学歴 · スレットボルド・トミー</title>
 <meta name="description" content="Noroffのネットワーク＆ITセキュリティ課程：カリキュラム、試験プロジェクト（セキュアなインフラ構築、情報漏えい分析）、Azureの実習、CyberOps、Python。">
 <meta property="og:title" content="学歴 · スレットボルド・トミー">
@@ -20,8 +23,8 @@
 <body class="page-school lang-ja" data-lang="ja" data-other="/school/">
 <header class="top"><div class="wrap">
   <a class="brand" href="/ja/"><span class="mon">ト</span><span class="nm">スレットボルド <b>トミー</b></span></a>
-  <button class="menu" aria-label="メニュー" onclick="document.body.classList.toggle('nav-open')">☰</button>
-  <nav><a href="/ja/japan/">日本<i>Japan</i></a><a href="/ja/work/">仕事<i>Work</i></a><a href="/ja/projects/">作品<i>Projects</i></a><a href="/ja/school/" class=on>学校<i>School</i></a><a href="/ja/hobbies/">趣味<i>Hobbies</i></a><a href="/ja/notes/">メモ<i>Notes</i></a><a class="lang-switch" href="/school/" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">English</a></nav>
+  <button class="menu" aria-label="メニュー" aria-expanded="false">☰</button>
+  <nav><a href="/ja/japan/">日本<i>Japan</i></a><a href="/ja/work/">仕事<i>Work</i></a><a href="/ja/projects/">作品<i>Projects</i></a><a href="/ja/school/" class=on>学校<i>School</i></a><a href="/ja/hobbies/">趣味<i>Hobbies</i></a><a href="/ja/notes/">メモ<i>Notes</i></a><a href="/ja/contact/">連絡<i>Contact</i></a><a class="lang-switch" href="/school/" hreflang="en" data-set-lang="en">English</a></nav>
 </div></header>
 <main class="wrap">
 <div class="kicker">学校</div>
@@ -47,6 +50,8 @@
     <li>外部・内部・無線の脅威に対するリスク分析と、多層防御（Defence in Depth）モデル。</li>
     <li>接続性、SSHへの攻撃、ファイアウォール、バックアップと復元、無線セキュリティをすべて検証。</li>
   </ul>
+  <div class="archbox case-fig"><svg class="arch" viewBox="0 0 900 430" role="img" aria-label="LNXE Corpのネットワーク：ルーター、スイッチ、無線アクセスポイント。内部のホストオンリーLAN 192.168.10.0/24にWebサーバー、バックアップサーバー、2台のクライアント。NATは更新の外向き通信のみ"><defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker></defs><rect class="bx" x="20" y="16" width="190" height="64" rx="10"/><text class="h" x="32" y="40">インターネット</text><text class="s" x="32" y="60">パッケージリポジトリ</text><rect class="bx" x="270" y="16" width="300" height="64" rx="10"/><text class="h" x="282" y="40">VMware NAT · 192.168.40.0/24</text><text class="s" x="282" y="60">更新の外向き通信のみ・内向きなし</text><line class="ar" x1="270" y1="48" x2="212" y2="48" marker-end="url(#ah2)"/><rect class="bx hot" x="20" y="116" width="190" height="64" rx="10"/><text class="h" x="32" y="140">LNXE-RTR01</text><text class="s" x="32" y="160">ゲートウェイ・ルーティング</text><rect class="bx hot" x="270" y="116" width="190" height="64" rx="10"/><text class="h" x="282" y="140">LNXE-SW01</text><text class="s" x="282" y="160">有線の集約</text><rect class="bx hot" x="520" y="116" width="190" height="64" rx="10"/><text class="h" x="532" y="140">LNXE-WIFI01</text><text class="s" x="532" y="160">WPA2-PSK · AES</text><line class="ln" x1="210" y1="148" x2="270" y2="148"/><line class="ln" x1="460" y1="148" x2="520" y2="148"/><line class="ln" x1="365" y1="180" x2="365" y2="214"/><rect class="grp" x="10" y="214" width="880" height="206" rx="14"/><text class="g" x="26" y="240">内部LAN 192.168.10.0/24 · ホストオンリー（ブリッジ接続なし）</text><rect class="bx hot" x="24" y="256" width="205" height="112" rx="10"/><text class="h" x="36" y="280">LNXE-WEB01 · .10</text><text class="s" x="36" y="300">Ubuntu · Nginx</text><text class="s" x="36" y="318">UFW：22・80・443のみ</text><text class="s" x="36" y="336">SSHはLAN内から鍵認証のみ</text><text class="s" x="36" y="354">2つ目のNIC → 更新用NAT</text><rect class="bx hot" x="244" y="256" width="205" height="112" rx="10"/><text class="h" x="256" y="280">LNXE-BAK01 · .20</text><text class="s" x="256" y="300">Ubuntu · /srv/backups/web01</text><text class="s" x="256" y="318">SSHはWEB01からのみ</text><text class="s" x="256" y="336">パスワード認証は無効</text><text class="s" x="256" y="354">2つ目のNIC → 更新用NAT</text><rect class="bx" x="464" y="256" width="205" height="112" rx="10"/><text class="h" x="476" y="280">LNXE-CLI01 · .30</text><text class="s" x="476" y="300">Ubuntu デスクトップ</text><text class="s" x="476" y="318">テスト用クライアント</text><rect class="bx" x="684" y="256" width="196" height="112" rx="10"/><text class="h" x="696" y="280">WIN11CLI01 · .40</text><text class="s" x="696" y="300">Windows 11</text><text class="s" x="696" y="318">テスト用クライアント</text><path class="ar" d="M126 368 Q126 392 236 392 Q346 392 346 372" fill="none" marker-end="url(#ah2)"/><text class="al" x="236" y="412" text-anchor="middle">SSH経由のrsync・復元テスト済み</text></svg></div>
+  <p class="small">構築したネットワーク：サーバーとクライアントは分離された内部LANに置き、NATは更新のみに使用。バックアップにはWebサーバーからしか接続できません。</p>
   <div class="cta" style="margin-top:14px"><a class="btn line" href="/docs/LNXE-Corp-Exam-Project-Tommy-Slettvold.pdf" target="_blank" rel="noopener">レポート全文を読む（PDF・英語・51ページ）</a></div>
 </div>
 
@@ -90,7 +95,7 @@
 </main>
 <footer><div class="wrap">
   <div><b>トミー・アンドレ・スレットボルド</b> · ノルウェー → 日本</div>
-  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="/onidojo/">Oni Dojo</a><a href="/onidojo/privacy.html">プライバシー</a></div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/ja/contact/">お問い合わせ・ご意見</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/ja/privacy/">プライバシー</a></div>
   <div class="small">© 2026 · Cookieもトラッキングも使用していません。</div>
 </div></footer>
 <script src="/assets/fx.js" defer></script>

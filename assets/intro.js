@@ -2,8 +2,11 @@
    Shown once per browser session on the home pages; the choice is remembered (localStorage "lang"), and choosing
    the other language goes straight to that version. Without JavaScript the page simply shows as normal. */
 (() => {
+  // a page can use its own words and session key through data attributes on <body>: data-gate-key, data-gate-kicker,
+  // data-gate-name, data-gate-jp, data-gate-tag (the Oni Dojo pages do)
+  const D = document.body.dataset, key = D.gateKey || 'entered';
   let seen = false, saved = null;
-  try { seen = sessionStorage.getItem('entered') === '1'; saved = localStorage.getItem('lang'); } catch (e) {}
+  try { seen = sessionStorage.getItem(key) === '1'; saved = localStorage.getItem('lang'); } catch (e) {}
   if (seen) return;
   const here = document.body.dataset.lang, other = document.body.dataset.other;
   const guess = saved || ((navigator.language || '').toLowerCase().startsWith('ja') ? 'ja' : here);
@@ -24,10 +27,10 @@
       </g>
     </svg>
     <div class="gate-text">
-      <div class="gate-kicker">slettvold.org</div>
-      <div class="gate-name">Tommy André Slettvold</div>
-      <div class="gate-jp">トミー・アンドレ・スレットボルド</div>
-      <div class="gate-tag">Norway → 日本 · IT security · apps · Japanese</div>
+      <div class="gate-kicker">${D.gateKicker || 'slettvold.org'}</div>
+      <div class="gate-name">${D.gateName || 'Tommy André Slettvold'}</div>
+      <div class="gate-jp">${D.gateJp || 'トミー・アンドレ・スレットボルド'}</div>
+      <div class="gate-tag">${D.gateTag || 'Norway → 日本 · IT security · apps · Japanese'}</div>
       <div class="gate-choose">
         <button data-lang="en" class="${guess === 'en' ? 'pref' : ''}"><b>Enter</b><span>English</span></button>
         <button data-lang="ja" class="${guess === 'ja' ? 'pref' : ''}"><b>入る</b><span>日本語</span></button>
@@ -39,7 +42,7 @@
   requestAnimationFrame(() => gate.classList.add('show'));
 
   const enter = (lang) => {
-    try { sessionStorage.setItem('entered', '1'); localStorage.setItem('lang', lang); } catch (e) {}
+    try { sessionStorage.setItem(key, '1'); localStorage.setItem('lang', lang); } catch (e) {}
     if (lang !== here && other) { gate.classList.add('leave'); setTimeout(() => { location.href = other; }, 450); return; }
     gate.classList.add('through');
     setTimeout(() => document.documentElement.classList.remove('gate-open'), 350);

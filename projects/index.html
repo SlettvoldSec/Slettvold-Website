@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
 <title>Projects · Tommy Slettvold</title>
 <meta name="description" content="Apps and projects by Tommy Slettvold: Oni Dojo (learn Japanese), Tokoyami Oni Radio, security research.">
 <meta property="og:title" content="Projects · Tommy Slettvold">
@@ -19,8 +22,8 @@
 <body class="page-projects lang-en" data-lang="en" data-other="/ja/projects/">
 <header class="top"><div class="wrap">
   <a class="brand" href="/"><span class="mon">ト</span><span class="nm">Tommy <b>Slettvold</b></span></a>
-  <button class="menu" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">☰</button>
-  <nav><a href="/japan/">Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/" class=on>Projects<i>作品</i></a><a href="/school/">School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/">Notes<i>メモ</i></a><a class="lang-switch" href="/ja/projects/" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">日本語</a></nav>
+  <button class="menu" aria-label="Menu" aria-expanded="false">☰</button>
+  <nav><a href="/japan/">Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/" class=on>Projects<i>作品</i></a><a href="/school/">School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/">Notes<i>メモ</i></a><a href="/contact/">Contact<i>連絡</i></a><a class="lang-switch" href="/ja/projects/" hreflang="ja" data-set-lang="ja">日本語</a></nav>
 </div></header>
 <main class="wrap">
 <div class="kicker">Projects</div>
@@ -28,14 +31,21 @@
 <p class="lead">Mostly tools I wanted for myself while learning Japanese, built and shipped under the name SlettvoldSec.</p>
 
 <h2 id="onidojo">Oni Dojo<span class="jp">鬼道場</span></h2>
-<div class="proj">
-  <img src="/onidojo/img/01_home.jpg" alt="Oni Dojo home screen" loading="lazy">
-  <div>
-    <p>A complete Japanese course from kana to JLPT N1, taught by Kurenai, a mischievous oni sensei. 140 guided lessons, over 15,000 voice recordings, spaced-repetition flashcards, graded stories, speaking practice and conversations you answer out loud.</p>
-    <span class="tag red">Windows</span><span class="tag red">Android</span><span class="tag">Electron · Capacitor · Supabase</span>
-    <div class="cta" style="margin-top:14px"><a class="btn red" href="/onidojo/">Visit Oni Dojo</a></div>
-  </div>
-</div>
+<p>A complete Japanese course from kana to JLPT N1, taught by Kurenai, a mischievous oni sensei. 140 guided lessons, over 15,000 voice recordings, spaced-repetition flashcards, graded stories, speaking practice and conversations you answer out loud. Coming to Google Play: kana and N5 free, Premium for N4 to N1.</p>
+<span class="tag red">Windows</span><span class="tag red">Android</span><span class="tag">Electron · Capacitor · Supabase</span>
+<div class="cta" style="margin-top:14px"><a class="btn red" href="/onidojo/">Visit Oni Dojo</a></div>
+<div class="shots" tabindex="0"><figure><img src="/img/onidojo/01_home.jpg" alt="Home: today's dojo" width="360" height="640" loading="lazy"><figcaption>Home: today's dojo</figcaption></figure><figure><img src="/img/onidojo/04_kana.jpg" alt="Hiragana with sound and writing" width="360" height="640" loading="lazy"><figcaption>Hiragana with sound and writing</figcaption></figure><figure><img src="/img/onidojo/02b_lesson.jpg" alt="A lesson: new words" width="360" height="640" loading="lazy"><figcaption>A lesson: new words</figcaption></figure><figure><img src="/img/onidojo/05_talk.jpg" alt="Conversations with Kurenai" width="360" height="640" loading="lazy"><figcaption>Conversations with Kurenai</figcaption></figure><figure><img src="/img/onidojo/06_story.jpg" alt="Graded story with known-word meter" width="360" height="640" loading="lazy"><figcaption>Graded story with known-word meter</figcaption></figure><figure><img src="/img/onidojo/07_cards.jpg" alt="Spaced-repetition flashcards" width="360" height="640" loading="lazy"><figcaption>Spaced-repetition flashcards</figcaption></figure><figure><img src="/img/onidojo/03_trail.jpg" alt="The lesson trail" width="360" height="640" loading="lazy"><figcaption>The lesson trail</figcaption></figure><figure><img src="/img/onidojo/08_mydojo.jpg" alt="Honest progress page" width="360" height="640" loading="lazy"><figcaption>Honest progress page</figcaption></figure></div>
+
+<h3 class="sub">How it's built</h3>
+<div class="archbox"><svg class="arch" viewBox="0 0 900 390" role="img" aria-label="How Oni Dojo is built"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker></defs><rect class="grp" x="10" y="10" width="260" height="370" rx="14"/><text class="g" x="26" y="38">On the learner's device</text><rect class="bx hot" x="24" y="56" width="112" height="64" rx="10"/><text class="h" x="36" y="80">Windows PC</text><text class="s" x="36" y="100">Electron</text><rect class="bx hot" x="146" y="56" width="112" height="64" rx="10"/><text class="h" x="158" y="80">Android</text><text class="s" x="158" y="100">Capacitor 8</text><text class="h" x="30" y="160">One shared JavaScript app</text><text class="s li" x="30" y="190">· Works offline</text><text class="s li" x="30" y="220">· 140 lessons, flashcards, stories</text><text class="s li" x="30" y="250">· 15,797 pre-recorded voice clips</text><text class="s li" x="30" y="280">· Progress stays on the device</text><rect class="grp" x="350" y="10" width="250" height="370" rx="14"/><text class="g" x="366" y="38">Supabase · Frankfurt (EU)</text><rect class="bx" x="364" y="56" width="222" height="64" rx="10"/><text class="h" x="376" y="80">Auth</text><text class="s" x="376" y="100">email code · password reset</text><rect class="bx" x="364" y="136" width="222" height="64" rx="10"/><text class="h" x="376" y="160">Postgres + RLS</text><text class="s" x="376" y="180">accounts · access · purchases</text><rect class="bx" x="364" y="216" width="222" height="64" rx="10"/><text class="h" x="376" y="240">Edge Functions</text><text class="s" x="376" y="260">purchases · feedback · deletion</text><rect class="bx" x="364" y="296" width="222" height="64" rx="10"/><text class="h" x="376" y="320">Storage</text><text class="s" x="376" y="340">signed lesson updates</text><rect class="bx" x="680" y="56" width="210" height="64" rx="10"/><text class="h" x="692" y="80">Resend</text><text class="s" x="692" y="100">account emails (EU)</text><rect class="bx" x="680" y="196" width="210" height="84" rx="10"/><text class="h" x="692" y="220">Google Play</text><text class="s" x="692" y="240">Billing on the phone</text><text class="s" x="692" y="260">Developer API checks</text><rect class="bx" x="680" y="296" width="210" height="64" rx="10"/><text class="h" x="692" y="320">GitHub Actions</text><text class="s" x="692" y="340">tests · signed builds</text><line class="ar" x1="270" y1="88" x2="362" y2="88" marker-end="url(#ah)"/><text class="al" x="316.0" y="81" text-anchor="middle">sign in</text><line class="ar" x1="270" y1="248" x2="362" y2="248" marker-end="url(#ah)"/><text class="al" x="316.0" y="241" text-anchor="middle">purchase check</text><line class="ar" x1="362" y1="328" x2="272" y2="328" marker-end="url(#ah)"/><text class="al" x="317.0" y="321" text-anchor="middle">signed updates</text><line class="ar" x1="588" y1="248" x2="678" y2="248" marker-end="url(#ah)"/><text class="al" x="633.0" y="241" text-anchor="middle">verify</text><line class="ar" x1="588" y1="88" x2="678" y2="88" marker-end="url(#ah)"/><text class="al" x="633.0" y="81" text-anchor="middle">emails</text></svg></div>
+<ul class="facts big">
+  <li><b>Offline first.</b> Lessons, audio and progress live on the device. An account is optional, so most learners never send me any data.</li>
+  <li><b>Purchases checked on the server.</b> The phone buys through Google Play; an edge function asks the Google Play Developer API whether each purchase is real before anything unlocks, so patched stores can't fake Premium.</li>
+  <li><b>Locked-down database.</b> Row-level security on every table, no public write access to purchases or access levels, and accounts deleted with everything they own (GDPR).</li>
+  <li><b>Signed updates.</b> New lessons for the PC app are signed, and the app refuses anything that doesn't match its built-in public key.</li>
+  <li><b>Voices recorded in advance.</b> Every sentence is rendered with VOICEVOX at build time and checked against the app's own furigana, so the app never needs a speech server.</li>
+  <li><b>Automated builds.</b> GitHub Actions validates the content, runs syntax checks and builds the signed Android bundle for Google Play.</li>
+</ul>
 
 <h2 id="radio">Tokoyami Oni Radio<span class="jp">ラジオ</span></h2>
 <div class="proj">
@@ -50,11 +60,11 @@
 <p>Bug-bounty work through Intigriti: reconnaissance, attack-surface analysis and responsible disclosure. Details stay private, as they should.</p>
 
 <h2>This website<span class="jp">このサイト</span></h2>
-<p>Hand-written HTML on GitHub Pages: fast, free, and without cookies or tracking.</p>
+<p>Hand-written HTML on GitHub Pages, built by a small Python script: self-hosted fonts, a strict Content-Security-Policy that only runs scripts from this site, no cookies, no analytics and no third-party requests. The contact form posts straight to my own Supabase function in the EU.</p>
 </main>
 <footer><div class="wrap">
   <div><b>Tommy André Slettvold</b> · Norway → 日本</div>
-  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="/onidojo/">Oni Dojo</a><a href="/onidojo/privacy.html">Privacy</a></div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/contact/">Contact &amp; feedback</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/privacy/">Privacy</a></div>
   <div class="small">© 2026 · No cookies, no tracking.</div>
 </div></footer>
 <script src="/assets/fx.js" defer></script>

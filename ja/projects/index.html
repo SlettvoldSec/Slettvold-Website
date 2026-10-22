@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
 <title>作品 · スレットボルド・トミー</title>
 <meta name="description" content="スレットボルド・トミーのアプリと作品：Oni Dojo（日本語学習）、Tokoyami Oni Radio、セキュリティリサーチ。">
 <meta property="og:title" content="作品 · スレットボルド・トミー">
@@ -20,8 +23,8 @@
 <body class="page-projects lang-ja" data-lang="ja" data-other="/projects/">
 <header class="top"><div class="wrap">
   <a class="brand" href="/ja/"><span class="mon">ト</span><span class="nm">スレットボルド <b>トミー</b></span></a>
-  <button class="menu" aria-label="メニュー" onclick="document.body.classList.toggle('nav-open')">☰</button>
-  <nav><a href="/ja/japan/">日本<i>Japan</i></a><a href="/ja/work/">仕事<i>Work</i></a><a href="/ja/projects/" class=on>作品<i>Projects</i></a><a href="/ja/school/">学校<i>School</i></a><a href="/ja/hobbies/">趣味<i>Hobbies</i></a><a href="/ja/notes/">メモ<i>Notes</i></a><a class="lang-switch" href="/projects/" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">English</a></nav>
+  <button class="menu" aria-label="メニュー" aria-expanded="false">☰</button>
+  <nav><a href="/ja/japan/">日本<i>Japan</i></a><a href="/ja/work/">仕事<i>Work</i></a><a href="/ja/projects/" class=on>作品<i>Projects</i></a><a href="/ja/school/">学校<i>School</i></a><a href="/ja/hobbies/">趣味<i>Hobbies</i></a><a href="/ja/notes/">メモ<i>Notes</i></a><a href="/ja/contact/">連絡<i>Contact</i></a><a class="lang-switch" href="/projects/" hreflang="en" data-set-lang="en">English</a></nav>
 </div></header>
 <main class="wrap">
 <div class="kicker">作品</div>
@@ -29,14 +32,21 @@
 <p class="lead">ほとんどは、日本語を勉強しながら「こんなものが欲しい」と思って作ったツールです。SlettvoldSecの名前で開発・公開しています。</p>
 
 <h2 id="onidojo">Oni Dojo<span class="jp">鬼道場</span></h2>
-<div class="proj">
-  <img src="/onidojo/img/01_home.jpg" alt="Oni Dojoのホーム画面" loading="lazy">
-  <div>
-    <p>かなからJLPT N1まで学べる日本語講座アプリです。先生は、ちょっといたずら好きな鬼の「紅（くれない）」。140のレッスン、15,000以上の音声、間隔反復のフラッシュカード、段階別の読み物、発音練習、そして声で答える会話練習があります。</p>
-    <span class="tag red">Windows</span><span class="tag red">Android</span><span class="tag">Electron · Capacitor · Supabase</span>
-    <div class="cta" style="margin-top:14px"><a class="btn red" href="/onidojo/">Oni Dojoを見る（英語）</a></div>
-  </div>
-</div>
+<p>かなからJLPT N1まで学べる日本語講座アプリです。先生は、ちょっといたずら好きな鬼の「紅（くれない）」。140のレッスン、15,000以上の音声、間隔反復のフラッシュカード、段階別の読み物、発音練習、そして声で答える会話練習があります。Google Playで配信予定です。かなとN5は無料、N4〜N1はプレミアムです。</p>
+<span class="tag red">Windows</span><span class="tag red">Android</span><span class="tag">Electron · Capacitor · Supabase</span>
+<div class="cta" style="margin-top:14px"><a class="btn red" href="/onidojo/ja.html">Oni Dojoを見る</a></div>
+<div class="shots" tabindex="0"><figure><img src="/img/onidojo/01_home.jpg" alt="ホーム：今日の道場" width="360" height="640" loading="lazy"><figcaption>ホーム：今日の道場</figcaption></figure><figure><img src="/img/onidojo/04_kana.jpg" alt="音声と書き取りのひらがな" width="360" height="640" loading="lazy"><figcaption>音声と書き取りのひらがな</figcaption></figure><figure><img src="/img/onidojo/02b_lesson.jpg" alt="レッスン：新しい単語" width="360" height="640" loading="lazy"><figcaption>レッスン：新しい単語</figcaption></figure><figure><img src="/img/onidojo/05_talk.jpg" alt="紅との会話練習" width="360" height="640" loading="lazy"><figcaption>紅との会話練習</figcaption></figure><figure><img src="/img/onidojo/06_story.jpg" alt="既知語メーター付きの読み物" width="360" height="640" loading="lazy"><figcaption>既知語メーター付きの読み物</figcaption></figure><figure><img src="/img/onidojo/07_cards.jpg" alt="間隔反復フラッシュカード" width="360" height="640" loading="lazy"><figcaption>間隔反復フラッシュカード</figcaption></figure><figure><img src="/img/onidojo/03_trail.jpg" alt="レッスンの道" width="360" height="640" loading="lazy"><figcaption>レッスンの道</figcaption></figure><figure><img src="/img/onidojo/08_mydojo.jpg" alt="正直な進捗ページ" width="360" height="640" loading="lazy"><figcaption>正直な進捗ページ</figcaption></figure></div>
+
+<h3 class="sub">構成と仕組み</h3>
+<div class="archbox"><svg class="arch" viewBox="0 0 900 390" role="img" aria-label="Oni Dojoの構成"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker></defs><rect class="grp" x="10" y="10" width="260" height="370" rx="14"/><text class="g" x="26" y="38">学習者の端末</text><rect class="bx hot" x="24" y="56" width="112" height="64" rx="10"/><text class="h" x="36" y="80">Windows PC</text><text class="s" x="36" y="100">Electron</text><rect class="bx hot" x="146" y="56" width="112" height="64" rx="10"/><text class="h" x="158" y="80">Android</text><text class="s" x="158" y="100">Capacitor 8</text><text class="h" x="30" y="160">共通のJavaScriptアプリ</text><text class="s li" x="30" y="190">· オフラインで動作</text><text class="s li" x="30" y="220">· 140レッスン・カード・読み物</text><text class="s li" x="30" y="250">· 15,797の録音済み音声</text><text class="s li" x="30" y="280">· 進捗は端末に保存</text><rect class="grp" x="350" y="10" width="250" height="370" rx="14"/><text class="g" x="366" y="38">Supabase · フランクフルト（EU）</text><rect class="bx" x="364" y="56" width="222" height="64" rx="10"/><text class="h" x="376" y="80">認証</text><text class="s" x="376" y="100">メールコード・パスワード再設定</text><rect class="bx" x="364" y="136" width="222" height="64" rx="10"/><text class="h" x="376" y="160">Postgres + RLS</text><text class="s" x="376" y="180">アカウント・権限・購入</text><rect class="bx" x="364" y="216" width="222" height="64" rx="10"/><text class="h" x="376" y="240">Edge Functions</text><text class="s" x="376" y="260">購入確認・ご意見・削除</text><rect class="bx" x="364" y="296" width="222" height="64" rx="10"/><text class="h" x="376" y="320">Storage</text><text class="s" x="376" y="340">署名付きレッスン更新</text><rect class="bx" x="680" y="56" width="210" height="64" rx="10"/><text class="h" x="692" y="80">Resend</text><text class="s" x="692" y="100">アカウントのメール（EU）</text><rect class="bx" x="680" y="196" width="210" height="84" rx="10"/><text class="h" x="692" y="220">Google Play</text><text class="s" x="692" y="240">端末で課金</text><text class="s" x="692" y="260">Developer APIで検証</text><rect class="bx" x="680" y="296" width="210" height="64" rx="10"/><text class="h" x="692" y="320">GitHub Actions</text><text class="s" x="692" y="340">テスト・署名付きビルド</text><line class="ar" x1="270" y1="88" x2="362" y2="88" marker-end="url(#ah)"/><text class="al" x="316.0" y="81" text-anchor="middle">ログイン</text><line class="ar" x1="270" y1="248" x2="362" y2="248" marker-end="url(#ah)"/><text class="al" x="316.0" y="241" text-anchor="middle">購入確認</text><line class="ar" x1="362" y1="328" x2="272" y2="328" marker-end="url(#ah)"/><text class="al" x="317.0" y="321" text-anchor="middle">署名付き更新</text><line class="ar" x1="588" y1="248" x2="678" y2="248" marker-end="url(#ah)"/><text class="al" x="633.0" y="241" text-anchor="middle">検証</text><line class="ar" x1="588" y1="88" x2="678" y2="88" marker-end="url(#ah)"/><text class="al" x="633.0" y="81" text-anchor="middle">メール</text></svg></div>
+<ul class="facts big">
+  <li><b>オフラインファースト。</b>レッスン、音声、進捗は端末内にあります。アカウントは任意なので、ほとんどの学習者のデータは私に送られません。</li>
+  <li><b>購入はサーバーで検証。</b>購入はGoogle Playで行い、Edge FunctionがGoogle Play Developer APIで本物かどうかを確認してから解放します。改造ストアによる偽の購入は通りません。</li>
+  <li><b>堅牢なデータベース。</b>全テーブルに行レベルセキュリティを設定し、購入や権限への公開書き込みはできません。アカウント削除時は関連データもすべて削除します（GDPR）。</li>
+  <li><b>署名付きアップデート。</b>PC版の新しいレッスンには署名があり、アプリに組み込まれた公開鍵と一致しないものは受け付けません。</li>
+  <li><b>音声は事前に録音。</b>すべての文をビルド時にVOICEVOXで生成し、アプリのふりがなと照合しています。音声サーバーは不要です。</li>
+  <li><b>自動ビルド。</b>GitHub Actionsでコンテンツの検証、構文チェック、Google Play向けの署名付きAndroidバンドルの作成を行います。</li>
+</ul>
 
 <h2 id="radio">Tokoyami Oni Radio<span class="jp">Radio</span></h2>
 <div class="proj">
@@ -51,11 +61,11 @@
 <p>Intigritiでのバグバウンティ活動：偵察、アタックサーフェス分析、責任ある開示。詳細は非公開です。</p>
 
 <h2>このサイト<span class="jp">This website</span></h2>
-<p>GitHub Pagesで公開している手書きのHTMLです。速くて無料、Cookieもトラッキングもありません。</p>
+<p>GitHub Pagesで公開している手書きのHTMLを、小さなPythonスクリプトでビルドしています。フォントは自前で配信し、このサイトのスクリプトしか実行しない厳格なContent-Security-Policyを設定。Cookie、アクセス解析、外部へのリクエストはありません。お問い合わせフォームはEUにある自分のSupabase関数に直接送信されます。</p>
 </main>
 <footer><div class="wrap">
   <div><b>トミー・アンドレ・スレットボルド</b> · ノルウェー → 日本</div>
-  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="/onidojo/">Oni Dojo</a><a href="/onidojo/privacy.html">プライバシー</a></div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/ja/contact/">お問い合わせ・ご意見</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/ja/privacy/">プライバシー</a></div>
   <div class="small">© 2026 · Cookieもトラッキングも使用していません。</div>
 </div></footer>
 <script src="/assets/fx.js" defer></script>

@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
 <title>School · Tommy Slettvold</title>
 <meta name="description" content="Network &amp; IT Security at Noroff: courses, exam projects (secure infrastructure, data-breach analysis), Azure cloud labs, CyberOps and Python.">
 <meta property="og:title" content="School · Tommy Slettvold">
@@ -19,8 +22,8 @@
 <body class="page-school lang-en" data-lang="en" data-other="/ja/school/">
 <header class="top"><div class="wrap">
   <a class="brand" href="/"><span class="mon">ト</span><span class="nm">Tommy <b>Slettvold</b></span></a>
-  <button class="menu" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">☰</button>
-  <nav><a href="/japan/">Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/">Projects<i>作品</i></a><a href="/school/" class=on>School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/">Notes<i>メモ</i></a><a class="lang-switch" href="/ja/school/" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">日本語</a></nav>
+  <button class="menu" aria-label="Menu" aria-expanded="false">☰</button>
+  <nav><a href="/japan/">Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/">Projects<i>作品</i></a><a href="/school/" class=on>School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/">Notes<i>メモ</i></a><a href="/contact/">Contact<i>連絡</i></a><a class="lang-switch" href="/ja/school/" hreflang="ja" data-set-lang="ja">日本語</a></nav>
 </div></header>
 <main class="wrap">
 <div class="kicker">School</div>
@@ -46,6 +49,8 @@
     <li>Risk analysis (external, internal and wireless threats) and a defence-in-depth model from the hardware layer to the people using it.</li>
     <li>Everything validated: connectivity, SSH attacks, firewall rules, backup and restore, wireless security.</li>
   </ul>
+  <div class="archbox case-fig"><svg class="arch" viewBox="0 0 900 430" role="img" aria-label="LNXE Corp network: router, switch and wireless access point; internal host-only LAN 192.168.10.0/24 with web server, backup server and two clients; NAT used only for outbound updates"><defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker></defs><rect class="bx" x="20" y="16" width="190" height="64" rx="10"/><text class="h" x="32" y="40">Internet</text><text class="s" x="32" y="60">package repositories</text><rect class="bx" x="270" y="16" width="300" height="64" rx="10"/><text class="h" x="282" y="40">VMware NAT · 192.168.40.0/24</text><text class="s" x="282" y="60">outbound updates only · no inbound</text><line class="ar" x1="270" y1="48" x2="212" y2="48" marker-end="url(#ah2)"/><rect class="bx hot" x="20" y="116" width="190" height="64" rx="10"/><text class="h" x="32" y="140">LNXE-RTR01</text><text class="s" x="32" y="160">gateway · routing</text><rect class="bx hot" x="270" y="116" width="190" height="64" rx="10"/><text class="h" x="282" y="140">LNXE-SW01</text><text class="s" x="282" y="160">wired distribution</text><rect class="bx hot" x="520" y="116" width="190" height="64" rx="10"/><text class="h" x="532" y="140">LNXE-WIFI01</text><text class="s" x="532" y="160">WPA2-PSK · AES</text><line class="ln" x1="210" y1="148" x2="270" y2="148"/><line class="ln" x1="460" y1="148" x2="520" y2="148"/><line class="ln" x1="365" y1="180" x2="365" y2="214"/><rect class="grp" x="10" y="214" width="880" height="206" rx="14"/><text class="g" x="26" y="240">INTERNAL LAN 192.168.10.0/24 · HOST-ONLY (NO BRIDGED NETWORKING)</text><rect class="bx hot" x="24" y="256" width="205" height="112" rx="10"/><text class="h" x="36" y="280">LNXE-WEB01 · .10</text><text class="s" x="36" y="300">Ubuntu · Nginx</text><text class="s" x="36" y="318">UFW: only 22, 80, 443</text><text class="s" x="36" y="336">SSH from the LAN, keys only</text><text class="s" x="36" y="354">2nd NIC → NAT for updates</text><rect class="bx hot" x="244" y="256" width="205" height="112" rx="10"/><text class="h" x="256" y="280">LNXE-BAK01 · .20</text><text class="s" x="256" y="300">Ubuntu · /srv/backups/web01</text><text class="s" x="256" y="318">SSH only from WEB01</text><text class="s" x="256" y="336">passwords disabled</text><text class="s" x="256" y="354">2nd NIC → NAT for updates</text><rect class="bx" x="464" y="256" width="205" height="112" rx="10"/><text class="h" x="476" y="280">LNXE-CLI01 · .30</text><text class="s" x="476" y="300">Ubuntu desktop</text><text class="s" x="476" y="318">test client</text><rect class="bx" x="684" y="256" width="196" height="112" rx="10"/><text class="h" x="696" y="280">WIN11CLI01 · .40</text><text class="s" x="696" y="300">Windows 11</text><text class="s" x="696" y="318">test client</text><path class="ar" d="M126 368 Q126 392 236 392 Q346 392 346 372" fill="none" marker-end="url(#ah2)"/><text class="al" x="236" y="412" text-anchor="middle">rsync over SSH · tested restore</text></svg></div>
+  <p class="small">The network as built: servers and clients on an isolated internal LAN, NAT only for updates, and backups that only the web server can reach.</p>
   <div class="cta" style="margin-top:14px"><a class="btn line" href="/docs/LNXE-Corp-Exam-Project-Tommy-Slettvold.pdf" target="_blank" rel="noopener">Read the full report (PDF, 51 pages)</a></div>
 </div>
 
@@ -89,7 +94,7 @@
 </main>
 <footer><div class="wrap">
   <div><b>Tommy André Slettvold</b> · Norway → 日本</div>
-  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="/onidojo/">Oni Dojo</a><a href="/onidojo/privacy.html">Privacy</a></div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/contact/">Contact &amp; feedback</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/privacy/">Privacy</a></div>
   <div class="small">© 2026 · No cookies, no tracking.</div>
 </div></footer>
 <script src="/assets/fx.js" defer></script>

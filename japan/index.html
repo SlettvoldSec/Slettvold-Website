@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
 <title>Road to Japan · Tommy Slettvold</title>
 <meta name="description" content="Why I&#x27;m learning Japanese, how I study, and my plan to work in IT and security in Japan.">
 <meta property="og:title" content="Road to Japan · Tommy Slettvold">
@@ -19,14 +22,21 @@
 <body class="page-japan lang-en" data-lang="en" data-other="/ja/japan/">
 <header class="top"><div class="wrap">
   <a class="brand" href="/"><span class="mon">ト</span><span class="nm">Tommy <b>Slettvold</b></span></a>
-  <button class="menu" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">☰</button>
-  <nav><a href="/japan/" class=on>Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/">Projects<i>作品</i></a><a href="/school/">School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/">Notes<i>メモ</i></a><a class="lang-switch" href="/ja/japan/" hreflang="ja" onclick="try{localStorage.setItem('lang','ja')}catch(e){}">日本語</a></nav>
+  <button class="menu" aria-label="Menu" aria-expanded="false">☰</button>
+  <nav><a href="/japan/" class=on>Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/">Projects<i>作品</i></a><a href="/school/">School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/">Notes<i>メモ</i></a><a href="/contact/">Contact<i>連絡</i></a><a class="lang-switch" href="/ja/japan/" hreflang="ja" data-set-lang="ja">日本語</a></nav>
 </div></header>
 <main class="wrap">
 <div class="kicker">Road to Japan</div>
 <h1>Working in Japan<span class="jp">日本で働く</span></h1>
 <p class="lead">My goal is a job in IT support or security in Japan. I'm studying Japanese every day, finishing my IT security degree, and I can move as soon as I have an offer.</p>
 <span class="tag red">Open to offers in Japan</span><span class="tag">IT support</span><span class="tag">Security / fraud prevention</span><span class="tag">Customer support (English, Norwegian)</span>
+
+<div class="glance">
+  <div><span>Japanese</span><b>JLPT N5 passed</b><i>Studying for N4</i></div>
+  <div><span>Visa</span><b>Looking for sponsorship</b><i>Engineer / Specialist in Humanities / International Services</i></div>
+  <div><span>Available</span><b>As soon as there's an offer</b><i>Graduating in March 2027</i></div>
+  <div><span>Résumé</span><b>履歴書 &amp; 職務経歴書 ready</b><i><a href="/contact/?about=contact">Ask for a copy</a></i></div>
+</div>
 
 <h2>自己紹介<span class="jp sub">Introduction, in Japanese</span></h2>
 <div class="jabox">
@@ -53,7 +63,7 @@
 </main>
 <footer><div class="wrap">
   <div><b>Tommy André Slettvold</b> · Norway → 日本</div>
-  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="/onidojo/">Oni Dojo</a><a href="/onidojo/privacy.html">Privacy</a></div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/contact/">Contact &amp; feedback</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/privacy/">Privacy</a></div>
   <div class="small">© 2026 · No cookies, no tracking.</div>
 </div></footer>
 <script src="/assets/fx.js" defer></script>

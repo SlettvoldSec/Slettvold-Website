@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
 <title>メモ · スレットボルド・トミー</title>
 <meta name="description" content="スレットボルド・トミーの近況：アプリ、勉強、日本への道。">
 <meta property="og:title" content="メモ · スレットボルド・トミー">
@@ -20,24 +23,28 @@
 <body class="page-notes lang-ja" data-lang="ja" data-other="/notes/">
 <header class="top"><div class="wrap">
   <a class="brand" href="/ja/"><span class="mon">ト</span><span class="nm">スレットボルド <b>トミー</b></span></a>
-  <button class="menu" aria-label="メニュー" onclick="document.body.classList.toggle('nav-open')">☰</button>
-  <nav><a href="/ja/japan/">日本<i>Japan</i></a><a href="/ja/work/">仕事<i>Work</i></a><a href="/ja/projects/">作品<i>Projects</i></a><a href="/ja/school/">学校<i>School</i></a><a href="/ja/hobbies/">趣味<i>Hobbies</i></a><a href="/ja/notes/" class=on>メモ<i>Notes</i></a><a class="lang-switch" href="/notes/" hreflang="en" onclick="try{localStorage.setItem('lang','en')}catch(e){}">English</a></nav>
+  <button class="menu" aria-label="メニュー" aria-expanded="false">☰</button>
+  <nav><a href="/ja/japan/">日本<i>Japan</i></a><a href="/ja/work/">仕事<i>Work</i></a><a href="/ja/projects/">作品<i>Projects</i></a><a href="/ja/school/">学校<i>School</i></a><a href="/ja/hobbies/">趣味<i>Hobbies</i></a><a href="/ja/notes/" class=on>メモ<i>Notes</i></a><a href="/ja/contact/">連絡<i>Contact</i></a><a class="lang-switch" href="/notes/" hreflang="en" data-set-lang="en">English</a></nav>
 </div></header>
 <main class="wrap">
 <div class="kicker">メモ</div>
 <h1>メモ<span class="jp">Notes</span></h1>
 <p class="lead">アプリ、勉強、日本への道についての短い近況報告。新しい順です。</p>
 
-<article class="note" id="oni-dojo-play"><div class="when">2026年10月</div><h3>Oni DojoがGoogle Playに登場します</h3>
-<p>Oni Dojoは、自分が欲しかった日本語講座として作り始めました。今ではWindowsとAndroidで動き、ネオンの鬼の面になった紅（くれない）、15,000以上の音声、そして声で答えられる会話練習があります。</p>
-<p>Android版では、かなとN5のコースがすべて無料です。プレミアムでN1まですべてのレッスンが使えます。広告もトラッキングもありません。もうすぐクローズドテストを始めます。参加したい方は<a href="mailto:tommy@slettvold.org?subject=Oni%20Dojo%20beta">ご連絡ください</a>。</p></article>
+<article class="note" id="review"><div class="when">2026年10月22日 · 約1分で読めます</div><h3>Oni DojoがGoogleの審査に入りました</h3>
+<p>今日、バージョン3.8.0をGoogle Playに提出しました。ここまでにはコード以外の作業もたくさんありました。支払いプロフィール、データセーフティのフォーム、レーティング、プライバシーポリシー、すべての購入をGoogleに確認するサーバー、そしてSPF・DKIM・DMARCを設定した自分のドメインからのアカウントメールです。</p>
+<p>一番楽しかったのはセキュリティの部分です。購入はサーバーで検証してから解放し、データベースでは各アカウントが自分の行にしかアクセスできません。アカウントを作らなければ、アプリはあなたが誰かを知る必要もありません。全体の構成は<a href="/ja/projects/#onidojo">作品ページ</a>の図をご覧ください。不具合やアイデアがあれば<a href="/ja/contact/?about=app">お知らせください</a>。</p></article>
 
-<article class="note" id="hello"><div class="when">2026年10月</div><h3>ホームページを開設しました</h3>
+<article class="note" id="oni-dojo-play"><div class="when">2026年10月 · 約1分で読めます</div><h3>Oni DojoがGoogle Playに登場します</h3>
+<p>Oni Dojoは、自分が欲しかった日本語講座として作り始めました。今ではWindowsとAndroidで動き、ネオンの鬼の面になった紅（くれない）、15,000以上の音声、そして声で答えられる会話練習があります。</p>
+<p>Android版では、かなとN5のコースがすべて無料です。プレミアムでN1まですべてのレッスンが使えます。広告もトラッキングもありません。</p></article>
+
+<article class="note" id="hello"><div class="when">2026年10月 · 約1分で読めます</div><h3>ホームページを開設しました</h3>
 <p>作っているもの、勉強していること、そして日本で働くまでの道のりを紹介する場所です。日本語の練習にもなるので、レベルが上がるにつれて、自分の日本語でも書いていきます。</p></article>
 </main>
 <footer><div class="wrap">
   <div><b>トミー・アンドレ・スレットボルド</b> · ノルウェー → 日本</div>
-  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="/onidojo/">Oni Dojo</a><a href="/onidojo/privacy.html">プライバシー</a></div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/ja/contact/">お問い合わせ・ご意見</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/ja/privacy/">プライバシー</a></div>
   <div class="small">© 2026 · Cookieもトラッキングも使用していません。</div>
 </div></footer>
 <script src="/assets/fx.js" defer></script>

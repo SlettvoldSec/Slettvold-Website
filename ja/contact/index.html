@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
+<title>お問い合わせ・ご意見 · スレットボルド・トミー</title>
+<meta name="description" content="スレットボルド・トミーへのお問い合わせ、求人のご連絡、Oni Dojoやこのサイトへのご意見・アイデアはこちらから。">
+<meta property="og:title" content="お問い合わせ・ご意見 · スレットボルド・トミー">
+<meta property="og:description" content="スレットボルド・トミーへのお問い合わせ、求人のご連絡、Oni Dojoやこのサイトへのご意見・アイデアはこちらから。">
+<meta property="og:image" content="https://slettvold.org/assets/og.png">
+<link rel="alternate" hreflang="en" href="https://slettvold.org/contact/">
+<link rel="alternate" hreflang="ja" href="https://slettvold.org/ja/contact/">
+<link rel="icon" href="/favicon.png">
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/zenkaku-400-a.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body class="page-contact lang-ja" data-lang="ja" data-other="/contact/">
+<header class="top"><div class="wrap">
+  <a class="brand" href="/ja/"><span class="mon">ト</span><span class="nm">スレットボルド <b>トミー</b></span></a>
+  <button class="menu" aria-label="メニュー" aria-expanded="false">☰</button>
+  <nav><a href="/ja/japan/">日本<i>Japan</i></a><a href="/ja/work/">仕事<i>Work</i></a><a href="/ja/projects/">作品<i>Projects</i></a><a href="/ja/school/">学校<i>School</i></a><a href="/ja/hobbies/">趣味<i>Hobbies</i></a><a href="/ja/notes/">メモ<i>Notes</i></a><a href="/ja/contact/" class=on>連絡<i>Contact</i></a><a class="lang-switch" href="/contact/" hreflang="en" data-set-lang="en">English</a></nav>
+</div></header>
+<main class="wrap">
+<div class="kicker">お問い合わせ</div>
+<h1>お問い合わせ・ご意見<span class="jp">Contact &amp; feedback</span></h1>
+<p class="lead">求人のご連絡、Oni Dojoの不具合、このサイトへのご意見、新しい機能のアイデアなど、どんなことでもお気軽にどうぞ。すべてのメッセージに私自身が目を通します。</p>
+
+<div class="contact">
+  <form id="fb" class="card form" novalidate>
+    <label for="fb-kind">お問い合わせの種類</label>
+    <select id="fb-kind" name="kind">
+      <option value="contact">トミーへのメッセージ（求人・協業・ご質問）</option>
+      <option value="app">Oni Dojo：不具合・改善点</option>
+      <option value="idea">Oni Dojoや新しいアプリのアイデア</option>
+      <option value="website">このサイトについて</option>
+      <option value="other">その他</option>
+    </select>
+    <label for="fb-message">メッセージ</label>
+    <textarea id="fb-message" name="message" rows="7" maxlength="4000" required placeholder="英語でも日本語でも大丈夫です。"></textarea>
+    <div class="row2">
+      <div><label for="fb-name">お名前 <span class="opt">（任意）</span></label><input id="fb-name" name="name" maxlength="80" autocomplete="name"></div>
+      <div><label for="fb-email">メールアドレス <span class="opt">（任意・返信をご希望の場合）</span></label><input id="fb-email" name="email" type="email" maxlength="200" autocomplete="email"></div>
+    </div>
+    <div class="hp" aria-hidden="true"><label for="fb-website">空欄のままにしてください</label><input id="fb-website" name="website" tabindex="-1" autocomplete="off"></div>
+    <button class="btn red" type="submit">送信する</button>
+    <p id="fb-msg" class="fb-msg" role="status"></p>
+    <p class="small">メッセージはEU内に保存され、私だけが読みます。12か月以内に削除します（ご希望があればすぐに削除します）。トラッキングやメールマガジンはありません。<a href="/ja/privacy/">プライバシー</a></p>
+  </form>
+  <div id="fb-done" class="card form done" hidden><div class="g">感謝</div><h3>ありがとうございます</h3><p>メッセージを受け取りました。メールアドレスをご記入いただいた場合は、通常数日以内にお返事します。</p></div>
+
+  <aside class="other">
+    <div class="card"><div class="g">連絡</div><h3>その他の連絡先</h3>
+      <ul class="plain">
+        <li><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a></li>
+        <li><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a></li>
+        <li><a href="https://github.com/SlettvoldSec" rel="me">GitHub · SlettvoldSec</a></li>
+      </ul>
+    </div>
+    <div class="card"><div class="g">履歴</div><h3>履歴書・職務経歴書</h3><p>英文CV、履歴書、職務経歴書はご依頼に応じてお送りします。個人情報を含むため公開していません。「トミーへのメッセージ」からご連絡ください。</p></div>
+  </aside>
+</div>
+</main>
+<footer><div class="wrap">
+  <div><b>トミー・アンドレ・スレットボルド</b> · ノルウェー → 日本</div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/ja/contact/">お問い合わせ・ご意見</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/ja/privacy/">プライバシー</a></div>
+  <div class="small">© 2026 · Cookieもトラッキングも使用していません。</div>
+</div></footer>
+<script src="/assets/fx.js" defer></script>
+<script src="/assets/contact.js" defer></script>
+</body>
+</html>

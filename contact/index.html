@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
+<title>Contact &amp; feedback · Tommy Slettvold</title>
+<meta name="description" content="Send Tommy Slettvold a message, a job inquiry, feedback on Oni Dojo or this website, or an idea.">
+<meta property="og:title" content="Contact &amp; feedback · Tommy Slettvold">
+<meta property="og:description" content="Send Tommy Slettvold a message, a job inquiry, feedback on Oni Dojo or this website, or an idea.">
+<meta property="og:image" content="https://slettvold.org/assets/og.png">
+<link rel="alternate" hreflang="en" href="https://slettvold.org/contact/">
+<link rel="alternate" hreflang="ja" href="https://slettvold.org/ja/contact/">
+<link rel="icon" href="/favicon.png">
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body class="page-contact lang-en" data-lang="en" data-other="/ja/contact/">
+<header class="top"><div class="wrap">
+  <a class="brand" href="/"><span class="mon">ト</span><span class="nm">Tommy <b>Slettvold</b></span></a>
+  <button class="menu" aria-label="Menu" aria-expanded="false">☰</button>
+  <nav><a href="/japan/">Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/">Projects<i>作品</i></a><a href="/school/">School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/">Notes<i>メモ</i></a><a href="/contact/" class=on>Contact<i>連絡</i></a><a class="lang-switch" href="/ja/contact/" hreflang="ja" data-set-lang="ja">日本語</a></nav>
+</div></header>
+<main class="wrap">
+<div class="kicker">Contact</div>
+<h1>Contact &amp; feedback<span class="jp">お問い合わせ・ご意見</span></h1>
+<p class="lead">A job inquiry, a bug in Oni Dojo, something on this site that could be better, or an idea for a new feature: I read every message myself.</p>
+
+<div class="contact">
+  <form id="fb" class="card form" novalidate>
+    <label for="fb-kind">What is it about?</label>
+    <select id="fb-kind" name="kind">
+      <option value="contact">A message to Tommy (job, collaboration, question)</option>
+      <option value="app">Oni Dojo: a bug or something to improve</option>
+      <option value="idea">An idea for Oni Dojo or a new app</option>
+      <option value="website">This website</option>
+      <option value="other">Something else</option>
+    </select>
+    <label for="fb-message">Your message</label>
+    <textarea id="fb-message" name="message" rows="7" maxlength="4000" required placeholder="Write as much or as little as you like."></textarea>
+    <div class="row2">
+      <div><label for="fb-name">Name <span class="opt">(optional)</span></label><input id="fb-name" name="name" maxlength="80" autocomplete="name"></div>
+      <div><label for="fb-email">Email <span class="opt">(optional, if you want an answer)</span></label><input id="fb-email" name="email" type="email" maxlength="200" autocomplete="email"></div>
+    </div>
+    <div class="hp" aria-hidden="true"><label for="fb-website">Leave this empty</label><input id="fb-website" name="website" tabindex="-1" autocomplete="off"></div>
+    <button class="btn red" type="submit">Send message</button>
+    <p id="fb-msg" class="fb-msg" role="status"></p>
+    <p class="small">Your message is stored in the EU and only I read it. It is deleted within 12 months, sooner if you ask. No tracking, no newsletter. <a href="/privacy/">Privacy</a></p>
+  </form>
+  <div id="fb-done" class="card form done" hidden><div class="g">感謝</div><h3>Thank you!</h3><p>Your message has arrived. If you left an email address, I'll answer as soon as I can, usually within a few days.</p></div>
+
+  <aside class="other">
+    <div class="card"><div class="g">連絡</div><h3>Other ways</h3>
+      <ul class="plain">
+        <li><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a></li>
+        <li><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a></li>
+        <li><a href="https://github.com/SlettvoldSec" rel="me">GitHub · SlettvoldSec</a></li>
+      </ul>
+    </div>
+    <div class="card"><div class="g">履歴</div><h3>CV and 履歴書</h3><p>English CV, 履歴書 and 職務経歴書 are sent on request. They contain personal details, so they aren't public. Choose "A message to Tommy" and ask.</p></div>
+  </aside>
+</div>
+</main>
+<footer><div class="wrap">
+  <div><b>Tommy André Slettvold</b> · Norway → 日本</div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/contact/">Contact &amp; feedback</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/privacy/">Privacy</a></div>
+  <div class="small">© 2026 · No cookies, no tracking.</div>
+</div></footer>
+<script src="/assets/fx.js" defer></script>
+<script src="/assets/contact.js" defer></script>
+</body>
+</html>
