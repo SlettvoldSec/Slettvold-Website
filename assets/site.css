@@ -414,3 +414,21 @@ html.term .card, html.term .jabox, html.term .glance > div { background: rgba(2,
 .clock .tz { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .clock .tz span { color: var(--muted); font-size: 14px; } .clock .tz b { font: 700 20px var(--mono); font-variant-numeric: tabular-nums; }
 .clock p { margin-top: 10px; }
+/* ---------- articles ---------- */
+.article { max-width: 780px; }
+.article h2 { font-size: 24px; margin-top: 40px; scroll-margin-top: 80px; }
+.article p, .article li { color: #e6dde0; }
+.article code { font-family: var(--mono); font-size: .88em; padding: 1px 6px; border-radius: 6px; background: rgba(255, 255, 255, .07); border: 1px solid var(--line); word-break: break-word; }
+.article pre { padding: 14px 16px; border-radius: 12px; background: #070305; border: 1px solid var(--line); overflow-x: auto; }
+.article pre code { background: none; border: 0; padding: 0; color: #9ff0b8; }
+.toc { padding: 16px 20px; border-radius: 14px; border: 1px solid var(--line); background: rgba(20, 12, 15, .7); margin: 8px 0 10px; }
+.toc ol { margin: 6px 0 0; padding-left: 20px; columns: 2; column-gap: 28px; } .toc li { margin: 3px 0; break-inside: avoid; }
+.tablewrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--line); border-radius: 12px; }
+.article table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 640px; }
+.article th, .article td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.article th { color: var(--red); font-family: var(--mono), var(--jpt); font-size: 12.5px; letter-spacing: 1px; text-transform: uppercase; background: rgba(255, 49, 71, .06); }
+.article tr:last-child td { border-bottom: 0; }
+.grid.three-up { margin: 16px 0; }
+ol.steps { padding-left: 22px; } ol.steps li { margin: 10px 0; }
+ul.sources li { font-size: 14.5px; }
+@media (max-width: 860px) { .toc ol { columns: 1; } }

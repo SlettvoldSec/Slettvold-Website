@@ -1,0 +1,144 @@
+<!doctype html>
+<!--
+        ____________________________
+       /____________________________\
+          ||       slettvold       ||
+       ___||_______________________||___
+      /___||_______________________||___\
+          ||                       ||
+          ||   You looked behind   ||        Hello, curious one. 好奇心は良いことです。
+          ||   the gate. Nice.     ||
+          ||                       ||        This site has no trackers, no cookies and one
+          ||                       ||        small secret. The base64 below is your first clue.
+                                             U3RhcnQgd2l0aCB3aGF0IHJvYm90cyBhcmUgdG9sZCBub3QgdG8gcmVhZC4=
+     Built by hand by Tommy Slettvold · Norway → 日本 · tommy@slettvold.org
+-->
+<html lang="en">
+<head>
+<script>try{var p=JSON.parse(localStorage.getItem('prefs')||'{}'),d=document.documentElement;if(p.size)d.dataset.size=p.size;if(p.font)d.dataset.font=p.font;if(p.calm)d.classList.add('calm')}catch(e){}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI=' 'sha256-vmiflRfgCRauMUaJOwyI7tp2nbqr9TsWn2/Em5jUBs0=' 'sha256-SD0DTIYuFO45hEZUDsqItcgfsmsRXk/Ch774tXx+/mw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
+<title>SPF, DKIM and DMARC for small businesses · Tommy Slettvold</title>
+<meta name="description" content="A plain-language guide to SPF, DKIM and DMARC: how they stop criminals from sending email in your company&#x27;s name, with an example setup and a safe step-by-step rollout.">
+<link rel="canonical" href="https://slettvold.org/notes/dmarc/">
+<meta property="og:title" content="SPF, DKIM and DMARC for small businesses · Tommy Slettvold">
+<meta property="og:description" content="A plain-language guide to SPF, DKIM and DMARC: how they stop criminals from sending email in your company&#x27;s name, with an example setup and a safe step-by-step rollout.">
+<meta property="og:url" content="https://slettvold.org/notes/dmarc/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="slettvold.org">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://slettvold.org/og/en-notes-dmarc.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://slettvold.org/notes/dmarc/">
+<link rel="alternate" hreflang="ja" href="https://slettvold.org/ja/notes/dmarc/">
+<link rel="alternate" hreflang="x-default" href="https://slettvold.org/notes/dmarc/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SPF, DKIM and DMARC for small businesses", "description": "A plain-language guide to SPF, DKIM and DMARC: how they stop criminals from sending email in your company's name, with an example setup and a safe step-by-step rollout.", "inLanguage": "en", "datePublished": "2026-10-22", "dateModified": "2026-10-22", "image": "https://slettvold.org/og/en-notes-dmarc.png", "url": "https://slettvold.org/notes/dmarc/", "mainEntityOfPage": "https://slettvold.org/notes/dmarc/", "author": {"@type": "Person", "@id": "https://slettvold.org/#tommy", "name": "Tommy André Slettvold", "alternateName": "トミー・アンドレ・スレットボルド", "url": "https://slettvold.org/", "image": "https://slettvold.org/img/tommy.jpg", "email": "mailto:tommy@slettvold.org", "jobTitle": "IT security student and support specialist", "nationality": "Norway", "knowsLanguage": ["no", "en", "ja"], "alumniOf": {"@type": "CollegeOrUniversity", "name": "Noroff University College"}, "knowsAbout": ["IT security", "Fraud prevention", "OSINT", "Bug bounty", "Linux", "Networking", "Japanese language", "App development"], "sameAs": ["https://www.linkedin.com/in/tommyandreslettvold", "https://github.com/SlettvoldSec"]}}</script>
+
+<link rel="icon" href="/favicon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/img/app-192.png">
+<link rel="author" href="/humans.txt">
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=2562821f">
+<link rel="stylesheet" href="/assets/site.css?v=758dc181">
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/docs/*"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body class="page-notes lang-en" data-lang="en" data-other="/ja/notes/dmarc/">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <a class="brand" href="/"><span class="mon">ト</span><span class="nm">Tommy <b>Slettvold</b></span></a>
+  <button class="menu" aria-label="Menu" aria-expanded="false">☰</button>
+  <nav><a href="/japan/">Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/">Projects<i>作品</i></a><a href="/school/">School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/" class=on>Notes<i>メモ</i></a><a href="/contact/">Contact<i>連絡</i></a><a class="lang-switch" href="/ja/notes/dmarc/" hreflang="ja" data-set-lang="ja">日本語</a></nav>
+</div></header>
+<main class="wrap" id="main">
+<div class="kicker">Notes · Email security</div>
+<h1>SPF, DKIM and DMARC for small businesses<span class="jp">小さな会社のためのなりすましメール対策</span></h1>
+<p class="lead">Could someone be sending scam emails in your company's name right now? A few lines in your DNS usually stop it, yet most small businesses still haven't added them. Here's how the three checks work, how to set them up safely, and the mistakes to avoid.</p>
+<p class="small">22 October 2026 · 4 min read · <a href="/ja/notes/dmarc/">日本語</a></p>
+
+<div class="prose article">
+<div class="toc" role="navigation" aria-label="Contents"><b>Contents</b><ol>
+  <li><a href="#why">Why now</a></li><li><a href="#three">The three checks</a></li><li><a href="#example">An example setup</a></li>
+  <li><a href="#steps">Rolling it out safely</a></li><li><a href="#mistakes">Common mistakes</a></li><li><a href="#check">How to check</a></li><li><a href="#more">Why DMARC alone isn't enough</a></li></ol></div>
+
+<h2 id="why">Why now</h2>
+<p>In Japan, the Council of Anti-Phishing Japan received <b>2,454,297</b> phishing reports in 2025, about 1.43 times the year before and a new record. Early in the year, a large share of those emails used real brands' own domains as the sender. The targets were domains with no DMARC record, or with a policy left at "none".</p>
+<p>In September 2025, Japan's Ministry of Internal Affairs and Communications asked the telecom industry associations to adopt DMARC with a "quarantine" or "reject" policy. Google, meanwhile, requires SPF, DKIM and DMARC from anyone sending more than 5,000 emails a day, and SPF or DKIM from everyone else.</p>
+<p>So without them, your domain is easier to impersonate, and <b>your own legitimate emails are more likely to land in spam</b>.</p>
+
+<h2 id="three">The three checks</h2>
+<div class="grid three-up">
+  <div class="card"><div class="g">許</div><h3>SPF</h3><p>A list of the servers allowed to send email for your domain, published as a DNS TXT record.</p></div>
+  <div class="card"><div class="g">署</div><h3>DKIM</h3><p>A digital signature on each email. The receiver checks it with a public key in your DNS, proving who sent it and that nothing was changed.</p></div>
+  <div class="card"><div class="g">判</div><h3>DMARC</h3><p>Combines the SPF and DKIM results, tells receivers what to do with failures (nothing, quarantine or reject), and sends you reports.</p></div>
+</div>
+<p>The key idea is <b>alignment</b>. DMARC checks that the domain people see in the From line matches the domain that passed SPF or DKIM. Passing SPF for some other domain doesn't count.</p>
+
+<h2 id="example">An example setup</h2>
+<p>A made-up company, example.com, uses Google Workspace for staff email and an email delivery service for notifications. The delivery service sends from a subdomain, <code>send.example.com</code>, to keep it apart from the main domain.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Name</th><th>Type</th><th>Value (example)</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td><code>example.com</code></td><td>TXT</td><td><code>v=spf1 include:_spf.google.com ~all</code></td><td>SPF: allows Google's servers to send</td></tr>
+    <tr><td><code>google._domainkey</code></td><td>TXT</td><td><code>v=DKIM1; k=rsa; p=MIIB…</code></td><td>DKIM: public key generated in the Google Admin console</td></tr>
+    <tr><td><code>(selector)._domainkey</code></td><td>TXT / CNAME</td><td>Given by the delivery service</td><td>DKIM: the delivery service's public key</td></tr>
+    <tr><td><code>send.example.com</code></td><td>TXT / MX</td><td>Given by the delivery service</td><td>SPF for the subdomain and bounce handling</td></tr>
+    <tr><td><code>_dmarc</code></td><td>TXT</td><td><code>v=DMARC1; p=none; rua=mailto:dmarc@example.com</code></td><td>DMARC: monitor only for now, and send reports</td></tr>
+  </tbody>
+</table></div>
+<p>Domains that never send email (ones you only own to protect your name) are even simpler: <code>v=spf1 -all</code> and <code>v=DMARC1; p=reject</code> tell the world that any email from them is fake.</p>
+
+<h2 id="steps">Rolling it out safely</h2>
+<ol class="steps">
+  <li><b>Start by watching (2–4 weeks).</b> Set <code>p=none</code> with a <code>rua</code> address for aggregate reports. Nothing changes for delivery, and you learn who is sending email as your domain.</li>
+  <li><b>Add every legitimate sender.</b> The reports reveal the ones you forgot: invoices from accounting software, booking systems, newsletters, web forms, the office printer's scan-to-email. Give each one SPF and DKIM.</li>
+  <li><b>Move to quarantine.</b> When all real email passes, switch to <code>p=quarantine</code>. Failures go to the spam folder.</li>
+  <li><b>Finish with reject.</b> After a quiet period, set <code>p=reject</code>. Fakes are refused outright. Use <code>sp=</code> to set the policy for subdomains.</li>
+</ol>
+
+<h2 id="mistakes">Common mistakes</h2>
+<ul>
+  <li><b>Two SPF records.</b> A domain may have only one. When you add a service, add an <code>include:</code> to the existing record.</li>
+  <li><b>The 10-lookup limit.</b> SPF may follow at most 10 DNS lookups. Too many <code>include:</code>s and even real email fails.</li>
+  <li><b>Forgotten services.</b> Jump straight to <code>p=reject</code> and your invoices or booking confirmations may vanish. Always start with monitoring.</li>
+  <li><b>Staying at <code>p=none</code> forever.</b> Monitoring alone stops nothing; those were exactly the domains abused in 2025.</li>
+  <li><b>Forwarding breaks SPF.</b> Forwarded mail often fails SPF, but the DKIM signature survives. That's why DKIM matters.</li>
+</ul>
+
+<h2 id="check">How to check</h2>
+<p>On Windows, in Command Prompt (on macOS or Linux, use <code>dig TXT _dmarc.example.com</code>):</p>
+<pre><code>nslookup -type=TXT example.com
+nslookup -type=TXT _dmarc.example.com</code></pre>
+<p>Or check a real email: send one to a Gmail address, open it and choose "Show original". If SPF, DKIM and DMARC all say PASS, you're done.</p>
+
+<h2 id="more">Why DMARC alone isn't enough</h2>
+<p>The 2026 report from the Council of Anti-Phishing Japan shows that by the end of 2025, about 75% of phishing came from <b>look-alike domains the attackers registered themselves</b>, set up so they pass DMARC. DMARC protects your exact domain, not every domain that resembles it.</p>
+<p>So take DMARC all the way to reject, then add BIMI (your verified logo in the inbox), monitoring for look-alike domains, staff training, and multi-factor authentication on every account.</p>
+
+<div class="honest"><p>This site's own email follows the same steps, starting from the monitoring stage. Questions about your setup? <a href="/contact/?about=contact">Get in touch</a>.</p></div>
+
+<h2>Sources</h2>
+<ul class="sources">
+  <li><a href="https://scan.netsecurity.ne.jp/article/2026/06/11/55466.html">Council of Anti-Phishing Japan, Phishing Report 2026 (ScanNetSecurity, Japanese)</a></li>
+  <li><a href="https://scan.netsecurity.ne.jp/article/2025/09/09/53579.html">MIC asks telecom associations to adopt DMARC quarantine/reject (ScanNetSecurity, September 2025, Japanese)</a></li>
+  <li><a href="https://support.google.com/mail/answer/81126?hl=en">Google: Email sender guidelines</a></li>
+  <li><a href="https://www.rfc-editor.org/rfc/rfc7489">RFC 7489 (DMARC)</a> · <a href="https://www.rfc-editor.org/rfc/rfc7208">RFC 7208 (SPF)</a> · <a href="https://www.rfc-editor.org/rfc/rfc6376">RFC 6376 (DKIM)</a></li>
+</ul>
+</div>
+</main>
+<footer><div class="wrap">
+  <div><b>Tommy André Slettvold</b> · Norway → 日本</div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/contact/">Contact &amp; feedback</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/privacy/">Privacy</a><a href="/security/">Security</a></div>
+  <div class="small">© 2026 · No cookies, no tracking.</div>
+</div></footer>
+<script src="/assets/fx.js?v=1c515f6a" defer></script>
+<script src="/assets/prefs.js?v=68a6de10" defer></script>
+
+</body>
+</html>

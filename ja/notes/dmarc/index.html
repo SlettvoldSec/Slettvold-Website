@@ -1,0 +1,145 @@
+<!doctype html>
+<!--
+        ____________________________
+       /____________________________\
+          ||       slettvold       ||
+       ___||_______________________||___
+      /___||_______________________||___\
+          ||                       ||
+          ||   You looked behind   ||        Hello, curious one. 好奇心は良いことです。
+          ||   the gate. Nice.     ||
+          ||                       ||        This site has no trackers, no cookies and one
+          ||                       ||        small secret. The base64 below is your first clue.
+                                             U3RhcnQgd2l0aCB3aGF0IHJvYm90cyBhcmUgdG9sZCBub3QgdG8gcmVhZC4=
+     Built by hand by Tommy Slettvold · Norway → 日本 · tommy@slettvold.org
+-->
+<html lang="ja">
+<head>
+<script>try{var p=JSON.parse(localStorage.getItem('prefs')||'{}'),d=document.documentElement;if(p.size)d.dataset.size=p.size;if(p.font)d.dataset.font=p.font;if(p.calm)d.classList.add('calm')}catch(e){}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI=' 'sha256-vmiflRfgCRauMUaJOwyI7tp2nbqr9TsWn2/Em5jUBs0=' 'sha256-SD0DTIYuFO45hEZUDsqItcgfsmsRXk/Ch774tXx+/mw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
+<title>小さな会社のためのSPF・DKIM・DMARC入門 · スレットボルド・トミー</title>
+<meta name="description" content="なりすましメールから自社ドメインを守るSPF・DKIM・DMARCの仕組みと設定手順を、例と段階的な導入方法つきでわかりやすく解説します。">
+<link rel="canonical" href="https://slettvold.org/ja/notes/dmarc/">
+<meta property="og:title" content="小さな会社のためのSPF・DKIM・DMARC入門 · スレットボルド・トミー">
+<meta property="og:description" content="なりすましメールから自社ドメインを守るSPF・DKIM・DMARCの仕組みと設定手順を、例と段階的な導入方法つきでわかりやすく解説します。">
+<meta property="og:url" content="https://slettvold.org/ja/notes/dmarc/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="slettvold.org">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://slettvold.org/og/ja-notes-dmarc.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://slettvold.org/notes/dmarc/">
+<link rel="alternate" hreflang="ja" href="https://slettvold.org/ja/notes/dmarc/">
+<link rel="alternate" hreflang="x-default" href="https://slettvold.org/notes/dmarc/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "小さな会社のためのSPF・DKIM・DMARC入門", "description": "なりすましメールから自社ドメインを守るSPF・DKIM・DMARCの仕組みと設定手順を、例と段階的な導入方法つきでわかりやすく解説します。", "inLanguage": "ja", "datePublished": "2026-10-22", "dateModified": "2026-10-22", "image": "https://slettvold.org/og/ja-notes-dmarc.png", "url": "https://slettvold.org/ja/notes/dmarc/", "mainEntityOfPage": "https://slettvold.org/ja/notes/dmarc/", "author": {"@type": "Person", "@id": "https://slettvold.org/#tommy", "name": "Tommy André Slettvold", "alternateName": "トミー・アンドレ・スレットボルド", "url": "https://slettvold.org/", "image": "https://slettvold.org/img/tommy.jpg", "email": "mailto:tommy@slettvold.org", "jobTitle": "IT security student and support specialist", "nationality": "Norway", "knowsLanguage": ["no", "en", "ja"], "alumniOf": {"@type": "CollegeOrUniversity", "name": "Noroff University College"}, "knowsAbout": ["IT security", "Fraud prevention", "OSINT", "Bug bounty", "Linux", "Networking", "Japanese language", "App development"], "sameAs": ["https://www.linkedin.com/in/tommyandreslettvold", "https://github.com/SlettvoldSec"]}}</script>
+
+<link rel="icon" href="/favicon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/img/app-192.png">
+<link rel="author" href="/humans.txt">
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/zenkaku-400-a.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=2562821f">
+<link rel="stylesheet" href="/assets/site.css?v=758dc181">
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/docs/*"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body class="page-notes lang-ja" data-lang="ja" data-other="/notes/dmarc/">
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="top"><div class="wrap">
+  <a class="brand" href="/ja/"><span class="mon">ト</span><span class="nm">スレットボルド <b>トミー</b></span></a>
+  <button class="menu" aria-label="メニュー" aria-expanded="false">☰</button>
+  <nav><a href="/ja/japan/">日本<i>Japan</i></a><a href="/ja/work/">仕事<i>Work</i></a><a href="/ja/projects/">作品<i>Projects</i></a><a href="/ja/school/">学校<i>School</i></a><a href="/ja/hobbies/">趣味<i>Hobbies</i></a><a href="/ja/notes/" class=on>メモ<i>Notes</i></a><a href="/ja/contact/">連絡<i>Contact</i></a><a class="lang-switch" href="/notes/dmarc/" hreflang="en" data-set-lang="en">English</a></nav>
+</div></header>
+<main class="wrap" id="main">
+<div class="kicker">メモ · メールセキュリティ</div>
+<h1>小さな会社のためのSPF・DKIM・DMARC入門<span class="jp">Email authentication for small businesses</span></h1>
+<p class="lead">自社のドメインが、知らないうちに詐欺メールの差出人として使われていませんか。DNSに数行を追加するだけで防げることが多いのに、多くの中小企業ではまだ設定されていません。仕組みから設定手順、よくある失敗まで、順番に説明します。</p>
+<p class="small">2026年10月22日 · 約5分で読めます · <a href="/notes/dmarc/">English</a></p>
+
+<div class="prose article">
+<div class="toc" role="navigation" aria-label="目次"><b>目次</b><ol>
+  <li><a href="#why">なぜ今なのか</a></li><li><a href="#three">3つの仕組み</a></li><li><a href="#example">設定例</a></li>
+  <li><a href="#steps">段階的な導入</a></li><li><a href="#mistakes">よくある失敗</a></li><li><a href="#check">確認方法</a></li><li><a href="#more">DMARCだけでは足りない理由</a></li></ol></div>
+
+<h2 id="why">なぜ今なのか</h2>
+<p>フィッシング対策協議会によると、2025年のフィッシング報告件数は<b>2,454,297件</b>で、前年の約1.43倍となり過去最多でした。年の前半には、実在するブランドのドメインをそのまま差出人に使った「なりすましメール」が大きな割合を占めていました。狙われたのは、DMARCを設定していないドメインや、ポリシーが「none」のままのドメインです。</p>
+<p>これを受けて総務省は2025年9月、通信業界の団体に対し、DMARCの導入と「隔離」または「拒否」のポリシー設定などを要請しました。またGoogleは、1日5,000通以上を送る送信者にSPF・DKIM・DMARCのすべてを求めています。少ない通数でも、SPFかDKIMのどちらかは必須です。</p>
+<p>つまり、設定していないと「なりすましに使われやすい」だけでなく、<b>自社の正規のメールが迷惑メールになりやすい</b>という問題も起きます。</p>
+
+<h2 id="three">3つの仕組み</h2>
+<div class="grid three-up">
+  <div class="card"><div class="g">許</div><h3>SPF</h3><p>「このドメインのメールを送ってよいサーバー」の一覧です。DNSのTXTレコードに書きます。</p></div>
+  <div class="card"><div class="g">署</div><h3>DKIM</h3><p>メールに付ける電子署名です。受信側はDNSの公開鍵で、改ざんされていないことと送信元を確認します。</p></div>
+  <div class="card"><div class="g">判</div><h3>DMARC</h3><p>SPFとDKIMの結果をまとめて判定し、失敗したメールをどう扱うか（何もしない・隔離・拒否）を宣言します。結果のレポートも受け取れます。</p></div>
+</div>
+<p>大事なのは「アライメント（一致）」です。DMARCは、受信者が目にする差出人（From）のドメインと、SPFまたはDKIMで確認されたドメインが一致しているかを見ます。SPFが通っても、別のドメインで通っているだけならDMARCは合格になりません。</p>
+
+<h2 id="example">設定例</h2>
+<p>架空の会社「example.co.jp」が、社員のメールにGoogle Workspaceを、通知メールに外部のメール配信サービスを使っている場合の例です。配信サービスは、メインのドメインと分けるためにサブドメイン <code>send.example.co.jp</code> を使います。</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>名前</th><th>種類</th><th>値（例）</th><th>役割</th></tr></thead>
+  <tbody>
+    <tr><td><code>example.co.jp</code></td><td>TXT</td><td><code>v=spf1 include:_spf.google.com ~all</code></td><td>SPF：Googleのサーバーからの送信を許可</td></tr>
+    <tr><td><code>google._domainkey</code></td><td>TXT</td><td><code>v=DKIM1; k=rsa; p=MIIB…</code></td><td>DKIM：Google管理コンソールで生成した公開鍵</td></tr>
+    <tr><td><code>（セレクタ）._domainkey</code></td><td>TXT / CNAME</td><td>配信サービスが指定する値</td><td>DKIM：配信サービス用の公開鍵</td></tr>
+    <tr><td><code>send.example.co.jp</code></td><td>TXT / MX</td><td>配信サービスが指定する値</td><td>サブドメインのSPFとエラーメールの受け取り</td></tr>
+    <tr><td><code>_dmarc</code></td><td>TXT</td><td><code>v=DMARC1; p=none; rua=mailto:dmarc@example.co.jp</code></td><td>DMARC：まずは監視のみ、レポートを受け取る</td></tr>
+  </tbody>
+</table></div>
+<p>メールを一切送らないドメイン（予約しているだけのドメインなど）は、さらに簡単です。<code>v=spf1 -all</code> と <code>v=DMARC1; p=reject</code> を設定すれば、そのドメインからのメールはすべて偽物として扱われます。</p>
+
+<h2 id="steps">段階的な導入</h2>
+<ol class="steps">
+  <li><b>監視から始める（2〜4週間）。</b><code>p=none</code> と <code>rua</code>（集計レポートの送り先）を設定します。メールの届き方は変わらず、誰があなたのドメインで送っているかがわかります。</li>
+  <li><b>正規の送信元をすべて登録する。</b>レポートを見ると、忘れていた送信元が見つかります。会計ソフトの請求書、予約システム、ニュースレター、問い合わせフォーム、複合機のスキャン送信などです。それぞれSPFとDKIMを設定します。</li>
+  <li><b>「隔離」に進む。</b>正規のメールがすべて合格するようになったら <code>p=quarantine</code> にします。失敗したメールは迷惑メールフォルダに入ります。</li>
+  <li><b>「拒否」で完成。</b>しばらく問題がなければ <code>p=reject</code> にします。なりすましメールは受信側で拒否されます。サブドメインの扱いは <code>sp=</code> で指定できます。</li>
+</ol>
+
+<h2 id="mistakes">よくある失敗</h2>
+<ul>
+  <li><b>SPFレコードを2つ作ってしまう。</b>SPFは1つのドメインに1つだけです。サービスを追加するときは、既存のレコードに <code>include:</code> を足します。</li>
+  <li><b>DNSの参照回数の上限。</b>SPFの評価でたどれるDNS参照は10回までです。<code>include:</code> を増やしすぎると、正規のメールまで失敗します。</li>
+  <li><b>外部サービスを忘れる。</b>いきなり <code>p=reject</code> にすると、請求書や予約確認のメールが届かなくなることがあります。必ず監視から始めましょう。</li>
+  <li><b>ずっと <code>p=none</code> のまま。</b>監視だけでは、なりすましは止まりません。2025年のフィッシングで狙われたのも、まさにこの状態のドメインでした。</li>
+  <li><b>転送でSPFが失敗する。</b>メールが転送されるとSPFは失敗しがちですが、DKIMの署名は残ります。DKIMは必ず設定しておきましょう。</li>
+</ul>
+
+<h2 id="check">確認方法</h2>
+<p>Windowsのコマンドプロンプトでは次のように確認できます（macOSやLinuxでは <code>dig TXT _dmarc.example.co.jp</code>）。</p>
+<pre><code>nslookup -type=TXT example.co.jp
+nslookup -type=TXT _dmarc.example.co.jp</code></pre>
+<p>実際のメールでも確認できます。Gmailで自分宛てに送ったメールを開き、「メッセージのソースを表示」を選ぶと、SPF・DKIM・DMARCの結果が「PASS」と表示されていれば成功です。</p>
+
+<h2 id="more">DMARCだけでは足りない理由</h2>
+<p>フィッシング対策協議会の2026年のレポートによると、2025年の終わりには、攻撃者が<b>自分で取得したよく似たドメイン</b>から、DMARCに合格するメールを送る手口が約75%に増えました。DMARCが守るのは「あなたのドメインそのもの」で、似たドメインまでは守れません。</p>
+<p>そのため、DMARCを「拒否」まで進めたうえで、BIMI（受信箱に正式なロゴを表示する仕組み）、似たドメインの監視、社員への訓練、そしてすべてのアカウントでの多要素認証を組み合わせることが大切です。</p>
+
+<div class="honest"><p>このサイトのメールも、この手順に沿って監視の段階から設定しています。自社の設定について質問があれば、<a href="/ja/contact/?about=contact">お問い合わせ</a>からお気軽にどうぞ。</p></div>
+
+<h2>出典</h2>
+<ul class="sources">
+  <li><a href="https://scan.netsecurity.ne.jp/article/2026/06/11/55466.html">フィッシング対策協議会「フィッシングレポート2026」（ScanNetSecurity）</a></li>
+  <li><a href="https://scan.netsecurity.ne.jp/article/2025/09/09/53579.html">総務省が電気通信業界団体にDMARCの隔離・拒否などを要請（ScanNetSecurity、2025年9月）</a></li>
+  <li><a href="https://support.google.com/mail/answer/81126?hl=ja">Google「メール送信者のガイドライン」</a></li>
+  <li><a href="https://www.rfc-editor.org/rfc/rfc7489">RFC 7489（DMARC）</a> · <a href="https://www.rfc-editor.org/rfc/rfc7208">RFC 7208（SPF）</a> · <a href="https://www.rfc-editor.org/rfc/rfc6376">RFC 6376（DKIM）</a></li>
+</ul>
+</div>
+</main>
+<footer><div class="wrap">
+  <div><b>トミー・アンドレ・スレットボルド</b> · ノルウェー → 日本</div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/ja/contact/">お問い合わせ・ご意見</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/ja/privacy/">プライバシー</a><a href="/security/">Security</a></div>
+  <div class="small">© 2026 · Cookieもトラッキングも使用していません。</div>
+</div></footer>
+<script src="/assets/fx.js?v=1c515f6a" defer></script>
+<script src="/assets/prefs.js?v=68a6de10" defer></script>
+
+</body>
+</html>
