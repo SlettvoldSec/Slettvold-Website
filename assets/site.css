@@ -433,3 +433,9 @@ html.term .card, html.term .jabox, html.term .glance > div { background: rgba(2,
 ol.steps { padding-left: 22px; } ol.steps li { margin: 10px 0; }
 ul.sources li { font-size: 14.5px; }
 @media (max-width: 860px) { .toc ol { columns: 1; } }
+
+/* Japanese name card (Japan page) */
+.namecard .kanji { font-size: clamp(44px, 8vw, 72px); font-weight: 800; color: #fff; text-align: center; margin: 18px 0 6px; letter-spacing: .08em;
+  text-shadow: 0 0 30px rgba(255, 49, 71, .55); }
+.namecard rt { font-size: 15px; color: var(--muted); letter-spacing: .1em; font-weight: 500; font-family: var(--jpt); }
+.jabox ruby rt { font-size: 11px; color: var(--muted); }

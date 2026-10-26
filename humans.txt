@@ -1,5 +1,5 @@
 /* TEAM */
-  Built by: Tommy André Slettvold
+  Built by: Tommy André Slettvold (平原 智明, Hirahara Tomoaki)
   Role: everything (design, code, words, coffee)
   Contact: tommy [at] slettvold.org
   From: Norway, heading for 日本
