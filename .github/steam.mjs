@@ -90,8 +90,14 @@ async function achIcon(appid, apiname) {
   if (!s || !s.icon) { console.log(`::warning::no achievement icon in the Steam schema for ${appid}/${apiname} (${Object.keys(schemas[appid]).length} achievements in schema)`); return null; }
   const name = `ach-${appid}-${apiname.replace(/[^\w-]/g, '_').slice(0, 60)}.jpg`, file = `steam/img/${name}`; keep.add(name);
   if (!fs.existsSync(file)) {
-    try { const r = await fetch(s.icon); if (!r.ok) { console.log(`::warning::achievement icon ${appid}/${apiname}: HTTP ${r.status}`); return null; } fs.writeFileSync(file, Buffer.from(await r.arrayBuffer())); }
-    catch (e) { console.log(`::warning::achievement icon ${appid}/${apiname}: ${e.message}`); return null; }
+    // the schema's URL is sometimes an old CDN path; try the newer image hosts with the same file name
+    const fn = s.icon.split('/').pop(), urls = [s.icon,
+      `https://shared.akamai.steamstatic.com/community_assets/images/apps/${appid}/${fn}`,
+      `https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/${appid}/${fn}`,
+      `https://shared.fastly.steamstatic.com/community_assets/images/apps/${appid}/${fn}`];
+    let ok = false;
+    for (const u of urls) { try { const r = await fetch(u); if (r.ok && (r.headers.get('content-type') || '').startsWith('image/')) { fs.writeFileSync(file, Buffer.from(await r.arrayBuffer())); ok = true; break; } } catch (e) {} }
+    if (!ok) { console.log(`::warning::achievement icon ${appid}/${apiname}: not found at ${urls.length} addresses`); return null; }
   }
   return `/${file}`;
 }
