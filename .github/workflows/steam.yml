@@ -1,0 +1,23 @@
+# Keeps the Steam numbers on slettvold.org/hobbies/ up to date (see .github/steam.mjs). Daily, or run by hand.
+name: steam
+on:
+  schedule: [{ cron: '17 4 * * *' }]
+  workflow_dispatch:
+permissions: { contents: write }
+concurrency: { group: steam, cancel-in-progress: false }
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with: { node-version: 22 }
+      - name: Fetch from the Steam Web API
+        env: { STEAM_API_KEY: '${{ secrets.STEAM_API_KEY }}', STEAM_ID: '${{ secrets.STEAM_ID || vars.STEAM_ID }}' }
+        run: node .github/steam.mjs
+      - name: Commit if anything changed
+        run: |
+          git add -A steam
+          git diff --cached --quiet && exit 0
+          git -c user.name="steam-bot" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -qm "Steam stats update"
+          git push -q

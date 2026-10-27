@@ -448,3 +448,11 @@ figure.wide { margin: 6px 0 14px; max-width: 760px; }
 figure.wide img { width: 100%; height: auto; border-radius: 18px; border: 1px solid var(--line-red); box-shadow: 0 10px 30px rgba(0, 0, 0, .45); display: block; }
 figure.wide figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
 ul.bullets { padding-left: 20px; margin: 10px 0 14px; } ul.bullets li { margin: 6px 0; line-height: 1.6; }
+/* hobbies: live Steam games (assets/steam.js) */
+.sgames { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 10px; align-items: start; }
+.sgame { display: block; border-radius: 14px; border: 1px solid var(--line); background: rgba(20, 12, 15, .7); overflow: hidden; text-decoration: none; color: inherit; }
+.sgame:hover { border-color: var(--line-red); }
+.sgame img { display: block; width: 100%; height: auto; aspect-ratio: 231 / 87; object-fit: cover; }
+.sgame b { display: block; padding: 10px 12px 0; font-size: 15px; } .sgame span { display: block; padding: 2px 12px 12px; color: var(--muted); font-size: 13px; }
+.supd { margin-top: 10px; }
+@media (max-width: 860px) { .sgames { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

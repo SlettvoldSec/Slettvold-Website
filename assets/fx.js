@@ -54,11 +54,11 @@
   }));
   // numbers count up the first time they come into view
   document.querySelectorAll('[data-count]').forEach((el) => {
-    const to = +el.dataset.count, fmt = new Intl.NumberFormat(document.documentElement.lang === 'ja' ? 'ja-JP' : 'en-US');
+    const fmt = new Intl.NumberFormat(document.documentElement.lang === 'ja' ? 'ja-JP' : 'en-US');
     if (still || !('IntersectionObserver' in window)) return;
     el.textContent = '0';
     const ob = new IntersectionObserver((es) => { if (!es[0].isIntersecting) return; ob.disconnect(); const t0 = performance.now();
-      const step = (now) => { const p = Math.min(1, (now - t0) / 1400), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt.format(Math.round(to * e)); if (p < 1) requestAnimationFrame(step); };
+      const step = (now) => { const p = Math.min(1, (now - t0) / 1400), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt.format(Math.round(+el.dataset.count * e)); if (p < 1) requestAnimationFrame(step); };
       requestAnimationFrame(step); });
     ob.observe(el);
   });
