@@ -466,7 +466,7 @@ ul.bullets { padding-left: 20px; margin: 10px 0 14px; } ul.bullets li { margin: 
 #steam-more h3.sh { margin-top: 26px; }
 .rares { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 10px; }
 .rare { display: flex; gap: 12px; align-items: flex-start; padding: 12px; border-radius: 14px; border: 1px solid var(--line-red); background: linear-gradient(160deg, rgba(42, 9, 16, .7), rgba(14, 10, 12, .7)); }
-.rare img { width: 56px; height: 56px; border-radius: 10px; flex: none; box-shadow: 0 0 14px rgba(255, 176, 96, .25); }
+.rare img { width: 56px; height: 56px; border-radius: 10px; flex: none; object-fit: cover; box-shadow: 0 0 14px rgba(255, 176, 96, .25); }
 .rare b { display: block; font-size: 15px; } .rare span { display: block; font-size: 13px; color: var(--muted); }
 .rare .rd { margin-top: 2px; } .rare .rp { margin-top: 4px; color: #ffb060; font-family: var(--mono); font-size: 12.5px; }
 .perfects { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }

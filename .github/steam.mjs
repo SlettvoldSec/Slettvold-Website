@@ -82,19 +82,24 @@ const rare = pcts.flat().filter(Boolean).sort((a, b) => a.pct - b.pct).slice(0, 
 const schemas = {};
 async function achIcon(appid, apiname) {
   if (!schemas[appid]) {
-    const j = await raw('ISteamUserStats/GetSchemaForGame/v2', { appid, l: 'english' });
+    let j = await raw('ISteamUserStats/GetSchemaForGame/v2', { appid, l: 'english' });
+    if (!(j && j.game && j.game.availableGameStats)) j = await raw('ISteamUserStats/GetSchemaForGame/v2', { appid });
     schemas[appid] = Object.fromEntries(((j && j.game && j.game.availableGameStats && j.game.availableGameStats.achievements) || []).map((x) => [x.name, x]));
   }
-  const s = schemas[appid][apiname]; if (!s || !s.icon) return null;
+  const s = schemas[appid][apiname];
+  if (!s || !s.icon) { console.log(`::warning::no achievement icon in the Steam schema for ${appid}/${apiname} (${Object.keys(schemas[appid]).length} achievements in schema)`); return null; }
   const name = `ach-${appid}-${apiname.replace(/[^\w-]/g, '_').slice(0, 60)}.jpg`, file = `steam/img/${name}`; keep.add(name);
-  if (!fs.existsSync(file)) { try { const r = await fetch(s.icon); if (!r.ok) return null; fs.writeFileSync(file, Buffer.from(await r.arrayBuffer())); } catch (e) { return null; } }
+  if (!fs.existsSync(file)) {
+    try { const r = await fetch(s.icon); if (!r.ok) { console.log(`::warning::achievement icon ${appid}/${apiname}: HTTP ${r.status}`); return null; } fs.writeFileSync(file, Buffer.from(await r.arrayBuffer())); }
+    catch (e) { console.log(`::warning::achievement icon ${appid}/${apiname}: ${e.message}`); return null; }
+  }
   return `/${file}`;
 }
 data.achievements = unlocked;
 data.perfect = perfect.length;
 data.perfectGames = perfect.slice(0, 8).map((g) => ({ appid: g.appid, name: g.name }));
 data.rarest = [];
-for (const r of rare) data.rarest.push({ appid: r.g.appid, game: r.g.name, name: r.a.name || r.a.apiname, desc: r.a.description || '', pct: Math.round(r.pct * 10) / 10, icon: await achIcon(r.g.appid, r.a.apiname) });
+for (const r of rare) data.rarest.push({ appid: r.g.appid, game: r.g.name, name: r.a.name || r.a.apiname, desc: r.a.description || '', pct: Math.round(r.pct * 10) / 10, icon: (await achIcon(r.g.appid, r.a.apiname)) || (await image(r.g.appid)) });
 
 // ---------- games playable in Japanese (store data, cached; checked a little each day) ----------
 const CACHE = 'steam/cache/lang.json';
