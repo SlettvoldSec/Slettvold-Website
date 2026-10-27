@@ -17,6 +17,7 @@ jobs:
         run: node .github/steam.mjs
       - name: Commit if anything changed
         run: |
+          [ -d steam ] || exit 0
           git add -A steam
           git diff --cached --quiet && exit 0
           git -c user.name="steam-bot" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -qm "Steam stats update"
