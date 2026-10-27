@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Rireki Studio · Japanese CV maker (履歴書・職務経歴書)</title>
+<meta name="description" content="Free tool for foreign job seekers in Japan: make a 履歴書 and 職務経歴書 in English or Japanese, with a built-in guide and a checker for common mistakes. No account, nothing leaves your browser.">
+<link rel="canonical" href="https://slettvold.org/rireki/">
+<link rel="icon" href="/favicon.png">
+<meta name="theme-color" content="#0b0507">
+<meta property="og:title" content="Rireki Studio · Japanese CV maker">
+<meta property="og:description" content="Make a correct 履歴書 and 職務経歴書 in one evening, in English or Japanese. Free, private, no account.">
+<meta property="og:url" content="https://slettvold.org/rireki/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://slettvold.org/rireki/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://slettvold.org/rireki/guide.html">
+<link rel="alternate" hreflang="ja" href="https://slettvold.org/rireki/guide-ja.html">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rireki Studio", "alternateName": "履歴書・職務経歴書メーカー", "url": "https://slettvold.org/rireki/", "applicationCategory": "BusinessApplication", "operatingSystem": "Any (web browser)", "inLanguage": ["en", "ja"], "description": "Free tool for foreign job seekers in Japan: make a 履歴書 and 職務経歴書 in English or Japanese, with a built-in guide and a checker for common mistakes. Everything stays in your browser.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "@id": "https://slettvold.org/#tommy", "name": "Tommy André Slettvold", "url": "https://slettvold.org/"}}</script>
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="rireki.css?v=1">
+<script src="rireki.js?v=1" defer></script>
+</head>
+<body>
+<noscript><p style="padding:20px">Rireki Studio needs JavaScript. You can still read the <a href="guide.html">guide in English</a> or <a href="guide-ja.html">日本語のガイド</a>.</p></noscript>
+<div class="kbg" aria-hidden="true">
+  <span style="left:2%;top:12%;font-size:120px">履</span><span style="left:46%;top:58%;font-size:180px">道</span>
+  <span style="right:3%;top:20%;font-size:140px">夢</span><span style="left:20%;bottom:-4%;font-size:110px">職</span>
+  <span style="right:16%;bottom:6%;font-size:90px">日本</span>
+</div>
+
+<div class="app">
+  <header class="top"><div class="top-in">
+    <div class="brand"><div class="mon" aria-hidden="true">履</div><div class="nm">Rireki <b>Studio</b><small>履歴書・職務経歴書</small></div></div>
+    <nav class="views" aria-label="Views">
+      <button type="button" id="v-builder" data-goview="builder" data-t="nav_builder"></button>
+      <button type="button" id="v-guide" data-goview="guide" data-t="nav_guide"></button>
+    </nav>
+    <div class="acts">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" id="lang-en" data-lang="en">EN</button><button type="button" id="lang-ja" data-lang="ja">日本語</button>
+      </div>
+      <button class="btn" type="button" id="btn-cvs"><span class="cvname" id="cvname"></span><span class="chev">▼</span></button>
+      <button class="btn red" type="button" id="btn-pdf" data-t="btn_pdf"></button>
+    </div>
+  </div></header>
+
+  <div id="builder">
+    <div class="viewswitch"><div class="seg" role="group">
+      <button type="button" id="pn-edit" data-pane="edit" data-t="view_edit"></button>
+      <button type="button" id="pn-prev" data-pane="preview" data-t="view_preview"></button>
+    </div></div>
+    <div class="main">
+      <section class="editor" aria-label="Editor">
+        <nav class="stabs" role="tablist" id="stabs"></nav>
+        <div class="form" id="form"></div>
+      </section>
+      <section class="preview" aria-label="Preview">
+        <div class="ptabs">
+          <div class="seg" role="group" id="dtabs">
+            <button type="button" id="dt-rireki" data-doc="rireki">履歴書</button>
+            <button type="button" id="dt-shokumu" data-doc="shokumu">職務経歴書</button>
+            <button type="button" id="dt-check" data-doc="check"><span data-t="d_check"></span><span class="badge" id="ckbadge">0</span></button>
+          </div>
+        </div>
+        <div class="docwrap" id="docwrap"></div>
+      </section>
+    </div>
+  </div>
+
+  <div id="guide" hidden></div>
+</div>
+
+<dialog id="dlg-cvs">
+  <h2><span data-t="cvs_title"></span><span class="jp">マイ履歴書</span></h2>
+  <p class="hint" data-t="cvs_hint"></p>
+  <div class="cvlist" id="cvlist"></div>
+  <div class="dlg-acts" style="justify-content:flex-start">
+    <button class="btn" type="button" id="cv-new" data-t="cv_new"></button>
+    <button class="btn" type="button" id="cv-example" data-t="cv_example"></button>
+    <button class="btn" type="button" id="cv-io" data-t="btn_io"></button>
+    <button class="btn ghost" type="button" id="cv-close" style="margin-left:auto" data-t="close"></button>
+  </div>
+</dialog>
+
+<dialog id="dlg-io">
+  <h2><span data-t="io_title"></span><span class="jp">読込・書出</span></h2>
+  <p class="hint" data-t="io_hint"></p>
+  <div class="dlg-acts" style="justify-content:flex-start;margin:10px 0">
+    <label class="btn"><span data-t="io_file"></span><input type="file" id="io-file" accept=".json,application/json" hidden></label>
+    <button class="btn" type="button" id="io-save-one" data-t="io_save_one"></button>
+    <button class="btn" type="button" id="io-save-all" data-t="io_save_all"></button>
+  </div>
+  <details class="adv"><summary data-t="io_text"></summary>
+    <p class="hint" data-t="io_text_hint"></p>
+    <textarea id="io-text" spellcheck="false"></textarea>
+    <div class="dlg-acts">
+      <button class="btn" type="button" id="io-copy" data-t="io_copy"></button>
+      <button class="btn" type="button" id="io-load" data-t="io_load"></button>
+    </div>
+  </details>
+  <div class="dlg-acts"><button class="btn ghost" type="button" id="io-close" data-t="close"></button></div>
+</dialog>
+
+<div id="measure"></div>
+<div id="capture"></div>
+<div id="printRoot"></div>
+<footer class="foot"><span>Rireki Studio · made by <a href="/">Tommy Slettvold</a> <span lang="ja">平原 智明</span></span>
+  <span>No account, no tracking: your CVs stay in this browser. Use Import / Export for backups.</span>
+  <a href="guide.html">Guide (EN)</a><a href="guide-ja.html" lang="ja">ガイド（日本語）</a><a href="/contact/?about=idea">Feedback</a></footer>
+</body>
+</html>
