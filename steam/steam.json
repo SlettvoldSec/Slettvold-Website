@@ -10,7 +10,7 @@
    "name": "Valheim",
    "hours": 1272,
    "img": "/steam/img/892970.jpg",
-   "hours2w": 63.3
+   "hours2w": 61.4
   },
   {
    "appid": 2634950,
@@ -126,7 +126,7 @@
    "name": "Top of the World",
    "desc": "Build something very high up.",
    "pct": 0.1,
-   "icon": null
+   "icon": "/steam/img/892970.jpg"
   },
   {
    "appid": 892970,
@@ -134,7 +134,7 @@
    "name": "The Treasure Hunter",
    "desc": "",
    "pct": 0.2,
-   "icon": null
+   "icon": "/steam/img/892970.jpg"
   },
   {
    "appid": 815370,
@@ -162,10 +162,10 @@
   }
  ],
  "japanese": {
-  "games": 17,
-  "voice": 1,
-  "checked": 150,
+  "games": 33,
+  "voice": 3,
+  "checked": 300,
   "total": 1705
  },
- "updated": "2026-10-27T09:11:09.329Z"
+ "updated": "2026-10-27T11:14:52.989Z"
 }
