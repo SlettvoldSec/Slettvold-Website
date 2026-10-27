@@ -457,3 +457,16 @@ ul.bullets { padding-left: 20px; margin: 10px 0 14px; } ul.bullets li { margin: 
 .supd { margin-top: 10px; }
 @media (max-width: 860px) { .sgames { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .fav .fav-h { display: block; margin-top: 6px; font-style: normal; font-family: var(--mono, ui-monospace, monospace); font-size: 13px; color: var(--ember, #ffb060); }
+/* hobbies: level bar, achievements (assets/steam.js) */
+#steam-more { margin-top: 18px; }
+.lvlbar { margin: 4px 0 6px; }
+.lvl-top { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--muted); margin-bottom: 6px; font-family: var(--mono); }
+.lvl-track { height: 10px; border-radius: 99px; background: rgba(255, 255, 255, .06); border: 1px solid var(--line); overflow: hidden; }
+.lvl-track i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #ff3147, #ffb060); box-shadow: 0 0 16px rgba(255, 49, 71, .6); }
+#steam-more h3.sh { margin-top: 26px; }
+.rares { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 10px; }
+.rare { display: flex; gap: 12px; align-items: flex-start; padding: 12px; border-radius: 14px; border: 1px solid var(--line-red); background: linear-gradient(160deg, rgba(42, 9, 16, .7), rgba(14, 10, 12, .7)); }
+.rare img { width: 56px; height: 56px; border-radius: 10px; flex: none; box-shadow: 0 0 14px rgba(255, 176, 96, .25); }
+.rare b { display: block; font-size: 15px; } .rare span { display: block; font-size: 13px; color: var(--muted); }
+.rare .rd { margin-top: 2px; } .rare .rp { margin-top: 4px; color: #ffb060; font-family: var(--mono); font-size: 12.5px; }
+.perfects { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }

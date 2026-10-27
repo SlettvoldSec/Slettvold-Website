@@ -17,6 +17,7 @@
       const h = hrs[f.dataset.appid]; if (!h) return;
       const t = document.createElement('i'); t.className = 'fav-h'; t.textContent = ja ? `${fmt.format(h)}時間` : `${fmt.format(h)} h`; f.appendChild(t);
     });
+    more(d, ja, fmt);
     const list = d.recent && d.recent.length ? d.recent : d.mostPlayed || [];
     if (!list.length) return;
     const card = (g) => {
@@ -36,4 +37,44 @@
       + (d.hours ? (ja ? ` · 総プレイ時間 ${fmt.format(d.hours)}時間` : ` · ${fmt.format(d.hours)} hours played in total`) : '');
     box.hidden = false;
   }).catch(() => {});
+
+  // level progress, achievements, 100 % games, games in Japanese, rarest achievements
+  function more(d, ja, fmt) {
+    const box = document.getElementById('steam-more'); if (!box) return;
+    const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+    let any = false;
+    if (d.levelProgress) {
+      const lp = d.levelProgress, w = el('div', 'lvlbar');
+      const top = el('div', 'lvl-top'); top.append(el('span', '', ja ? `レベル ${lp.next - 1} → ${lp.next}` : `Level ${lp.next - 1} → ${lp.next}`), el('span', '', ja ? `あと ${fmt.format(lp.toGo)} XP` : `${fmt.format(lp.toGo)} XP to go`));
+      const tr = el('div', 'lvl-track'); const fill = el('i'); fill.style.width = Math.max(2, Math.min(100, lp.pct)) + '%'; tr.appendChild(fill);
+      tr.setAttribute('role', 'progressbar'); tr.setAttribute('aria-valuenow', String(lp.pct)); tr.setAttribute('aria-valuemin', '0'); tr.setAttribute('aria-valuemax', '100');
+      w.append(top, tr); box.appendChild(w); any = true;
+    }
+    const st = el('div', 'stats'), stat = (v, label) => { const b = el('b', '', fmt.format(v)); b.dataset.count = v; const c = el('div', 'stat'); c.append(b, el('span', '', label)); st.appendChild(c); };
+    if (d.achievements != null) stat(d.achievements, ja ? '実績' : 'achievements');
+    if (d.perfect != null) stat(d.perfect, ja ? '実績100%のゲーム' : '100% games');
+    if (d.japanese && d.japanese.games != null) stat(d.japanese.games, ja ? '日本語で遊べる' : 'playable in Japanese');
+    if (d.japanese && d.japanese.voice != null) stat(d.japanese.voice, ja ? '日本語ボイス' : 'with Japanese voices');
+    if (st.children.length) { box.appendChild(st); any = true;
+      if (d.japanese && d.japanese.checked < d.japanese.total) box.appendChild(el('p', 'small', ja ? `日本語対応は${fmt.format(d.japanese.total)}本中${fmt.format(d.japanese.checked)}本を確認済み（毎日少しずつ確認しています）。` : `Japanese support checked for ${fmt.format(d.japanese.checked)} of ${fmt.format(d.japanese.total)} games so far (a few more every day).`));
+    }
+    if (d.rarest && d.rarest.length) {
+      box.appendChild(el('h3', 'sh', ja ? 'いちばん珍しい実績' : 'Rarest achievements'));
+      const g = el('div', 'rares');
+      d.rarest.forEach((r) => {
+        const c = el('div', 'rare');
+        if (r.icon) { const i = el('img'); i.src = r.icon; i.alt = ''; i.width = 64; i.height = 64; i.loading = 'lazy'; c.appendChild(i); }
+        const t = el('div'); t.append(el('b', '', r.name), el('span', 'rg', r.game));
+        if (r.desc) t.appendChild(el('span', 'rd', r.desc));
+        t.appendChild(el('span', 'rp', ja ? `プレイヤーの${r.pct}%だけ` : `Only ${r.pct}% of players`));
+        c.appendChild(t); g.appendChild(c);
+      });
+      box.appendChild(g); any = true;
+    }
+    if (d.perfectGames && d.perfectGames.length) {
+      box.appendChild(el('h3', 'sh', ja ? '実績100%達成' : '100% completed'));
+      const p = el('div', 'perfects'); d.perfectGames.forEach((x) => p.appendChild(el('span', 'tag red', x.name))); box.appendChild(p); any = true;
+    }
+    if (any) box.hidden = false;
+  }
 })();

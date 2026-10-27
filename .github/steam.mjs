@@ -49,6 +49,73 @@ const data = {
   mostPlayed: await Promise.all(top.map((g) => pick(g, {}))),
   favs: FAVS.filter((id) => byId[id]).map((id) => ({ appid: id, hours: Math.round((byId[id].playtime_forever || 0) / 60) })),
 };
+// ---------- level progress ----------
+if (badges.player_xp != null && badges.player_xp_needed_to_level_up != null) {
+  const into = badges.player_xp - (badges.player_xp_needed_current_level || 0), span = into + badges.player_xp_needed_to_level_up;
+  data.levelProgress = { next: (level.player_level || 0) + 1, toGo: badges.player_xp_needed_to_level_up, pct: span > 0 ? Math.round(into / span * 1000) / 10 : 0 };
+}
+
+// ---------- achievements: totals, 100 % games and the rarest ones unlocked ----------
+const raw = async (path, params) => {
+  const r = await fetch(`${API}/${path}/?${new URLSearchParams({ key: KEY, format: 'json', ...params })}`);
+  return r.ok ? r.json() : null;
+};
+const pool = async (items, n, fn) => { const out = []; let i = 0; await Promise.all(Array.from({ length: n }, async () => { while (i < items.length) { const k = i++; out[k] = await fn(items[k]).catch(() => null); } })); return out; };
+const played = games.filter((g) => (g.playtime_forever || 0) >= 60).sort((a, b) => b.playtime_forever - a.playtime_forever).slice(0, 400);
+const ach = await pool(played, 6, async (g) => {
+  const j = await raw('ISteamUserStats/GetPlayerAchievements/v1', { steamid, appid: g.appid, l: 'english' });
+  const list = j && j.playerstats && j.playerstats.achievements;
+  return list && list.length ? { g, list } : null;
+});
+let unlocked = 0; const perfect = [], cand = [];
+for (const a of ach.filter(Boolean)) {
+  const got = a.list.filter((x) => x.achieved === 1); unlocked += got.length;
+  if (got.length === a.list.length) perfect.push(a.g);
+  if (got.length) cand.push({ g: a.g, got });
+}
+const pcts = await pool(cand, 6, async (c) => {
+  const j = await raw('ISteamUserStats/GetGlobalAchievementPercentagesForApp/v2', { gameid: c.g.appid });
+  const m = {}; ((j && j.achievementpercentages && j.achievementpercentages.achievements) || []).forEach((x) => { m[x.name] = +x.percent; });
+  return c.got.filter((x) => m[x.apiname] > 0).map((x) => ({ g: c.g, a: x, pct: m[x.apiname] }));
+});
+const rare = pcts.flat().filter(Boolean).sort((a, b) => a.pct - b.pct).slice(0, 5);
+const schemas = {};
+async function achIcon(appid, apiname) {
+  if (!schemas[appid]) {
+    const j = await raw('ISteamUserStats/GetSchemaForGame/v2', { appid, l: 'english' });
+    schemas[appid] = Object.fromEntries(((j && j.game && j.game.availableGameStats && j.game.availableGameStats.achievements) || []).map((x) => [x.name, x]));
+  }
+  const s = schemas[appid][apiname]; if (!s || !s.icon) return null;
+  const name = `ach-${appid}-${apiname.replace(/[^\w-]/g, '_').slice(0, 60)}.jpg`, file = `steam/img/${name}`; keep.add(name);
+  if (!fs.existsSync(file)) { try { const r = await fetch(s.icon); if (!r.ok) return null; fs.writeFileSync(file, Buffer.from(await r.arrayBuffer())); } catch (e) { return null; } }
+  return `/${file}`;
+}
+data.achievements = unlocked;
+data.perfect = perfect.length;
+data.perfectGames = perfect.slice(0, 8).map((g) => ({ appid: g.appid, name: g.name }));
+data.rarest = [];
+for (const r of rare) data.rarest.push({ appid: r.g.appid, game: r.g.name, name: r.a.name || r.a.apiname, desc: r.a.description || '', pct: Math.round(r.pct * 10) / 10, icon: await achIcon(r.g.appid, r.a.apiname) });
+
+// ---------- games playable in Japanese (store data, cached; checked a little each day) ----------
+const CACHE = 'steam/cache/lang.json';
+fs.mkdirSync('steam/cache', { recursive: true });
+const lang = fs.existsSync(CACHE) ? JSON.parse(fs.readFileSync(CACHE, 'utf8')) : {};   // appid → 0 none, 1 text, 2 voice, -1 unknown
+const todo = games.map((g) => String(g.appid)).filter((id) => !(id in lang)).slice(0, 150);   // the store allows ~200 requests per 5 min
+for (const id of todo) {
+  try {
+    const r = await fetch(`https://store.steampowered.com/api/appdetails?appids=${id}&filters=basic&l=english`);
+    if (r.status === 429) break;
+    const j = r.ok ? await r.json() : null, d = j && j[id];
+    if (!d || !d.success) lang[id] = -1;
+    else { const s = d.data.supported_languages || ''; const m = /Japanese(<strong>\*<\/strong>)?/i.exec(s); lang[id] = !m ? 0 : m[1] ? 2 : 1; }
+  } catch (e) { lang[id] = -1; }
+  await new Promise((res) => setTimeout(res, 1600));
+}
+fs.writeFileSync(CACHE, JSON.stringify(lang));
+const known = games.filter((g) => lang[g.appid] >= 0);
+data.japanese = { games: known.filter((g) => lang[g.appid] >= 1).length, voice: known.filter((g) => lang[g.appid] === 2).length,
+                  checked: games.filter((g) => String(g.appid) in lang).length, total: games.length };
+
 for (const f of fs.readdirSync('steam/img')) if (!keep.has(f)) fs.unlinkSync(`steam/img/${f}`);   // drop images no longer shown
 const old = fs.existsSync('steam/steam.json') ? JSON.parse(fs.readFileSync('steam/steam.json', 'utf8')) : {};
 const same = JSON.stringify({ ...old, updated: 0 }) === JSON.stringify({ ...data, updated: 0 });
