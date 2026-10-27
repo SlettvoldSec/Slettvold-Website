@@ -1,0 +1,64 @@
+{
+ "games": 1705,
+ "hours": 15368,
+ "level": 53,
+ "badges": 52,
+ "xp": 17362,
+ "recent": [
+  {
+   "appid": 892970,
+   "name": "Valheim",
+   "hours": 1272,
+   "img": "/steam/img/892970.jpg",
+   "hours2w": 63.3
+  },
+  {
+   "appid": 2634950,
+   "name": "Tokyo Xtreme Racer",
+   "hours": 1,
+   "img": "/steam/img/2634950.jpg",
+   "hours2w": 0.5
+  },
+  {
+   "appid": 2139460,
+   "name": "Once Human",
+   "hours": 0,
+   "img": "/steam/img/2139460.jpg",
+   "hours2w": 0.2
+  },
+  {
+   "appid": 1974050,
+   "name": "Torchlight: Infinite",
+   "hours": 0,
+   "img": "/steam/img/1974050.jpg",
+   "hours2w": 0.1
+  }
+ ],
+ "mostPlayed": [
+  {
+   "appid": 892970,
+   "name": "Valheim",
+   "hours": 1272,
+   "img": "/steam/img/892970.jpg"
+  },
+  {
+   "appid": 39210,
+   "name": "FINAL FANTASY XIV Online",
+   "hours": 1030,
+   "img": "/steam/img/39210.jpg"
+  },
+  {
+   "appid": 570,
+   "name": "Dota 2",
+   "hours": 832,
+   "img": "/steam/img/570.jpg"
+  },
+  {
+   "appid": 306130,
+   "name": "The Elder Scrolls Online",
+   "hours": 637,
+   "img": "/steam/img/306130.jpg"
+  }
+ ],
+ "updated": "2026-10-27T07:37:41.316Z"
+}
