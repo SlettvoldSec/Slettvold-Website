@@ -23,10 +23,10 @@
 <meta name="theme-color" content="#0b0507">
 <meta name="color-scheme" content="dark">
 <title>Projects · Tommy Slettvold</title>
-<meta name="description" content="Apps and projects by Tommy Slettvold: Oni Dojo (learn Japanese), Rireki Studio (Japanese CV maker), Tokoyami Oni Radio, security research.">
+<meta name="description" content="Apps and projects by Tommy Slettvold: Oni Dojo (learn Japanese), Rireki Studio (Japanese CV maker), Tokoyami Oni Radio, Onibi (coming soon), security research.">
 <link rel="canonical" href="https://slettvold.org/projects/">
 <meta property="og:title" content="Projects · Tommy Slettvold">
-<meta property="og:description" content="Apps and projects by Tommy Slettvold: Oni Dojo (learn Japanese), Rireki Studio (Japanese CV maker), Tokoyami Oni Radio, security research.">
+<meta property="og:description" content="Apps and projects by Tommy Slettvold: Oni Dojo (learn Japanese), Rireki Studio (Japanese CV maker), Tokoyami Oni Radio, Onibi (coming soon), security research.">
 <meta property="og:url" content="https://slettvold.org/projects/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="slettvold.org">
@@ -46,7 +46,7 @@
 <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=310052af">
-<link rel="stylesheet" href="/assets/site.css?v=ab24e86e">
+<link rel="stylesheet" href="/assets/site.css?v=2840c723">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/docs/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body class="page-projects lang-en" data-lang="en" data-other="/ja/projects/">
@@ -89,12 +89,28 @@
   </div>
 </div>
 
-<h2 id="radio">Tokoyami Oni Radio<span class="jp">ラジオ</span></h2>
+<h2 id="radio">Tokoyami Oni Radio<span class="jp">常闇鬼電波</span></h2>
+<p>Japanese internet radio in one player: local and community stations from all over Japan, sorted by region, with the same neon oni look as my other apps. I listen to it all day for Japanese practice. It started as a Windows app and is now rebuilt natively for Android.</p>
+<div class="shots" tabindex="0" aria-label="Screenshots of Tokoyami Oni Radio on Android">
+  <figure><img src="/img/radio/list.jpg" alt="Station list grouped by region, with a 'starting soon' reminder and the mini player" width="420" height="865" loading="lazy"><figcaption>Stations by region, favourites and a "starting soon" reminder.</figcaption></figure>
+  <figure><img src="/img/radio/player.jpg" alt="Player with the current programme, time left, next programme, translate and romaji buttons" width="420" height="865" loading="lazy"><figcaption>What's on now, time left and what's next. One tap translates or shows romaji.</figcaption></figure>
+  <figure><img src="/img/radio/guide.jpg" alt="Programme guide for one station in Japan time, with reminder bells" width="420" height="865" loading="lazy"><figcaption>The full programme guide in Japan time, with a bell for start reminders.</figcaption></figure>
+</div>
+<figure class="wide"><img src="/img/radio/visualizer.jpg" alt="Full-screen visualizer: a glowing red oni mask in a dark dojo, with the station and programme name" width="1200" height="554" loading="lazy"><figcaption>Turn the phone sideways for the full-screen visualizer.</figcaption></figure>
+<ul class="bullets">
+  <li><b>Learn while you listen:</b> programme titles translated or shown in romaji.</li>
+  <li><b>Never miss a show:</b> reminders before a programme starts, an alarm clock and a sleep timer.</li>
+  <li><b>Small touches:</b> volume per station, Chromecast, and a share card for what you're hearing.</li>
+</ul>
+<span class="tag">Android (Kotlin, Jetpack Compose, Media3)</span><span class="tag">Windows</span>
+
+<h2 id="onibi">Onibi<span class="jp">鬼火</span></h2>
 <div class="proj">
-  <div class="card" style="display:grid;place-items:center;aspect-ratio:9/16;max-width:220px"><div class="g" style="font-size:56px">鬼</div><p>Screenshot coming</p></div>
+  <div class="card" style="display:grid;place-items:center;aspect-ratio:4/5;max-width:220px;text-align:center"><div class="g" style="font-size:56px">火</div><p><span class="tag red">Coming soon</span></p></div>
   <div>
-    <p>Japanese internet radio in one place: a catalogue of about 80 stations with live refresh, streaming playback and the same neon oni look. A Windows app, now ported natively to Android.</p>
-    <span class="tag">Windows</span><span class="tag">Android (Kotlin, Media3)</span>
+    <p>My next app: fuel prices near you, compared live on a dark map, with directions to the cheapest station. Prices come from official open data where countries publish it, and from drivers who report what they see at the pump.</p>
+    <p>It is in development now. Want to know when it's ready, or test it early? <a href="/contact/?about=idea">Send me a message</a>.</p>
+    <span class="tag">Android (Kotlin, Jetpack Compose)</span><span class="tag">Supabase</span><span class="tag">OpenStreetMap</span>
   </div>
 </div>
 

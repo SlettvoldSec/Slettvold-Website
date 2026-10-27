@@ -47,7 +47,7 @@
 <link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/zenkaku-400-a.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=310052af">
-<link rel="stylesheet" href="/assets/site.css?v=ab24e86e">
+<link rel="stylesheet" href="/assets/site.css?v=2840c723">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/docs/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body class="page-projects lang-ja" data-lang="ja" data-other="/projects/">
@@ -90,12 +90,28 @@
   </div>
 </div>
 
-<h2 id="radio">Tokoyami Oni Radio<span class="jp">Radio</span></h2>
+<h2 id="radio">Tokoyami Oni Radio<span class="jp">常闇鬼電波</span></h2>
+<p>日本のインターネットラジオをひとつのプレーヤーで。全国のローカル局・コミュニティFMを地域別に聴けて、デザインは他のアプリと同じネオンの鬼。日本語の練習のために一日中聴いています。Windows版から始まり、今はAndroid向けにネイティブで作り直しました。</p>
+<div class="shots" tabindex="0" aria-label="AndroidでのTokoyami Oni Radioのスクリーンショット">
+  <figure><img src="/img/radio/list.jpg" alt="地域別の放送局一覧、「まもなく」のリマインダーとミニプレーヤー" width="420" height="865" loading="lazy"><figcaption>地域別の放送局、お気に入り、「まもなく」のお知らせ。</figcaption></figure>
+  <figure><img src="/img/radio/player.jpg" alt="現在の番組、残り時間、次の番組、翻訳とローマ字のボタンがあるプレーヤー" width="420" height="865" loading="lazy"><figcaption>今の番組、残り時間、次の番組。ワンタップで翻訳・ローマ字表示。</figcaption></figure>
+  <figure><img src="/img/radio/guide.jpg" alt="日本時間で表示した放送局の番組表とリマインダーのベル" width="420" height="865" loading="lazy"><figcaption>日本時間の番組表。ベルで番組開始をお知らせ。</figcaption></figure>
+</div>
+<figure class="wide"><img src="/img/radio/visualizer.jpg" alt="暗い道場に赤く光る鬼の面が浮かぶ全画面ビジュアライザー" width="1200" height="554" loading="lazy"><figcaption>スマホを横にすると全画面のビジュアライザー。</figcaption></figure>
+<ul class="bullets">
+  <li><b>聴きながら学ぶ：</b>番組名を翻訳、またはローマ字で表示。</li>
+  <li><b>聴き逃さない：</b>番組開始前のお知らせ、目覚まし、スリープタイマー。</li>
+  <li><b>細かな工夫：</b>局ごとの音量調整、Chromecast、今聴いている番組のシェアカード。</li>
+</ul>
+<span class="tag">Android（Kotlin、Jetpack Compose、Media3）</span><span class="tag">Windows</span>
+
+<h2 id="onibi">Onibi<span class="jp">鬼火</span></h2>
 <div class="proj">
-  <div class="card" style="display:grid;place-items:center;aspect-ratio:9/16;max-width:220px"><div class="g" style="font-size:56px">鬼</div><p>スクリーンショット準備中</p></div>
+  <div class="card" style="display:grid;place-items:center;aspect-ratio:4/5;max-width:220px;text-align:center"><div class="g" style="font-size:56px">火</div><p><span class="tag red">近日公開</span></p></div>
   <div>
-    <p>日本のインターネットラジオをひとつのアプリで。約80局のカタログ、自動更新、ストリーミング再生、そしてネオンの鬼のデザイン。Windows版に加えて、Android版も開発しました。</p>
-    <span class="tag">Windows</span><span class="tag">Android（Kotlin、Media3）</span>
+    <p>次のアプリは、近くのガソリン価格を暗い地図の上でリアルタイムに比べて、いちばん安いスタンドまで案内するアプリです。価格は各国が公開しているオープンデータと、ドライバーからの報告をもとにしています。</p>
+    <p>現在開発中です。完成のお知らせやテスト参加をご希望の方は<a href="/ja/contact/?about=idea">メッセージ</a>をお送りください。</p>
+    <span class="tag">Android（Kotlin、Jetpack Compose）</span><span class="tag">Supabase</span><span class="tag">OpenStreetMap</span>
   </div>
 </div>
 

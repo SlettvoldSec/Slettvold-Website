@@ -443,3 +443,8 @@ ul.sources li { font-size: 14.5px; }
 /* app cards on the home page: status tags on their own line */
 .card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 12px; }
 .card .tags .tag { margin: 0; }
+/* projects: wide screenshot (radio visualizer) and short feature list */
+figure.wide { margin: 6px 0 14px; max-width: 760px; }
+figure.wide img { width: 100%; height: auto; border-radius: 18px; border: 1px solid var(--line-red); box-shadow: 0 10px 30px rgba(0, 0, 0, .45); display: block; }
+figure.wide figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+ul.bullets { padding-left: 20px; margin: 10px 0 14px; } ul.bullets li { margin: 6px 0; line-height: 1.6; }
