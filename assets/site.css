@@ -439,3 +439,7 @@ ul.sources li { font-size: 14.5px; }
   text-shadow: 0 0 30px rgba(255, 49, 71, .55); }
 .namecard rt { font-size: 15px; color: var(--muted); letter-spacing: .1em; font-weight: 500; font-family: var(--jpt); }
 .jabox ruby rt { font-size: 11px; color: var(--muted); }
+
+/* app cards on the home page: status tags on their own line */
+.card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 12px; }
+.card .tags .tag { margin: 0; }
