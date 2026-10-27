@@ -78,5 +78,94 @@
    "hours": 637
   }
  ],
- "updated": "2026-10-27T07:41:44.278Z"
+ "levelProgress": {
+  "next": 54,
+  "toGo": 38,
+  "pct": 93.7
+ },
+ "achievements": 9975,
+ "perfect": 152,
+ "perfectGames": [
+  {
+   "appid": 271590,
+   "name": "Grand Theft Auto V Legacy"
+  },
+  {
+   "appid": 345350,
+   "name": "LIGHTNING RETURNS: FINAL FANTASY XIII"
+  },
+  {
+   "appid": 72850,
+   "name": "The Elder Scrolls V: Skyrim"
+  },
+  {
+   "appid": 620,
+   "name": "Portal 2"
+  },
+  {
+   "appid": 638970,
+   "name": "Yakuza 0"
+  },
+  {
+   "appid": 489830,
+   "name": "The Elder Scrolls V: Skyrim Special Edition"
+  },
+  {
+   "appid": 814380,
+   "name": "Sekiro™: Shadows Die Twice"
+  },
+  {
+   "appid": 110800,
+   "name": "L.A. Noire"
+  }
+ ],
+ "rarest": [
+  {
+   "appid": 892970,
+   "game": "Valheim",
+   "name": "Top of the World",
+   "desc": "Build something very high up.",
+   "pct": 0.1,
+   "icon": null
+  },
+  {
+   "appid": 892970,
+   "game": "Valheim",
+   "name": "The Treasure Hunter",
+   "desc": "",
+   "pct": 0.2,
+   "icon": null
+  },
+  {
+   "appid": 815370,
+   "game": "Green Hell",
+   "name": "Mr... I don't feel so good",
+   "desc": "At the same time get leeches, worm, rash, fever, poison, food poisoning, parasites, insomnia, dirt and any wound",
+   "pct": 0.4,
+   "icon": "/steam/img/ach-815370-ACH_CATCH_AT_ONCE.jpg"
+  },
+  {
+   "appid": 815370,
+   "game": "Green Hell",
+   "name": "I'm not afraid of any work",
+   "desc": "Complete 7 Challenges",
+   "pct": 0.4,
+   "icon": "/steam/img/ach-815370-ACH_ALL_CHALLENGES.jpg"
+  },
+  {
+   "appid": 1702010,
+   "game": "Sengoku Dynasty",
+   "name": "Personal Enlightenment",
+   "desc": "Unlock max level in all Warrior, Monk, and Craftsman (non-background) perks.",
+   "pct": 0.5,
+   "icon": "/steam/img/ach-1702010-ACH_ALL_PERKS.jpg"
+  }
+ ],
+ "japanese": {
+  "games": 17,
+  "voice": 1,
+  "checked": 150,
+  "total": 1705
+ },
+ "updated": "2026-10-27T09:11:09.329Z"
 }
