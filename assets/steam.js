@@ -18,7 +18,7 @@
       if (g.img) { const i = document.createElement('img'); i.src = g.img; i.alt = ''; i.width = 231; i.height = 87; i.loading = 'lazy'; a.appendChild(i); }
       const b = document.createElement('b'); b.textContent = g.name; a.appendChild(b);
       const s = document.createElement('span');
-      s.textContent = g.hours2w != null ? (ja ? `過去2週間 ${g.hours2w}時間 · 合計 ${fmt.format(g.hours)}時間` : `${g.hours2w} h in the last 2 weeks · ${fmt.format(g.hours)} h total`)
+      s.textContent = g.hours2w != null ? (ja ? `過去2週間 ${g.hours2w}時間` + (g.hours >= 1 ? ` · 合計 ${fmt.format(g.hours)}時間` : '') : `${g.hours2w} h in the last 2 weeks` + (g.hours >= 1 ? ` · ${fmt.format(g.hours)} h total` : ''))
                                         : (ja ? `合計 ${fmt.format(g.hours)}時間` : `${fmt.format(g.hours)} h played`);
       a.appendChild(s); return a;
     };
