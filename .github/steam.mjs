@@ -39,11 +39,15 @@ async function image(appid) {
   return null;
 }
 const pick = async (g, extra) => ({ appid: g.appid, name: g.name, hours: Math.round((g.playtime_forever || 0) / 60), img: await image(g.appid), ...extra });
+// the hand-picked favourites on the Hobbies page (data-appid there): their hours are always included
+const FAVS = [570, 892970, 39210, 306130];
+const byId = Object.fromEntries(games.map((g) => [g.appid, g]));
 const data = {
   games: owned.game_count, hours, level: level.player_level ?? null,
   badges: (badges.badges || []).length, xp: badges.player_xp ?? null,
   recent: await Promise.all((recent.games || []).map((g) => pick(g, { hours2w: Math.round((g.playtime_2weeks || 0) / 6) / 10 }))),
   mostPlayed: await Promise.all(top.map((g) => pick(g, {}))),
+  favs: FAVS.filter((id) => byId[id]).map((id) => ({ appid: id, hours: Math.round((byId[id].playtime_forever || 0) / 60) })),
 };
 for (const f of fs.readdirSync('steam/img')) if (!keep.has(f)) fs.unlinkSync(`steam/img/${f}`);   // drop images no longer shown
 const old = fs.existsSync('steam/steam.json') ? JSON.parse(fs.readFileSync('steam/steam.json', 'utf8')) : {};

@@ -11,6 +11,12 @@
       const v = d[el.dataset.steam]; if (v == null) return;
       el.dataset.count = v; el.textContent = fmt.format(v);   // fx.js counts up to data-count when it scrolls into view
     });
+    // favourites: add the hours played when Steam has them
+    const hrs = {}; [...(d.mostPlayed || []), ...(d.recent || []), ...(d.favs || [])].forEach((g) => { hrs[g.appid] = g.hours; });
+    document.querySelectorAll('.fav[data-appid]').forEach((f) => {
+      const h = hrs[f.dataset.appid]; if (!h) return;
+      const t = document.createElement('i'); t.className = 'fav-h'; t.textContent = ja ? `${fmt.format(h)}時間` : `${fmt.format(h)} h`; f.appendChild(t);
+    });
     const list = d.recent && d.recent.length ? d.recent : d.mostPlayed || [];
     if (!list.length) return;
     const card = (g) => {

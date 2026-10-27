@@ -456,3 +456,4 @@ ul.bullets { padding-left: 20px; margin: 10px 0 14px; } ul.bullets li { margin: 
 .sgame b { display: block; padding: 10px 12px 0; font-size: 15px; } .sgame span { display: block; padding: 2px 12px 12px; color: var(--muted); font-size: 13px; }
 .supd { margin-top: 10px; }
 @media (max-width: 860px) { .sgames { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.fav .fav-h { display: block; margin-top: 6px; font-style: normal; font-family: var(--mono, ui-monospace, monospace); font-size: 13px; color: var(--ember, #ffb060); }
