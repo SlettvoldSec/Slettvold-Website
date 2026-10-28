@@ -10,7 +10,7 @@
    "name": "Valheim",
    "hours": 1272,
    "img": "/steam/img/892970.jpg",
-   "hours2w": 61.3
+   "hours2w": 51
   },
   {
    "appid": 2634950,
@@ -162,10 +162,10 @@
   }
  ],
  "japanese": {
-  "games": 65,
-  "voice": 12,
-  "checked": 450,
+  "games": 93,
+  "voice": 18,
+  "checked": 600,
   "total": 1705
  },
- "updated": "2026-10-27T11:20:46.514Z"
+ "updated": "2026-10-28T05:02:10.239Z"
 }
