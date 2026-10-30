@@ -10,7 +10,8 @@
 <link rel="alternate" hreflang="ja" href="https://slettvold.org/onidojo/ja.html">
 <link rel="canonical" href="https://slettvold.org/onidojo/">
 <link rel="alternate" hreflang="x-default" href="https://slettvold.org/onidojo/">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Oni Dojo", "alternateName": "鬼道場", "url": "https://slettvold.org/onidojo/", "description": "Learn Japanese from your first hiragana to JLPT N1 with Kurenai, your oni sensei. 140 guided lessons, over 15,000 voice recordings, flashcards, graded stories and conversations. No ads, no tracking.", "inLanguage": "en", "installUrl": "https://play.google.com/store/apps/details?id=no.slettvoldsec.onidojo", "applicationCategory": "EducationalApplication", "operatingSystem": "Android, Windows", "image": "https://slettvold.org/onidojo/img/hero.png", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Kana and JLPT N5 free; Premium for N4–N1"}, "author": {"@type": "Person", "@id": "https://slettvold.org/#tommy", "name": "Tommy André Slettvold", "url": "https://slettvold.org/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Oni Dojo", "alternateName": "鬼道場", "url": "https://slettvold.org/onidojo/", "description": "Learn Japanese from your first hiragana to JLPT N1 with Kurenai, your oni sensei. 142 guided lessons, over 16,000 voice recordings, flashcards, graded stories and conversations. No ads, no tracking.", "inLanguage": "en", "installUrl": "https://play.google.com/store/apps/details?id=no.slettvoldsec.onidojo", "applicationCategory": "EducationalApplication", "operatingSystem": "Android, Windows", "image": "https://slettvold.org/onidojo/img/hero.png", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Kana and JLPT N5 free; Premium for N4–N1"}, "author": {"@type": "Person", "@id": "https://slettvold.org/#tommy", "name": "Tommy André Slettvold", "url": "https://slettvold.org/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Oni Dojo free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. All hiragana and katakana and the whole JLPT N5 course are free, with their stories, flashcards and games, and there are no ads. Premium opens N4 to N1."}}, {"@type": "Question", "name": "How far does it go?", "acceptedAnswer": {"@type": "Answer", "text": "From your first hiragana to JLPT N1: 142 guided lessons (25 at N5, 27 at N4 and 30 each at N3, N2 and N1), graded stories, culture articles and mock exams for every level."}}, {"@type": "Question", "name": "Is it good for the JLPT?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each level follows the JLPT, and the JLPT path has mock exams with the real section minimums, a ten-minute exam sprint and a countdown to the next test in July or December."}}, {"@type": "Question", "name": "Does it work offline?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Lessons, voices, stories and flashcards are all on your phone. You only need the internet to sign in or buy Premium."}}, {"@type": "Question", "name": "Do I need an account?", "acceptedAnswer": {"@type": "Answer", "text": "No. An account is optional and free; it lets Premium follow you to a new phone. Oni Dojo has no ads, no analytics and no tracking."}}, {"@type": "Question", "name": "Which languages does the app speak?", "acceptedAnswer": {"@type": "Answer", "text": "Menus and messages are in English or Norwegian (bokmål). Lessons and explanations are in English for now."}}, {"@type": "Question", "name": "Is there a PC version?", "acceptedAnswer": {"@type": "Answer", "text": "A Windows version is in testing. If you want to hear when it is ready, write to tommy@slettvold.org."}}, {"@type": "Question", "name": "How is it different from Duolingo?", "acceptedAnswer": {"@type": "Answer", "text": "Oni Dojo is a full course: every grammar point is explained, every sentence is voiced, and it goes all the way to N1. There are no hearts or energy to run out of, and you can study as long as you like."}}]}</script>
 <title>Oni Dojo · Learn Japanese with Kurenai</title>
 <meta name="description" content="Learn Japanese from your first hiragana to JLPT N1 with Kurenai, your oni sensei. Guided lessons, natural voices, flashcards and conversations. No ads, no tracking.">
 <link rel="icon" href="favicon.png">
@@ -65,11 +66,27 @@
   .plan.hot { border-color: var(--red); box-shadow: 0 0 0 1px var(--red), 0 0 30px rgba(255, 49, 71, .2); }
   .plan .p { font-size: 26px; font-weight: 900; margin: 6px 0; }
   .plan p { color: var(--muted); margin: 0; font-size: 15px; }
+  .demo { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; max-width: 680px; }
+  .demo-q { color: var(--muted); }
+  .demo-s { font-size: 30px; margin: 10px 0 14px; font-family: "Shippori Mincho B1", "Yu Mincho", serif; }
+  .demo-blank { display: inline-block; min-width: 2.6em; border-bottom: 2px solid var(--red); text-align: center; }
+  .demo-blank.ok { color: #7fd99a; border-color: #7fd99a; } .demo-blank.no { color: var(--red); }
+  .demo-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .demo-row input { flex: 1 1 200px; min-width: 0; font-size: 20px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: #0a0406; color: var(--ink); }
+  .demo-row button { border: 0; cursor: pointer; font-size: 16px; }
+  .demo-row button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .demo-out { margin-top: 12px; color: var(--muted); min-height: 1.5em; }
+  .demo-out.good { color: #7fd99a; } .demo-out.hint { color: var(--ember); } .demo-out.bad { color: #ff8a96; }
+  .faq details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; margin: 0 0 10px; }
+  .faq summary { cursor: pointer; font-weight: 700; }
+  .faq p { color: var(--muted); margin: 8px 0 0; }
+  .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  a.card.link { text-decoration: none; color: var(--ink); } a.card.link:hover { border-color: var(--red); }
   footer { margin: 72px 0 0; padding: 26px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 22px; }
   footer a { color: var(--muted); }
   @media (max-width: 760px) {
     nav a:not(.keep) { display: none; }
-    .grid, .plans { grid-template-columns: 1fr; }
+    .grid, .grid.two, .plans { grid-template-columns: 1fr; }
     .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     h2 { font-size: 25px; margin-top: 48px; }
   }
@@ -79,25 +96,46 @@
 <div class="wrap">
   <header class="top">
     <a class="brand" href="#"><img src="img/icon.png" alt="">ONI <span>DOJO</span></a>
-    <nav><a href="/" title="Tommy Slettvold · slettvold.org">← slettvold.org</a><a href="#learn">What you learn</a><a href="#premium">Premium</a><a class="keep" href="privacy.html">Privacy</a><a class="keep lang" href="ja.html" hreflang="ja">日本語</a></nav>
+    <nav><a href="/" title="Tommy Slettvold · slettvold.org">← slettvold.org</a><a href="#learn">What you learn</a><a href="#try">Try one</a><a href="#premium">Premium</a><a href="#faq">FAQ</a><a class="keep" href="privacy.html">Privacy</a><a class="keep lang" href="ja.html" hreflang="ja">日本語</a></nav>
   </header>
 
   <div class="hero"><img src="img/hero.png" alt="Oni Dojo — learn Japanese with Kurenai, your oni sensei"></div>
   <div class="cta-row">
     <a class="btn primary" href="https://play.google.com/store/apps/details?id=no.slettvoldsec.onidojo&amp;hl=en" rel="noopener">Get it on Google Play</a>
     <a class="btn ghost" href="/contact/?about=app">Send feedback</a>
-    <span class="soon">Free on Android · Windows later</span>
+    <span class="soon">Free on Android · No ads · English and Norsk</span>
   </div>
 
   <h2 id="learn"><small>鬼道場</small>From your first hiragana to JLPT N1</h2>
   <p class="lead">Oni Dojo is a complete Japanese course taught by Kurenai 紅, a slightly mischievous oni sensei. Every lesson walks you through new words, grammar, a short dialogue and a checkpoint, and every sentence is voiced.</p>
   <div class="grid">
-    <div class="card"><div class="g">本</div><b>140 guided lessons</b><p>N5 to N1, with grammar explained in plain English and a checkpoint at the end of every lesson.</p></div>
-    <div class="card"><div class="g">声</div><b>Natural voices</b><p>Over 15,000 recorded clips, so you hear real pitch and rhythm in every word and sentence.</p></div>
+    <div class="card"><div class="g">本</div><b>142 guided lessons</b><p>N5 to N1, with grammar explained in plain English and a checkpoint at the end of every lesson.</p></div>
+    <div class="card"><div class="g">声</div><b>Natural voices</b><p>Over 16,000 recorded clips, so you hear real pitch and rhythm in every word and sentence.</p></div>
     <div class="card"><div class="g">札</div><b>Flashcards that stick</b><p>Spaced repetition for words, kanji and grammar, plus speaking cards that make you produce the word.</p></div>
     <div class="card"><div class="g">会</div><b>Talk with Kurenai</b><p>Role-plays you answer by typing or out loud, with several right answers and branching endings.</p></div>
     <div class="card"><div class="g">読</div><b>Stories at your level</b><p>44 graded stories and 38 culture articles, with a meter that shows how many words you already know.</p></div>
     <div class="card"><div class="g">静</div><b>No ads, no tracking</b><p>Works offline. No ads, no analytics. An account is optional.</p></div>
+  </div>
+
+
+  <h2 id="how"><small>教え方</small>How Kurenai teaches</h2>
+  <p class="lead">Built on what language-learning research keeps finding works, not on streak tricks. No hearts, no energy, no waiting to play.</p>
+  <div class="grid">
+    <div class="card"><div class="g">書</div><b>You write the answer</b><p>Many gaps are typed, not tapped: kana, kanji or romaji all count. Producing a word fixes it better than picking it.</p></div>
+    <div class="card"><div class="g">考</div><b>A hint before the answer</b><p>Get it wrong and Kurenai first gives you a hint and one more try. The full explanation comes after.</p></div>
+    <div class="card"><div class="g">聴</div><b>Hear it, write it</b><p>Every dialogue ends with a short dictation, so listening and spelling grow together.</p></div>
+    <div class="card"><div class="g">影</div><b>Shadowing in five steps</b><p>Listen, read along, whisper along, shadow without the text, then record yourself and compare your melody.</p></div>
+    <div class="card"><div class="g">漢</div><b>Furigana that fades</b><p>The reading above a kanji disappears once you know the word well, so your eyes learn to read it.</p></div>
+    <div class="card"><div class="g">記</div><b>Reviews at the right time</b><p>Flashcards use FSRS, a memory model that learns how fast you forget each card and brings it back just in time.</p></div>
+  </div>
+
+  <h2 id="try"><small>やってみる</small>Try one</h2>
+  <p class="lead">This is a real step from the first lessons. Type the missing word in hiragana, katakana, kanji or romaji.</p>
+  <div class="demo" id="demo" data-audio="audio/doko.ogg">
+    <div class="demo-q">Excuse me, <i>where</i> is the toilet?</div>
+    <div class="demo-s" lang="ja">トイレは<span class="demo-blank">　　</span>ですか。</div>
+    <div class="demo-row"><input type="text" lang="ja" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Your answer" placeholder="Type in kana or romaji"><button class="btn primary demo-check" type="button">Check</button><button class="btn ghost demo-play" type="button" aria-label="Listen">▶ Listen</button></div>
+    <div class="demo-out" role="status" aria-live="polite"></div>
   </div>
 
   <h2><small>見る</small>A look inside</h2>
@@ -117,6 +155,24 @@
   </div>
   <p class="lead"><b>Where your support goes.</b> Oni Dojo is made by one person. Most of what comes in from Premium and Lifetime goes straight back into the app: more lessons and stories, more voices, and bigger features such as spoken conversations with Kurenai.</p>
 
+  <h2 id="faq"><small>質問</small>Questions</h2>
+  <div class="faq">
+    <details><summary>Is Oni Dojo free?</summary><p>Yes. All hiragana and katakana and the whole JLPT N5 course are free, with their stories, flashcards and games, and there are no ads. Premium opens N4 to N1.</p></details>
+    <details><summary>How far does it go?</summary><p>From your first hiragana to JLPT N1: 142 guided lessons (25 at N5, 27 at N4 and 30 each at N3, N2 and N1), graded stories, culture articles and mock exams for every level.</p></details>
+    <details><summary>Is it good for the JLPT?</summary><p>Yes. Each level follows the JLPT, and the JLPT path has mock exams with the real section minimums, a ten-minute exam sprint and a countdown to the next test in July or December.</p></details>
+    <details><summary>Does it work offline?</summary><p>Yes. Lessons, voices, stories and flashcards are all on your phone. You only need the internet to sign in or buy Premium.</p></details>
+    <details><summary>Do I need an account?</summary><p>No. An account is optional and free; it lets Premium follow you to a new phone. Oni Dojo has no ads, no analytics and no tracking.</p></details>
+    <details><summary>Which languages does the app speak?</summary><p>Menus and messages are in English or Norwegian (bokmål). Lessons and explanations are in English for now.</p></details>
+    <details><summary>Is there a PC version?</summary><p>A Windows version is in testing. If you want to hear when it is ready, write to tommy@slettvold.org.</p></details>
+    <details><summary>How is it different from Duolingo?</summary><p>Oni Dojo is a full course: every grammar point is explained, every sentence is voiced, and it goes all the way to N1. There are no hearts or energy to run out of, and you can study as long as you like.</p></details>
+  </div>
+
+  <h2 id="free"><small>無料</small>Free study pages</h2>
+  <div class="grid two">
+    <a class="card link" href="hiragana.html"><div class="g">あ</div><b>Hiragana chart with romaji</b><p>All 46 kana, the voiced sounds, combined sounds and tips for learning them in a week.</p></a>
+    <a class="card link" href="jlpt-n5-grammar.html"><div class="g">文</div><b>JLPT N5 grammar list</b><p>Every N5 grammar point with its meaning, a short explanation and an example.</p></a>
+  </div>
+
   <footer>
     <span>© 2026 <a href="/">Slettvold Security</a> · Tommy Slettvold (平原 智明), Norway · org.nr. 935886457</span>
     <a href="privacy.html">Privacy policy</a>
@@ -128,5 +184,6 @@
   </footer>
 </div>
 <script src="/assets/intro.js?v=a2046e04" defer></script>
+<script src="demo.js?v=ec0dafae" defer></script>
 </body>
 </html>
