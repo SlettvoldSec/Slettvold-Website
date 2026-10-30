@@ -60,6 +60,7 @@ en:{
  f_era:"Year format", era_w:"Western 2026年", era_j:"Japanese era 令和8年", h_era:"Either is fine. Use one throughout both documents.",
  f_font:"Paper typeface", font_m:"Mincho (serif, traditional)", font_g:"Gothic (sans-serif, modern)",
  f_order:"Work history order (職務経歴書)", ord_desc:"Newest first (逆編年体)", ord_asc:"Oldest first (編年体)", h_order:"Newest first suits most people whose recent job is the most relevant.",
+ save_full:"Could not save: this browser\u2019s storage is full. Try a smaller photo, delete a CV you no longer need, or save a backup file (My CVs \u2192 Import / Export).", save_ok_again:"Saved again", restored:"Your saved CVs could not be read, so the latest daily backup was loaded. The unreadable copy is kept in this browser.", other_tab:"Rireki Studio is open in another tab too. Edit in one tab only, or changes can overwrite each other.", reload:"Reload", backup_nudge:"Your CVs live only in this browser. Save a backup file now and then, so a cleared browser can\u2019t take them.", backup_now:"Save backup", later:"Later",
  cvs_title:"My CVs", cvs_hint:"Keep one CV per purpose, for example full-time and part-time. Everything is saved in this browser only.",
  cv_new:"New blank CV", cv_example:"Add example CV", cv_open:"Open", cv_dup:"Duplicate", cv_del:"Delete", cv_current:"Open now", cv_copy:"copy",
  untitled_cv:"Untitled CV", edited:"Edited",
@@ -119,6 +120,7 @@ ja:{
  f_era:"年の表記", era_w:"西暦（2026年）", era_j:"和暦（令和8年）", h_era:"どちらでも構いませんが、両方の書類で統一しましょう。",
  f_font:"書体", font_m:"明朝体（伝統的）", font_g:"ゴシック体（現代的）",
  f_order:"職務経歴書の並び順", ord_desc:"新しい順（逆編年体）", ord_asc:"古い順（編年体）", h_order:"直近の職務が応募先に近い場合は新しい順が一般的です。",
+ save_full:"保存できませんでした。ブラウザの保存容量がいっぱいです。小さい写真にする、不要な履歴書を削除する、またはバックアップファイルを保存してください（履歴書の管理 → 読込・書出）。", save_ok_again:"保存できました", restored:"保存データを読み込めなかったため、最新の毎日のバックアップを読み込みました。読み込めなかったデータもこのブラウザに残してあります。", other_tab:"Rireki Studio が別のタブでも開いています。同時に編集すると内容が上書きされることがあるため、1つのタブで編集してください。", reload:"再読み込み", backup_nudge:"履歴書はこのブラウザ内にだけ保存されています。ブラウザのデータが消えても困らないよう、ときどきバックアップファイルを保存しましょう。", backup_now:"バックアップを保存", later:"あとで",
  cvs_title:"履歴書の管理", cvs_hint:"正社員用とアルバイト用など、目的ごとに分けて保存できます。データはこのブラウザ内にのみ保存されます。",
  cv_new:"新規作成", cv_example:"記入例を追加", cv_open:"開く", cv_dup:"複製", cv_del:"削除", cv_current:"表示中", cv_copy:"コピー",
  untitled_cv:"無題の履歴書", edited:"更新",
@@ -185,12 +187,23 @@ function normalize(d){
 }
 const nameFor = d => (d.personal?.nameJa || "").trim();
 
-/* store: several CVs */
-let store, S;
+/* store: several CVs.
+   Save safety (same rules as Oni Dojo): a store that fails to parse is never overwritten — it is kept under its own
+   key and the newest daily backup is loaded instead; one backup a day is kept for three days; a write that fails
+   (storage full, usually a big photo) is reported instead of failing silently; a second tab that edits the same
+   CVs is noticed; the browser is asked to keep this site's storage. */
+let store, S, restoredFrom = null, saveFailed = false;
+const BAK = [KEY2 + "-b0", KEY2 + "-b1", KEY2 + "-b2"], BAK_DAY = KEY2 + "-bday";
+const okStore = s => s && s.profiles && Object.keys(s.profiles).length;
 function loadStore(){
+  let raw = null;
+  try { raw = localStorage.getItem(KEY2); } catch(e){}
+  if (raw){
+    try { const s = JSON.parse(raw); if (okStore(s)) return s; } catch(e){}
+    try { localStorage.setItem(KEY2 + "-corrupt-" + Date.now(), raw); } catch(e){}   // keep it: never overwrite what we can't read
+    for (const k of BAK){ try { const b = JSON.parse(localStorage.getItem(k) || "null"); if (okStore(b)){ restoredFrom = k; return b; } } catch(e){} }
+  }
   try {
-    const raw = localStorage.getItem(KEY2);
-    if (raw){ const s = JSON.parse(raw); if (s && s.profiles && Object.keys(s.profiles).length) return s; }
     const v1 = localStorage.getItem(KEY1);
     if (v1){ const id = uid(); const d = normalize(JSON.parse(v1)); return {active:id, profiles:{[id]:{name:nameFor(d) || "My CV", updated:Date.now(), data:d}}}; }
   } catch(e){}
@@ -201,7 +214,28 @@ store = loadStore();
 if (!store.profiles[store.active]) store.active = Object.keys(store.profiles)[0];
 for (const p of Object.values(store.profiles)) p.data = normalize(p.data);
 S = store.profiles[store.active].data;
-const persist = () => { try { localStorage.setItem(KEY2, JSON.stringify(store)); } catch(e){} };
+let writing = false;
+const persist = () => {
+  const json = JSON.stringify(store);
+  try {
+    writing = true;
+    try { localStorage.setItem(KEY2, json); }
+    catch(e){ for (const k of BAK.slice().reverse()) localStorage.removeItem(k); localStorage.setItem(KEY2, json); }   // full: backups give way to the real save
+    if (saveFailed){ saveFailed = false; toast(t("save_ok_again")); }
+  } catch(e){
+    if (!saveFailed){ saveFailed = true; toast(t("save_full")); }
+    writing = false; return;
+  }
+  try {   // rotate the daily backups (b0 = newest); if there is no room for them, the main save still stands
+    const day = todayISO();
+    if (localStorage.getItem(BAK_DAY) !== day){
+      for (let i = BAK.length - 1; i > 0; i--){ const prev = localStorage.getItem(BAK[i-1]); if (prev) localStorage.setItem(BAK[i], prev); }
+      localStorage.setItem(BAK[0], json); localStorage.setItem(BAK_DAY, day);
+    }
+  } catch(e){ try { localStorage.removeItem(BAK[2]); localStorage.removeItem(BAK[1]); } catch(e2){} }
+  finally { writing = false; }
+};
+try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch(e){}
 const save = () => { const p = store.profiles[store.active]; p.data = S; p.updated = Date.now(); persist(); };
 
 try { const l = localStorage.getItem(KEY2+"-lang"); if (l === "ja" || l === "en") lang = l; else if ((navigator.language||"").startsWith("ja")) lang = "ja"; } catch(e){}
@@ -1093,7 +1127,7 @@ async function saveFile(filename, data, type){
 }
 const fileBase = () => (S.personal.nameKana || S.personal.nameJa || "rireki").replace(/\s+/g,"").replace(/[\\/:*?"<>|]/g,"");
 $("#io-save-one").addEventListener("click", () => saveFile(`${fileBase()}_rireki-studio.json`, JSON.stringify(S, null, 2), "application/json"));
-$("#io-save-all").addEventListener("click", () => saveFile(`rireki-studio_all_${todayISO()}.json`, JSON.stringify({app:"rireki-studio", kind:"bundle", profiles:Object.values(store.profiles).map(p => ({name:p.name, data:p.data}))}, null, 2), "application/json"));
+$("#io-save-all").addEventListener("click", () => markBackup() || saveFile(`rireki-studio_all_${todayISO()}.json`, JSON.stringify({app:"rireki-studio", kind:"bundle", profiles:Object.values(store.profiles).map(p => ({name:p.name, data:p.data}))}, null, 2), "application/json"));
 function importText(txt){
   try {
     const d = JSON.parse(txt); let n = 0, last;
@@ -1125,4 +1159,24 @@ setPane("edit");
 applyLang();
 setView(location.hash.startsWith("#g-") ? "guide" : "builder", location.hash.startsWith("#g-") ? location.hash.slice(3) : null);
 document.fonts?.ready.then(() => renderDoc());
+/* ---------- save safety: notices ---------- */
+function markBackup(){ try { localStorage.setItem(KEY2 + "-lastbackup", String(Date.now())); } catch(e){} document.querySelectorAll(".rs-notice.backup").forEach(x => x.remove()); return false; }
+function notice(cls, msg, actions){
+  const d = document.createElement("div"); d.className = "rs-notice " + cls; d.setAttribute("role", "status");
+  const p = document.createElement("span"); p.textContent = msg; d.appendChild(p);
+  for (const [label, fn] of actions){ const b = document.createElement("button"); b.type = "button"; b.className = "btn sm"; b.textContent = label; b.addEventListener("click", () => { d.remove(); fn && fn(); }); d.appendChild(b); }
+  const host = document.getElementById("builder"); (host || document.body).prepend(d); return d;
+}
+if (restoredFrom) notice("warn", t("restored"), [[t("close")]]);
+window.addEventListener("storage", e => {
+  if (e.key !== KEY2 || writing || document.querySelector(".rs-notice.tab")) return;
+  notice("warn tab", t("other_tab"), [[t("reload"), () => location.reload()]]);
+});
+{ // a gentle backup reminder: real CV data (not the example), edited, and no backup file in 21 days
+  let last = 0; try { last = +localStorage.getItem(KEY2 + "-lastbackup") || 0; } catch(e){}
+  const real = Object.values(store.profiles).some(p => !/^Example/.test(p.name) && (p.data.personal.nameJa || "").trim());
+  const snooze = (() => { try { return +localStorage.getItem(KEY2 + "-nudge") || 0; } catch(e){ return 0; } })();
+  if (!restoredFrom && real && Date.now() - last > 21 * 864e5 && Date.now() - snooze > 7 * 864e5)
+    notice("backup", t("backup_nudge"), [[t("backup_now"), () => document.getElementById("io-save-all").click()], [t("later"), () => { try { localStorage.setItem(KEY2 + "-nudge", String(Date.now())); } catch(e){} }]]);
+}
 })();
