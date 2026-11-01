@@ -47,8 +47,8 @@
 <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/zenkaku-400-a.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/fonts/fonts.css?v=310052af">
-<link rel="stylesheet" href="/assets/site.css?v=02b84f2a">
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=b7d758c5">
+<link rel="stylesheet" href="/assets/site.css?v=31c5d907">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/docs/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body class="page-notes lang-ja" data-lang="ja" data-other="/notes/dmarc/">
@@ -117,6 +117,7 @@
 <p>Windowsのコマンドプロンプトでは次のように確認できます（macOSやLinuxでは <code>dig TXT _dmarc.example.co.jp</code>）。</p>
 <pre><code>nslookup -type=TXT example.co.jp
 nslookup -type=TXT _dmarc.example.co.jp</code></pre>
+<p>いちばん簡単なのは、無料の診断ツール<a href="/ja/tools/mail/">Mail Shield</a>にドメインを入力する方法です。3つのレコードをまとめて確認し、評価と対処法を表示します。</p>
 <p>実際のメールでも確認できます。Gmailで自分宛てに送ったメールを開き、「メッセージのソースを表示」を選ぶと、SPF・DKIM・DMARCの結果が「PASS」と表示されていれば成功です。</p>
 
 <h2 id="more">DMARCだけでは足りない理由</h2>

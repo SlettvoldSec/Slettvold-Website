@@ -470,3 +470,53 @@ ul.bullets { padding-left: 20px; margin: 10px 0 14px; } ul.bullets li { margin: 
 .rare b { display: block; font-size: 15px; } .rare span { display: block; font-size: 13px; color: var(--muted); }
 .rare .rd { margin-top: 2px; } .rare .rp { margin-top: 4px; color: #ffb060; font-family: var(--mono); font-size: 12.5px; }
 .perfects { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
+/* Mail Shield (/tools/mail/): email authentication checker. Grade seal = a tilted hanko; records shown as zone-file lines. */
+.ms-form { max-width: 760px; margin-top: 8px; }
+.ms-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.ms-row input { flex: 1 1 260px; min-width: 0; width: auto; font: 16px var(--mono); padding: 13px 14px; }
+.ms-row .btn { border: 0; cursor: pointer; font-family: var(--display); font-size: 16px; padding: 13px 24px; }
+.ms-row .btn[disabled] { opacity: .65; cursor: progress; }
+.ms-more { margin: 10px 0 4px; font-size: 14px; color: var(--muted); }
+.ms-more summary { cursor: pointer; width: fit-content; }
+.ms-more input { margin-top: 8px; max-width: 420px; font: 14px var(--mono); }
+.ms-msg { border: 1px solid var(--line-red); border-radius: 12px; padding: 12px 16px; background: rgba(255, 49, 71, .06); }
+.ms-spin { display: inline-block; width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: ms-spin .8s linear infinite; vertical-align: -2px; margin-right: 8px; }
+@keyframes ms-spin { to { transform: rotate(360deg); } }
+.ms-summary { display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: center; margin-top: 30px; padding: 24px; border-radius: 16px; border: 1px solid var(--line);
+  background: linear-gradient(160deg, rgba(30, 14, 18, .72), rgba(14, 10, 12, .72)); backdrop-filter: blur(6px); }
+.ms-summary > * { min-width: 0; }
+.ms-seal { --s: var(--red); width: 116px; height: 116px; border-radius: 50%; border: 5px double var(--s); color: var(--s); display: grid; place-items: center; position: relative; transform: rotate(-8deg);
+  box-shadow: 0 0 34px color-mix(in srgb, var(--s) 22%, transparent), inset 0 0 18px color-mix(in srgb, var(--s) 16%, transparent); }
+.ms-seal b { font-family: var(--display); font-size: 60px; line-height: 1; }
+.ms-seal i { position: absolute; bottom: 14px; font: normal 11px var(--mono); letter-spacing: 1px; }
+.g-A .ms-seal, .g-B .ms-seal { --s: #4fd18b; } .g-C .ms-seal { --s: var(--ember); }
+.ms-domain { font: 20px var(--mono); overflow-wrap: anywhere; }
+.ms-sample { margin: 0 0 0 6px; vertical-align: middle; border-color: rgba(255, 176, 96, .45); color: var(--ember); }
+.ms-verdict { margin: 4px 0 8px; }
+.ms-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.ms-chip { font: 12px var(--mono); padding: 3px 10px; border-radius: 999px; border: 1px solid currentColor; text-decoration: none; }
+.lv-good { --c: #4fd18b; color: #4fd18b; } .lv-ok { --c: #a6d86e; color: #a6d86e; } .lv-warn { --c: var(--ember); color: var(--ember); }
+.lv-bad { --c: #ff5a6e; color: #ff5a6e; } .lv-info { --c: #9db8ff; color: #9db8ff; }
+.ms-check { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 6px; display: grid; gap: 12px; }
+.ms-check > * { min-width: 0; }
+.ms-check h2 { margin: 14px 0 0; font-size: 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.ms-check h2 .ms-pill { font: 700 12px var(--ui), var(--jpt); padding: 2px 10px; border-radius: 999px; background: var(--c); color: var(--bg); letter-spacing: 0; }
+.ms-label { font: 12px var(--mono), var(--jpt); letter-spacing: 1.5px; text-transform: uppercase; color: var(--soft); margin-bottom: 6px; }
+.ms-zone { position: relative; background: #070506; border: 1px solid var(--line); border-radius: 10px; overflow-x: auto; }
+.ms-zone pre { margin: 0; padding: 12px 84px 12px 14px; font: 13px/1.6 var(--mono); color: var(--ink); white-space: pre; background: none; border: 0; }
+.ms-zone .nm { color: var(--muted); } .ms-zone .ty { color: var(--red); }
+.ms-copy { position: absolute; top: 8px; right: 8px; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 2px 10px; font: 12px var(--ui), var(--jpt); color: var(--muted); cursor: pointer; }
+.ms-copy:hover, .ms-copy:focus-visible { color: var(--ink); border-color: var(--red); }
+.ms-findings { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.ms-findings li { display: grid; grid-template-columns: 3px 1fr; gap: 14px; }
+.ms-findings li::before { content: ""; background: var(--c); border-radius: 2px; }
+.ms-findings li > div { min-width: 0; }
+.ms-ft { font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
+.ms-lv { font: 11px var(--mono), var(--jpt); letter-spacing: 1px; margin-right: 8px; color: var(--c); }
+.ms-fd { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
+.ms-fix { margin: 6px 0 0; font-size: 15px; }
+.ms-fix b { color: var(--ember); margin-right: 8px; }
+@media (prefers-reduced-motion: reduce) { .ms-spin { animation: none; } }
+html.calm .ms-spin { animation: none; }
+@media (max-width: 560px) { .ms-summary { grid-template-columns: 1fr; } .ms-seal { width: 96px; height: 96px; } .ms-seal b { font-size: 48px; } .ms-seal i { bottom: 10px; } }

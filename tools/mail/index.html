@@ -1,0 +1,93 @@
+<!doctype html>
+<!--
+        ____________________________
+       /____________________________\
+          ||       slettvold       ||
+       ___||_______________________||___
+      /___||_______________________||___\
+          ||                       ||
+          ||   You looked behind   ||        Hello, curious one. 好奇心は良いことです。
+          ||   the gate. Nice.     ||
+          ||                       ||        This site has no trackers, no cookies and one
+          ||                       ||        small secret. The base64 below is your first clue.
+                                             U3RhcnQgd2l0aCB3aGF0IHJvYm90cyBhcmUgdG9sZCBub3QgdG8gcmVhZC4=
+     Built by hand by Tommy Slettvold · Norway → 日本 · tommy@slettvold.org
+-->
+<html lang="en">
+<head>
+<script>try{var p=JSON.parse(localStorage.getItem('prefs')||'{}'),d=document.documentElement;if(p.size)d.dataset.size=p.size;if(p.font)d.dataset.font=p.font;if(p.calm)d.classList.add('calm')}catch(e){}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI=' 'sha256-vmiflRfgCRauMUaJOwyI7tp2nbqr9TsWn2/Em5jUBs0=' 'sha256-SD0DTIYuFO45hEZUDsqItcgfsmsRXk/Ch774tXx+/mw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co https://cloudflare-dns.com https://dns.google; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0507">
+<meta name="color-scheme" content="dark">
+<title>Mail Shield: SPF, DKIM and DMARC checker · Tommy Slettvold</title>
+<meta name="description" content="Free checker that shows whether criminals can send email in your domain&#x27;s name. Checks SPF, DKIM, DMARC, MTA-STS and more, with plain-language fixes. Nothing is stored.">
+<link rel="canonical" href="https://slettvold.org/tools/mail/">
+<meta property="og:title" content="Mail Shield: SPF, DKIM and DMARC checker · Tommy Slettvold">
+<meta property="og:description" content="Free checker that shows whether criminals can send email in your domain&#x27;s name. Checks SPF, DKIM, DMARC, MTA-STS and more, with plain-language fixes. Nothing is stored.">
+<meta property="og:url" content="https://slettvold.org/tools/mail/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="slettvold.org">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://slettvold.org/og/en-tools-mail.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://slettvold.org/tools/mail/">
+<link rel="alternate" hreflang="ja" href="https://slettvold.org/ja/tools/mail/">
+<link rel="alternate" hreflang="x-default" href="https://slettvold.org/tools/mail/">
+
+<link rel="icon" href="/favicon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/img/app-192.png">
+<link rel="author" href="/humans.txt">
+<link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=b7d758c5">
+<link rel="stylesheet" href="/assets/site.css?v=31c5d907">
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/docs/*"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body class="page-projects lang-en" data-lang="en" data-other="/ja/tools/mail/">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <a class="brand" href="/"><span class="mon">ト</span><span class="nm">Tommy <b>Slettvold</b></span></a>
+  <button class="menu" aria-label="Menu" aria-expanded="false">☰</button>
+  <nav><a href="/japan/">Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/" class=on>Projects<i>作品</i></a><a href="/school/">School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/">Notes<i>メモ</i></a><a href="/shop/">Shop<i>店</i></a><a href="/contact/">Contact<i>連絡</i></a><a class="lang-switch" href="/ja/tools/mail/" hreflang="ja" data-set-lang="ja">日本語</a></nav>
+</div></header>
+<main class="wrap" id="main">
+<div class="kicker">Free tool · Email security</div>
+<h1>Mail Shield<span class="jp">なりすましメール診断</span></h1>
+<p class="lead">Can someone send email pretending to be your company? Enter your domain and see how well SPF, DKIM and DMARC protect it, with a plain-language fix for every problem.</p>
+
+<form class="form ms-form" id="ms-form" novalidate>
+  <label class="sr" for="ms-domain">Domain</label>
+  <div class="ms-row">
+    <input id="ms-domain" name="domain" placeholder="e.g. example.com" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="url">
+    <button class="btn red" id="ms-go" type="submit">Check</button>
+  </div>
+  <details class="ms-more"><summary>DKIM selectors (optional, comma-separated)</summary>
+    <input id="ms-selectors" name="selectors" placeholder="s1, mycompany2026" autocomplete="off" spellcheck="false"></details>
+  <p class="small">Only public DNS data is read, straight from your browser. The domain is not stored or sent to me; the only requests go to DNS-over-HTTPS (Cloudflare, with Google as backup).</p>
+</form>
+
+<noscript><p class="ms-msg">This checker runs in your browser and needs JavaScript.</p></noscript>
+<div id="ms-out" aria-live="polite"></div>
+
+<div class="prose">
+<h2>What the grade means</h2>
+<p>The grade weighs DMARC most, because it is the check that tells other mail servers to refuse fake mail. A domain without DMARC can't get better than D, and one that only monitors (<code>p=none</code>) can't get better than C. DKIM keys are found by guessing common selector names; if yours is not found, that does not mean it is missing.</p>
+<p>New to all this? Read <a href="/notes/dmarc/">SPF, DKIM and DMARC for small businesses</a> first.</p>
+</div>
+</main>
+<footer><div class="wrap">
+  <div><b>Tommy André Slettvold</b> <span class="jp">平原 智明</span> · Norway → 日本</div>
+  <div class="links"><a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a><a href="/contact/">Contact &amp; feedback</a><a href="https://www.linkedin.com/in/tommyandreslettvold" rel="me">LinkedIn</a><a href="https://github.com/SlettvoldSec" rel="me">GitHub</a><a href="/onidojo/">Oni Dojo</a><a href="/rireki/">Rireki Studio</a><a href="/hendelsespakken/" hreflang="nb">Hendelsespakken</a><a href="/personvernpakken/" hreflang="nb">Personvernpakken</a><a href="/privacy/">Privacy</a><a href="/security/">Security</a></div>
+  <div class="small">© 2026 Slettvold Security (SlettvoldSec) · org.nr. 935886457 · No cookies, no tracking.</div>
+</div></footer>
+<script src="/assets/fx.js?v=23785e8a" defer></script>
+<script src="/assets/prefs.js?v=68a6de10" defer></script>
+<script src="/assets/mailshield.js?v=8849e8ed" defer></script>
+</body>
+</html>
