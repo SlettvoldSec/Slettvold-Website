@@ -330,7 +330,14 @@
     return { domain, results, grade: g, checkedAt: new Date().toISOString() };
   }
 
-  const api = { checkDomain, dohResolver, normalizeDomain, orgDomain, parseSpf, parseTags, joinTxt, rsaBitsFromKey, SELECTORS };
+  // Counts DNS lookups for a record that is not published yet (used by the fix wizard).
+  async function countSpfLookups(record, resolve) {
+    const fake = '__draft__.invalid';
+    const wrapped = (n, t) => n === fake && t === 'TXT' ? Promise.resolve({ status: 'ok', answers: [record] }) : resolve(n, t);
+    return (await spfLookupCount(fake, wrapped, 0, new Set())).count;
+  }
+
+  const api = { checkDomain, countSpfLookups, dohResolver, normalizeDomain, orgDomain, parseSpf, parseTags, joinTxt, rsaBitsFromKey, SELECTORS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.MailShield = api;
 })(typeof window !== 'undefined' ? window : globalThis);
@@ -417,6 +424,61 @@
       fix_spf_example: 'v=spf1 include:（利用中のメールサービス） -all',
       fix_dmarc_example: 'v=DMARC1; p=none; rua=mailto:dmarc@{domain}',
       record_name: '名前',
+      wiz: {
+        title: '対策プランを作成',
+        intro: '使っているサービスを選ぶと、DNSに登録するレコードと、DKIMを有効にする手順をまとめます。',
+        provider: 'メールの送受信に使っているサービス',
+        services_label: 'あなたのドメイン名でメールを送る他のサービス',
+        rua: 'DMARCレポートの受信アドレス',
+        strict: 'これで全部です（許可していない送信元を拒否する -all を使う）',
+        nomail: 'このドメインではメールを一切送信しない',
+        extra: 'その他の送信元（任意）：include:… や ip4:… をスペース区切りで',
+        detected: '自動検出',
+        build: 'プランを作成',
+        step_spf: '1. SPFレコードを置き換える',
+        step_spf_d: 'ドメインのDNSで、既存のSPF（v=spf1 で始まるTXT）をこの1行に置き換えてください。SPFは1つだけにします。',
+        step_dkim: '2. DKIM（電子署名）を有効にする',
+        step_dmarc: '3. DMARCを段階的に強める',
+        step_dmarc_d: '各段階の間に2〜4週間あけ、レポートで正規のメールがすべて合格していることを確認してから次へ進みます。',
+        dmarc_stage: ['今すぐ', '2〜4週間後', 'さらに2〜4週間後'],
+        lookups: 'DNS参照：{n}回（上限10回）',
+        lookups_over: 'DNS参照が{n}回で上限の10回を超えます。使っていないサービスを外してください。',
+        recheck: '設定後、DNSの反映（数分〜48時間）を待ってから、もう一度診断してください。',
+        removed: '削除した記述：{list}',
+        providers: {
+          google: 'Google Workspace（Gmail）', microsoft: 'Microsoft 365（Outlook）', zoho_com: 'Zoho Mail（zoho.com）', zoho_eu: 'Zoho Mail（EU）',
+          zoho_jp: 'Zoho Mail（日本）', zoho_in: 'Zoho Mail（インド）', zoho_au: 'Zoho Mail（オーストラリア）', xserver: 'エックスサーバー',
+          proton: 'Proton Mail', fastmail: 'Fastmail', other: 'その他（レンタルサーバーなど）', none: 'なし',
+        },
+        services: {
+          zendesk: 'Zendesk', mailchimp: 'Mailchimp', shopify: 'Shopify', brevo: 'Brevo', hubspot: 'HubSpot',
+          sendgrid: 'SendGrid', ses: 'Amazon SES', freshdesk: 'Freshdesk',
+        },
+        dkim: {
+          google: 'Google管理コンソールの「Gmail」→「メールの認証」で2048ビットの鍵を作成し、表示されたTXTレコード（google._domainkey）をDNSに追加してから「認証を開始」を押します。',
+          microsoft: 'Microsoft Defenderポータルのメール認証設定（DKIM）でドメインを選び、表示される2つのCNAME（selector1 と selector2）をDNSに追加してから署名を有効にします。',
+          zoho: 'Zoho Mail管理コンソールの「ドメイン」→対象ドメイン→「メール設定」→「DKIM」でセレクタを追加（2048ビット）し、TXTレコードを登録して確認・有効化します。',
+          xserver: 'サーバーパネルの「DKIM設定」で対象ドメインを有効にします。DNSがエックスサーバー以外の場合は、表示されるTXTレコードを手動で追加します。',
+          proton: 'Protonの「設定」→「ドメイン名」でドメインを開き、DKIM用の3つのCNAMEレコードをDNSに追加します。',
+          fastmail: 'Fastmailの「設定」→「ドメイン」で表示される3つのCNAME（fm1〜fm3._domainkey）をDNSに追加します。',
+          other: 'ご利用のサービスの管理画面やマニュアルで「DKIM」を探し、表示されるレコードをDNSに追加して有効化してください。',
+          zendesk: 'Zendeskの管理センターでメールのドメイン認証（DKIM）を有効にし、表示される2つのCNAMEを追加します。',
+          mailchimp: 'Mailchimpの「ドメイン認証」で表示される2つのCNAMEを追加します。SPFに Mailchimp を追加する必要はありません。',
+          shopify: 'Shopifyの「送信者メールアドレス」の認証で表示されるCNAMEをすべて追加します。SPFへの追加は不要です。',
+          brevo: 'Brevoの「送信者・ドメイン」でドメインを認証し、表示されるDKIMレコードを追加します。SPFへの追加は通常不要です。',
+          hubspot: 'HubSpotの「ドメインとURL」→「メール送信ドメイン」で表示されるDKIMレコードを追加します。',
+          sendgrid: 'SendGridの「Sender Authentication」でドメインを認証し、表示されるCNAMEをすべて追加します（SPFもこれで処理されます）。',
+          ses: 'Amazon SESでドメインのEasy DKIMを有効にし、3つのCNAMEを追加します。SPFを合わせたい場合はカスタムMAIL FROMドメインを設定します。',
+          freshdesk: 'Freshdeskの管理画面のメール設定で「カスタムメールサーバー」または「DKIM」を有効にし、表示されるレコードを追加します。',
+        },
+        notes: {
+          nomail: '送信しないドメインでは、SPFで全拒否、DMARCですぐに reject にするのが安全です。メールを受信もしない場合は、MXを削除するかNull MX（0 .）にできます。',
+          spf_empty: '許可する送信元がまだありません。メールサービスを選ぶか、送信元を入力してください。',
+          spf_removed: '不要または非推奨の記述を外しました。',
+          dmarc_no_rua: 'レポートの受信アドレスがないと、問題に気づけません。専用のアドレス（例：dmarc@あなたのドメイン）を入力してください。',
+          rua_external: 'レポート先が別のドメインです。受け取る側のドメインに、外部レポートを許可するレコードが必要な場合があります（DMARCレポートサービスでは通常自動です）。',
+        },
+      },
     },
     en: {
       title: 'Email Authentication Checker',
@@ -496,10 +558,176 @@
       fix_spf_example: 'v=spf1 include:(your mail service) -all',
       fix_dmarc_example: 'v=DMARC1; p=none; rua=mailto:dmarc@{domain}',
       record_name: 'Name',
+      wiz: {
+        title: 'Build your fix plan',
+        intro: 'Pick the services you use and get the exact DNS records to publish, plus how to switch on DKIM in each one.',
+        provider: 'Your email provider (where your mailboxes live)',
+        services_label: 'Other services that send email as your domain',
+        rua: 'Address for DMARC reports',
+        strict: 'That is everything (reject all other senders with -all)',
+        nomail: 'This domain never sends email',
+        extra: 'Other senders (optional): include:… or ip4:…, separated by spaces',
+        detected: 'detected',
+        build: 'Build plan',
+        step_spf: '1. Replace your SPF record',
+        step_spf_d: 'In your domain\'s DNS, replace the existing SPF record (the TXT that starts with v=spf1) with this line. Keep exactly one.',
+        step_dkim: '2. Switch on DKIM signing',
+        step_dmarc: '3. Tighten DMARC step by step',
+        step_dmarc_d: 'Leave 2 to 4 weeks between steps, and only move on when the reports show all your real mail passing.',
+        dmarc_stage: ['Now', 'After 2–4 weeks', 'After another 2–4 weeks'],
+        lookups: 'DNS lookups: {n} (limit 10)',
+        lookups_over: 'This needs {n} DNS lookups, over the limit of 10. Remove services you no longer use.',
+        recheck: 'When you have made the changes, wait for DNS to update (minutes to 48 hours) and run the check again.',
+        removed: 'Removed: {list}',
+        providers: {
+          google: 'Google Workspace (Gmail)', microsoft: 'Microsoft 365 (Outlook)', zoho_com: 'Zoho Mail (zoho.com)', zoho_eu: 'Zoho Mail (EU)',
+          zoho_jp: 'Zoho Mail (Japan)', zoho_in: 'Zoho Mail (India)', zoho_au: 'Zoho Mail (Australia)', xserver: 'Xserver',
+          proton: 'Proton Mail', fastmail: 'Fastmail', other: 'Other (web host, etc.)', none: 'None',
+        },
+        services: {
+          zendesk: 'Zendesk', mailchimp: 'Mailchimp', shopify: 'Shopify', brevo: 'Brevo', hubspot: 'HubSpot',
+          sendgrid: 'SendGrid', ses: 'Amazon SES', freshdesk: 'Freshdesk',
+        },
+        dkim: {
+          google: 'In the Google Admin console, open Gmail → Authenticate email, generate a 2048-bit key, add the TXT record (google._domainkey) to your DNS, then click Start authentication.',
+          microsoft: 'In the Microsoft Defender portal, open the email authentication settings (DKIM), select your domain, add the two CNAME records it shows (selector1 and selector2) and enable signing.',
+          zoho: 'In the Zoho Mail admin console, open Domains → your domain → Email configuration → DKIM, add a 2048-bit selector, publish the TXT record, then verify and enable it.',
+          xserver: 'In the Xserver server panel, open DKIM settings and enable it for the domain. If your DNS is not at Xserver, add the TXT record it shows yourself.',
+          proton: 'In Proton, open Settings → Domain names, select your domain and add the three DKIM CNAME records to your DNS.',
+          fastmail: 'In Fastmail, open Settings → Domains and add the three CNAME records (fm1 to fm3._domainkey) to your DNS.',
+          other: 'Look for "DKIM" in your provider\'s admin panel or help pages, add the record it gives you to your DNS and switch signing on.',
+          zendesk: 'In Zendesk Admin Center, turn on domain authentication (DKIM) for email and add the two CNAME records it shows.',
+          mailchimp: 'Use Mailchimp\'s domain authentication and add the two CNAME records it shows. Do not add Mailchimp to SPF.',
+          shopify: 'Authenticate your sender email in Shopify and add every CNAME record it shows. No SPF change is needed.',
+          brevo: 'Authenticate the domain under Senders & domains in Brevo and add the DKIM record it shows. An SPF change is usually not needed.',
+          hubspot: 'In HubSpot, open Domains & URLs → Email sending domains and add the DKIM records it shows.',
+          sendgrid: 'Use Sender Authentication in SendGrid to authenticate the domain and add all the CNAME records it shows (they cover SPF too).',
+          ses: 'Enable Easy DKIM for the domain in Amazon SES and add the three CNAME records. For SPF alignment, also set a custom MAIL FROM domain.',
+          freshdesk: 'In Freshdesk\'s email settings, enable DKIM (or a custom mail server) and add the records it shows.',
+        },
+        notes: {
+          nomail: 'For a domain that never sends mail, the safe setup is SPF that rejects everything and DMARC at reject straight away. If it also never receives mail, remove the MX records or publish a null MX (0 .).',
+          spf_empty: 'Nothing is allowed to send yet. Choose your email provider or add your senders.',
+          spf_removed: 'Unneeded or deprecated terms were removed.',
+          dmarc_no_rua: 'Without a report address you will not notice problems. Enter a dedicated address, such as dmarc@yourdomain.',
+          rua_external: 'Reports go to another domain. That domain may need a record that allows external reports (DMARC report services usually handle this).',
+        },
+      },
     },
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = M;
   else root.MailShieldText = M;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+/* Mail Shield fix wizard: builds the exact SPF record, a staged DMARC plan and DKIM steps for the services a domain uses.
+   SPF include values were checked against each provider's documentation and live DNS (November 2026).
+   Senders such as Mailchimp or Shopify authenticate through DKIM records from their own dashboard and must NOT be added
+   to SPF (their bounce domain is theirs, so an include adds lookups without helping DMARC). */
+(function (root) {
+  'use strict';
+
+  // Mailbox providers: where the company's own mail is sent from.
+  const PROVIDERS = {
+    google:    { spf: ['_spf.google.com'], dkim: 'google', mx: /google\.com\.?$|googlemail\.com\.?$/i },
+    microsoft: { spf: ['spf.protection.outlook.com'], dkim: 'microsoft', mx: /mail\.protection\.outlook\.com\.?$/i },
+    zoho_com:  { spf: ['zohomail.com'], dkim: 'zoho', mx: /zoho\.com\.?$/i },
+    zoho_eu:   { spf: ['zoho.eu'], dkim: 'zoho', mx: /zoho\.eu\.?$/i },
+    zoho_jp:   { spf: ['zoho.jp'], dkim: 'zoho', mx: /zoho\.jp\.?$/i },
+    zoho_in:   { spf: ['zoho.in'], dkim: 'zoho', mx: /zoho\.in\.?$/i },
+    zoho_au:   { spf: ['zoho.com.au'], dkim: 'zoho', mx: /zoho\.com\.au\.?$/i },
+    xserver:   { spf: ['spf.sender.xserver.jp'], dkim: 'xserver', mx: /xserver\.jp\.?$/i },
+    proton:    { spf: ['_spf.protonmail.ch'], dkim: 'proton', mx: /protonmail\.ch\.?$/i },
+    fastmail:  { spf: ['spf.messagingengine.com'], dkim: 'fastmail', mx: /messagingengine\.com\.?$/i },
+    other:     { spf: [], dkim: 'other' },
+    none:      { spf: [], dkim: null },
+  };
+
+  // Other services that send mail as the domain. spf: include to add (only where the service documents one).
+  const SERVICES = {
+    zendesk:   { spf: ['mail.zendesk.com'] },
+    mailchimp: { spf: [] }, shopify: { spf: [] }, brevo: { spf: [] }, hubspot: { spf: [] },
+    sendgrid:  { spf: [] }, ses: { spf: [] }, freshdesk: { spf: [] },
+  };
+
+  // Includes that are commonly added but do not help DMARC for these services today.
+  const NOT_NEEDED = { 'servers.mcsv.net': 'mailchimp', 'shops.shopify.com': 'shopify' };
+
+  function knownInclude(v) {
+    v = v.toLowerCase();
+    for (const p of Object.values(PROVIDERS)) if (p.spf.includes(v)) return true;
+    for (const s of Object.values(SERVICES)) if (s.spf.includes(v)) return true;
+    return false;
+  }
+
+  function detectProvider(mxRecords, spfRecord) {
+    const hosts = (mxRecords || []).map(m => m.replace(/^\d+\s+/, ''));
+    for (const [id, p] of Object.entries(PROVIDERS)) if (p.mx && hosts.some(h => p.mx.test(h))) return id;
+    const spf = (spfRecord || '').toLowerCase();
+    for (const [id, p] of Object.entries(PROVIDERS)) if (p.spf.some(i => spf.includes('include:' + i))) return id;
+    return hosts.length ? 'other' : null;
+  }
+
+  // opts: { domain, provider, services:[], extra:[terms], current: existing SPF or '', strict: bool, noMail: bool,
+  //         dmarcCurrent: existing DMARC or '', rua: address }
+  function buildPlan(opts) {
+    const domain = opts.domain;
+    const notes = [];
+    if (opts.noMail) {
+      return {
+        spf: 'v=spf1 -all',
+        dmarcSteps: ['v=DMARC1; p=reject' + (opts.rua ? '; rua=mailto:' + opts.rua : '')],
+        dkim: [], notes: ['nomail'], keep: [], removed: [],
+      };
+    }
+    const terms = [];
+    const add = t => { if (!terms.some(x => x.toLowerCase() === t.toLowerCase())) terms.push(t); };
+    const kept = [], removed = [];
+    // 1. keep what the current record already allows (own servers, IP ranges, unknown includes), drop ptr and unneeded includes
+    if (opts.current) {
+      for (const t of opts.current.trim().split(/\s+/).slice(1)) {
+        const m = t.match(/^([+?~-]?)(include|a|mx|ip4|ip6|exists|ptr)([:\/].*)?$/i);
+        if (!m) continue; // drops all, redirect, exp and anything unparsable
+        const name = m[2].toLowerCase(), val = (m[3] || '').replace(/^:/, '').toLowerCase();
+        if (m[1] === '-' || m[1] === '~' || m[1] === '?') continue;
+        if (name === 'ptr') { removed.push(t); continue; }
+        if (name === 'include' && NOT_NEEDED[val]) { removed.push(t); continue; }
+        if (name === 'include' && knownInclude(val)) continue; // re-added below only if still selected
+        add(t.replace(/^\+/, '')); kept.push(t);
+      }
+    }
+    // 2. add the selected provider and services
+    const prov = PROVIDERS[opts.provider] || PROVIDERS.other;
+    for (const i of prov.spf) add('include:' + i);
+    for (const s of opts.services || []) for (const i of (SERVICES[s] || { spf: [] }).spf) add('include:' + i);
+    for (const t of opts.extra || []) if (/^(include:[a-z0-9._-]+|ip4:[0-9./]+|ip6:[0-9a-f:./]+|a|mx|a:[a-z0-9._-]+|mx:[a-z0-9._-]+)$/i.test(t)) add(t);
+    // 3. ending: -all only when the owner confirms the list is complete
+    const spf = ['v=spf1', ...terms, opts.strict ? '-all' : '~all'].join(' ');
+    if (!terms.length) notes.push('spf_empty');
+    if (removed.length) notes.push('spf_removed');
+
+    // DMARC: start where the domain is today and go one step at a time
+    const rua = opts.rua ? 'rua=mailto:' + opts.rua : '';
+    const cur = (opts.dmarcCurrent || '').toLowerCase();
+    const curP = (cur.match(/(?:^|;)\s*p=(none|quarantine|reject)/) || [])[1] || null;
+    const curRua = (opts.dmarcCurrent || '').match(/(?:^|;)\s*rua=([^;]+)/i);
+    const ruaPart = curRua ? 'rua=' + curRua[1].trim() : rua;
+    const rec = p => ['v=DMARC1', 'p=' + p, ruaPart].filter(Boolean).join('; ');
+    const order = ['none', 'quarantine', 'reject'];
+    const from = curP ? order.indexOf(curP) + (curP === 'reject' ? 0 : 1) : 0;
+    const dmarcSteps = order.slice(Math.min(from, 2)).map(rec);
+    if (!ruaPart) notes.push('dmarc_no_rua');
+    if (opts.rua && opts.rua.split('@')[1] && opts.rua.split('@')[1].toLowerCase() !== domain && !opts.rua.toLowerCase().endsWith('.' + domain)) notes.push('rua_external');
+
+    // DKIM steps per sender
+    const dkim = [];
+    if (prov.dkim) dkim.push(prov.dkim);
+    for (const s of opts.services || []) dkim.push(s);
+    return { spf, dmarcSteps, dkim, notes, kept, removed };
+  }
+
+  const api = { PROVIDERS, SERVICES, NOT_NEEDED, buildPlan, detectProvider };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.MailShieldWizard = api;
 })(typeof window !== 'undefined' ? window : globalThis);
 
 /* Mail Shield page UI for slettvold.org. Static text lives in the page (pages/en|ja/tools__mail.html);
@@ -517,7 +745,8 @@
   const RANK = { bad: 4, warn: 3, ok: 2, info: 1, good: 0 };
   const NAMES = { spf: 'SPF', dmarc: 'DMARC', dkim: 'DKIM', mtasts: 'MTA-STS', tlsrpt: 'TLS-RPT', mx: 'MX', bimi: 'BIMI' };
   const ORDER = ['dmarc', 'spf', 'dkim', 'mtasts', 'tlsrpt', 'mx', 'bimi'];
-  let last = null, sample = false;
+  let last = null, sample = false, resolver = null;
+  const WZ = window.MailShieldWizard;
 
   function status(r) {
     if (r.score === null) return 'info';
@@ -545,7 +774,7 @@
   function zone(rows, label) {
     const plain = rows.map(r => r.join('\t')).join('\n');
     const lines = rows.map(r => '<span class="nm">' + esc(r[0]) + '</span>  <span class="ty">' + esc(r[1]) + '</span>  ' + esc(r[2])).join('\n');
-    return '<div class="ms-zone-wrap"><div class="ms-label">' + esc(label) + '</div><div class="ms-zone"><pre>' + lines
+    return '<div class="ms-zone-wrap">' + (label ? '<div class="ms-label">' + esc(label) + '</div>' : '') + '<div class="ms-zone"><pre>' + lines
       + '</pre><button type="button" class="ms-copy" data-copy="' + esc(plain) + '">' + esc(T('copy')) + '</button></div></div>';
   }
 
@@ -578,7 +807,62 @@
       if (s) h += zone(s, T('suggested'));
       h += '</section>';
     }
+    if (WZ) h += wizardForm();
     out.innerHTML = h;
+  }
+
+  // ---------- fix wizard ----------
+  function wizardForm() {
+    const W = TX[lang].wiz, d = last.domain;
+    const get = k => last.results.find(r => r.key === k);
+    const spfNow = get('spf').records[0] || '';
+    const found = WZ.detectProvider(get('mx').records, spfNow);
+    const prov = found || 'google';
+    const opts = Object.keys(WZ.PROVIDERS).map(id => '<option value="' + id + '"' + (id === prov ? ' selected' : '') + '>' + esc(W.providers[id]) + (id === found ? ' · ' + esc(W.detected) : '') + '</option>').join('');
+    const svc = Object.keys(WZ.SERVICES).map(id => {
+      const on = (WZ.SERVICES[id].spf || []).some(i => spfNow.toLowerCase().includes('include:' + i));
+      return '<label class="ms-tick"><input type="checkbox" name="svc" value="' + id + '"' + (on ? ' checked' : '') + '> ' + esc(W.services[id]) + '</label>';
+    }).join('');
+    return '<section class="ms-wiz" id="ms-wiz"><h2>' + esc(W.title) + '</h2><p class="ms-fd">' + esc(W.intro) + '</p>'
+      + '<form class="form ms-wform" id="ms-wform" novalidate>'
+      + '<label for="ms-w-prov">' + esc(W.provider) + '</label><select id="ms-w-prov">' + opts + '</select>'
+      + '<fieldset><legend>' + esc(W.services_label) + '</legend><div class="ms-ticks">' + svc + '</div></fieldset>'
+      + '<label for="ms-w-extra">' + esc(W.extra) + '</label><input id="ms-w-extra" autocomplete="off" spellcheck="false" placeholder="include:spf.example.jp ip4:203.0.113.5">'
+      + '<label for="ms-w-rua">' + esc(W.rua) + '</label><input id="ms-w-rua" type="email" autocomplete="off" value="dmarc@' + esc(d) + '">'
+      + '<label class="ms-tick"><input type="checkbox" id="ms-w-strict"> ' + esc(W.strict) + '</label>'
+      + '<label class="ms-tick"><input type="checkbox" id="ms-w-nomail"> ' + esc(W.nomail) + '</label>'
+      + '<div><button class="btn red" type="submit">' + esc(W.build) + '</button></div></form><div id="ms-plan" aria-live="polite"></div></section>';
+  }
+
+  async function buildPlan() {
+    const W = TX[lang].wiz, d = last.domain;
+    const get = k => last.results.find(r => r.key === k);
+    const plan = WZ.buildPlan({
+      domain: d, provider: $('ms-w-prov').value,
+      services: [...document.querySelectorAll('#ms-wform input[name=svc]:checked')].map(x => x.value),
+      extra: $('ms-w-extra').value.split(/\s+/).filter(Boolean), current: get('spf').records[0] || '',
+      strict: $('ms-w-strict').checked, noMail: $('ms-w-nomail').checked,
+      dmarcCurrent: get('dmarc').where === '_dmarc.' + d ? (get('dmarc').records[0] || '') : '', rua: $('ms-w-rua').value.trim(),
+    });
+    let n = null;
+    try { n = await MS.countSpfLookups(plan.spf, resolver || MS.dohResolver()); } catch (e) { n = null; }
+    let h = '<div class="ms-step"><h3>' + esc(W.step_spf) + '</h3><p class="ms-fd">' + esc(W.step_spf_d) + '</p>' + zone([[d + '.', 'TXT', '"' + plan.spf + '"']], '');
+    if (n !== null) h += '<p class="ms-fd ' + (n > 10 ? 'lv-bad' : '') + '">' + esc(fill(n > 10 ? W.lookups_over : W.lookups, { n })) + '</p>';
+    if (plan.removed.length) h += '<p class="ms-fd">' + esc(fill(W.removed, { list: plan.removed.join(' ') })) + '</p>';
+    h += '</div>';
+    if (plan.dkim.length) {
+      const names = Object.assign({}, W.providers, W.services, { zoho: 'Zoho Mail', other: W.providers.other });
+      h += '<div class="ms-step"><h3>' + esc(W.step_dkim) + '</h3><ul class="ms-findings">'
+        + plan.dkim.map(k => '<li class="lv-info"><div><div class="ms-ft">' + esc(names[k] || k) + '</div><p class="ms-fd">' + esc(W.dkim[k]) + '</p></div></li>').join('') + '</ul></div>';
+    }
+    h += '<div class="ms-step"><h3>' + esc(W.step_dmarc) + '</h3><p class="ms-fd">' + esc(W.step_dmarc_d) + '</p>';
+    const stages = W.dmarc_stage.slice(0, plan.dmarcSteps.length);
+    plan.dmarcSteps.forEach((rec, i) => { h += zone([['_dmarc.' + d + '.', 'TXT', '"' + rec + '"']], stages[i] || ''); });
+    h += '</div>';
+    for (const k of plan.notes) h += '<p class="ms-msg">' + esc(W.notes[k]) + '</p>';
+    h += '<p class="small">' + esc(W.recheck) + '</p>';
+    $('ms-plan').innerHTML = h;
+    $('ms-plan').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
   }
 
   $('ms-out').addEventListener('click', e => {
@@ -588,13 +872,20 @@
     try { navigator.clipboard.writeText(b.getAttribute('data-copy')).then(done, select); } catch (err) { select(); }
   });
 
+  $('ms-out').addEventListener('submit', e => { if (e.target.id === 'ms-wform') { e.preventDefault(); buildPlan(); } });
+  $('ms-out').addEventListener('change', e => {
+    if (e.target.id !== 'ms-w-nomail') return;
+    for (const el of document.querySelectorAll('#ms-wform select, #ms-wform input[name=svc], #ms-w-extra, #ms-w-strict')) el.disabled = e.target.checked;
+  });
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const go = $('ms-go'), label = go.textContent;
     const sels = $('ms-selectors').value.split(/[\s,、]+/).map(s => s.trim().toLowerCase()).filter(s => /^[a-z0-9._-]{1,63}$/.test(s));
     go.disabled = true; go.innerHTML = '<span class="ms-spin" aria-hidden="true"></span>' + esc(T('checking'));
     try {
-      const res = await MS.checkDomain($('ms-domain').value, MS.dohResolver(), { selectors: sels });
+      resolver = MS.dohResolver();
+      const res = await MS.checkDomain($('ms-domain').value, resolver, { selectors: sels });
       const failed = k => res.results && res.results.find(r => r.key === k).findings.some(f => f.id === 'dns_error');
       last = !res.error && failed('mx') && failed('spf') && failed('dmarc') ? { error: 'network' } : res;
     } catch (err) { last = { error: 'network' }; }
@@ -617,6 +908,7 @@
     '_dmarc.example.co.jp TXT': ['v=DMARC1; p=none; rua=mailto:dmarc@example.co.jp'],
     'google._domainkey.example.co.jp TXT': ['v=DKIM1; k=rsa; p=' + KEY],
   };
-  MS.checkDomain('example.co.jp', async (n, t) => ({ status: 'ok', answers: EX[n.toLowerCase() + ' ' + t] || [] }))
-    .then(r => { if (!last) { last = r; sample = true; render(); } });
+  const exResolver = async (n, t) => ({ status: 'ok', answers: EX[n.toLowerCase() + ' ' + t] || [] });
+  MS.checkDomain('example.co.jp', exResolver)
+    .then(r => { if (!last) { last = r; sample = true; resolver = exResolver; render(); } });
 })();
