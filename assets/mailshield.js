@@ -203,7 +203,7 @@
   const SELECTORS = [
     'default', 'google', 'selector1', 'selector2', 'k1', 'k2', 'k3', 's1', 's2', 'dkim', 'mail', 'smtp',
     'fm1', 'fm2', 'fm3', 'protonmail', 'protonmail2', 'protonmail3', 'zoho', 'zmail', 'mxvault',
-    'everlytickey1', 'everlytickey2', 'mandrill', 'mailjet', 'sib', 'brevo1', 'brevo2', 'pm', 'key1', 'key2', 'dk', 'x',
+    'everlytickey1', 'everlytickey2', 'mandrill', 'mailjet', 'sib', 'brevo1', 'brevo2', 'pm', 'key1', 'key2', 'dk', 'x', 'resend', 'hs1', 'hs2', 'cm',
   ];
 
   function rsaBitsFromKey(b64) {
