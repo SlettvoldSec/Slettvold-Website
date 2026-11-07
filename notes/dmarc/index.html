@@ -47,7 +47,7 @@
 <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=f3d70b77">
-<link rel="stylesheet" href="/assets/site.css?v=40be0771">
+<link rel="stylesheet" href="/assets/site.css?v=b7bf467f">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/docs/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body class="page-notes lang-en" data-lang="en" data-other="/ja/notes/dmarc/">
@@ -116,7 +116,7 @@
 <p>On Windows, in Command Prompt (on macOS or Linux, use <code>dig TXT _dmarc.example.com</code>):</p>
 <pre><code>nslookup -type=TXT example.com
 nslookup -type=TXT _dmarc.example.com</code></pre>
-<p>The easiest way: run your domain through <a href="/tools/mail/">Mail Shield</a>, my free checker. It reads all three records, grades them and explains each fix.</p>
+<p>The easiest way: run your domain through <a href="/tools/sentinel/mail/">Sentinel Mail check</a>, my free checker. It reads all three records, grades them and explains each fix.</p>
 <p>Or check a real email: send one to a Gmail address, open it and choose "Show original". If SPF, DKIM and DMARC all say PASS, you're done.</p>
 
 <h2 id="more">Why DMARC alone isn't enough</h2>

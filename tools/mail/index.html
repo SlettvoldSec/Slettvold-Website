@@ -18,15 +18,16 @@
 <script>try{var p=JSON.parse(localStorage.getItem('prefs')||'{}'),d=document.documentElement;if(p.size)d.dataset.size=p.size;if(p.font)d.dataset.font=p.font;if(p.calm)d.classList.add('calm')}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI=' 'sha256-vmiflRfgCRauMUaJOwyI7tp2nbqr9TsWn2/Em5jUBs0=' 'sha256-SD0DTIYuFO45hEZUDsqItcgfsmsRXk/Ch774tXx+/mw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co https://cloudflare-dns.com https://dns.google; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI=' 'sha256-vmiflRfgCRauMUaJOwyI7tp2nbqr9TsWn2/Em5jUBs0=' 'sha256-SD0DTIYuFO45hEZUDsqItcgfsmsRXk/Ch774tXx+/mw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex">
 <meta name="theme-color" content="#0b0507">
 <meta name="color-scheme" content="dark">
-<title>Mail Shield: SPF, DKIM and DMARC checker · Tommy Slettvold</title>
-<meta name="description" content="Free checker that shows whether criminals can send email in your domain&#x27;s name. Checks SPF, DKIM, DMARC, MTA-STS and more, with plain-language fixes. Nothing is stored.">
+<title>Moved to Sentinel · Tommy Slettvold</title>
+<meta name="description" content="Mail Shield is now part of Sentinel. Taking you to the new page…">
 <link rel="canonical" href="https://slettvold.org/tools/mail/">
-<meta property="og:title" content="Mail Shield: SPF, DKIM and DMARC checker · Tommy Slettvold">
-<meta property="og:description" content="Free checker that shows whether criminals can send email in your domain&#x27;s name. Checks SPF, DKIM, DMARC, MTA-STS and more, with plain-language fixes. Nothing is stored.">
+<meta property="og:title" content="Moved to Sentinel · Tommy Slettvold">
+<meta property="og:description" content="Mail Shield is now part of Sentinel. Taking you to the new page…">
 <meta property="og:url" content="https://slettvold.org/tools/mail/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="slettvold.org">
@@ -46,7 +47,7 @@
 <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=f3d70b77">
-<link rel="stylesheet" href="/assets/site.css?v=40be0771">
+<link rel="stylesheet" href="/assets/site.css?v=b7bf467f">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/docs/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body class="page-projects lang-en" data-lang="en" data-other="/ja/tools/mail/">
@@ -57,43 +58,8 @@
   <nav><a href="/japan/">Japan<i>日本</i></a><a href="/work/">Work<i>仕事</i></a><a href="/projects/" class=on>Projects<i>作品</i></a><a href="/school/">School<i>学校</i></a><a href="/hobbies/">Hobbies<i>趣味</i></a><a href="/notes/">Notes<i>メモ</i></a><a href="/shop/">Shop<i>店</i></a><a href="/contact/">Contact<i>連絡</i></a><a class="lang-switch" href="/ja/tools/mail/" hreflang="ja" data-set-lang="ja">日本語</a></nav>
 </div></header>
 <main class="wrap" id="main">
-<div class="kicker">Free tool · Email security</div>
-<h1>Mail Shield<span class="jp">なりすましメール診断</span></h1>
-<p class="lead">Can someone send email pretending to be your company? Enter your domain and see how well SPF, DKIM and DMARC protect it, with a plain-language fix for every problem.</p>
-
-<form class="form ms-form" id="ms-form" novalidate>
-  <label class="sr" for="ms-domain">Domain</label>
-  <div class="ms-row">
-    <input id="ms-domain" name="domain" placeholder="e.g. example.com" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="url">
-    <button class="btn red" id="ms-go" type="submit">Check</button>
-  </div>
-  <details class="ms-more"><summary>DKIM selectors (optional, comma-separated)</summary>
-    <input id="ms-selectors" name="selectors" placeholder="s1, mycompany2026" autocomplete="off" spellcheck="false"></details>
-  <p class="small">Only public DNS data is read, straight from your browser. The domain is not stored or sent to me; the only requests go to DNS-over-HTTPS (Cloudflare, with Google as backup).</p>
-</form>
-
-<noscript><p class="ms-msg">This checker runs in your browser and needs JavaScript.</p></noscript>
-<div id="ms-out" aria-live="polite"></div>
-
-<section class="ms-plans-wrap" id="monitoring">
-<h2>Daily monitoring<span class="jp">毎日の監視</span></h2>
-<p class="lead">Settings break quietly: a new mail service, a DNS change, an expired key. Mail Shield checks your domains every day and emails you when something gets weaker.</p>
-<div class="ms-plans">
-  <div class="card ms-plan"><div class="g">1</div><h3>1 domain</h3><p class="ms-price">$4 <span>/ month</span></p>
-    <ul><li>Daily check of SPF, DKIM, DMARC, MTA-STS and more</li><li>Email alert when the grade drops or a record disappears</li><li>Alerts in English or Japanese</li></ul>
-    <a class="btn red" href="https://buy.stripe.com/dRmfZ96bH3nm4IM8hx2ZO09">Start monitoring</a></div>
-  <div class="card ms-plan"><div class="g">5</div><h3>5 domains</h3><p class="ms-price">$15 <span>/ month</span></p>
-    <ul><li>Everything in the 1-domain plan</li><li>For companies with several brands or for IT consultants</li><li>Add and remove domains at any time</li></ul>
-    <a class="btn red" href="https://buy.stripe.com/bJe14f57De20b7a55l2ZO0a">Start monitoring</a></div>
-</div>
-<p class="small">Prices include tax. Payment is handled by Stripe as the seller of record. Cancel any time. <a href="/tools/mail/terms/">Terms</a> · <a href="/privacy/">Privacy</a> · Already a customer? <a href="/tools/mail/manage/">Manage your domains</a></p>
-</section>
-
-<div class="prose">
-<h2>What the grade means</h2>
-<p>The grade weighs DMARC most, because it is the check that tells other mail servers to refuse fake mail. A domain without DMARC can't get better than D, and one that only monitors (<code>p=none</code>) can't get better than C. DKIM keys are found by guessing common selector names; if yours is not found, that does not mean it is missing.</p>
-<p>New to all this? Read <a href="/notes/dmarc/">SPF, DKIM and DMARC for small businesses</a> first.</p>
-</div>
+<div class="kicker">Sentinel</div>
+<p class="lead"><a id="moved" href="/tools/sentinel/mail/">Mail Shield is now part of Sentinel. Taking you to the new page…</a></p>
 </main>
 <footer><div class="wrap">
   <div><b>Tommy André Slettvold</b> <span class="jp">平原 智明</span> · Norway → 日本</div>
@@ -102,6 +68,6 @@
 </div></footer>
 <script src="/assets/fx.js?v=23785e8a" defer></script>
 <script src="/assets/prefs.js?v=68a6de10" defer></script>
-<script src="/assets/mailshield.js?v=fd1d8d7d" defer></script>
+<script src="/assets/moved.js?v=97b9daa2"></script>
 </body>
 </html>

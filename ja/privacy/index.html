@@ -47,7 +47,7 @@
 <link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/zenkaku-400-a.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=f3d70b77">
-<link rel="stylesheet" href="/assets/site.css?v=40be0771">
+<link rel="stylesheet" href="/assets/site.css?v=b7bf467f">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/docs/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body class="page-privacy lang-ja" data-lang="ja" data-other="/privacy/">
@@ -82,9 +82,9 @@
   <h2>テンプレートパックとワークブックのご購入</h2>
   <p>企業が<a href="/hendelsespakken/">Hendelsespakken</a>または<a href="/personvernpakken/">Personvernpakken</a>を購入した場合、ファイルの提供、領収書・請求書の送付、法律で定められた会計記録の保存（5年間）のために、購入者の氏名、メールアドレス、会社名、組織番号、支払い情報を取り扱います。カード決済はStripeが同社のプライバシーポリシーに基づいて処理し、私がカード番号全体を見ることはありません。法的根拠は契約と会計記録の保存義務です。JLPTワークブックはStripe Managed Paymentsで販売しています。Stripeが販売者として決済と税金を処理し、私はファイルのお届けとサポートのためにお名前とメールアドレスを受け取ります。</p>
 
-  <h2>Mail Shield</h2>
-  <p><a href="/ja/tools/mail/">無料の診断ツール</a>はお使いのブラウザ上で動作します。入力したドメインは、公開DNSレコードを読み取るために、ブラウザから直接Cloudflare（予備としてGoogle）のDNS-over-HTTPSサービスへ送られます。私には送信されず、保存もされません。</p>
-  <p>Mail Shieldの監視サービスはStripe Managed Paymentsを通じて販売しています。Stripeが販売者として決済と税金の処理を行い、私はメールアドレスと契約の状態を受け取ります。サービスの提供のため、メールアドレス、追加されたドメイン、毎日の診断結果、送信した通知を、ドイツ・フランクフルト（EU）のSupabaseに保存します。診断では、CloudflareとGoogleを通じてドメインの公開DNSレコードを確認します。管理用の専用リンクは、元に戻せない形（ハッシュ）でのみ保存します。通知とリンクのメールはResend（EUリージョン）から送信します。法的根拠は契約の履行です（GDPR第6条1項(b)）。すべてのデータは契約終了から30日後に削除します。ご依頼があれば、それより早く削除します。</p>
+  <h2>Sentinel（旧 Mail Shield）</h2>
+  <p>無料の<a href="/ja/tools/sentinel/mail/">Sentinel メール診断</a>はお使いのブラウザ上で動作します。入力したドメインは、公開DNSレコードを読み取るために、ブラウザから直接Cloudflare（予備としてGoogle）のDNS-over-HTTPSサービスへ送られます。私には送信されず、保存もされません。</p>
+  <p>Sentinelの監視サービスはStripe Managed Paymentsを通じて販売しています。Stripeが販売者として決済と税金の処理を行い、私はメールアドレスと契約の状態を受け取ります。サービスの提供のため、メールアドレス、通知の言語、追加されたドメイン、その診断結果（公開DNSレコード、セキュリティヘッダー、証明書とドメインの期限）、1日ごとの稼働状況の統計、送信した通知を、ドイツ・フランクフルト（EU）のSupabaseに保存します。診断では、GoogleとCloudflareを通じて公開DNSレコードを確認し、各ドメインのトップページにHTTPSでアクセスし、公開の証明書透明性検索crt.shから証明書の情報を、rdap.orgを通じて登録情報を取得します。これらのサービスに送るのはドメイン名だけで、メールアドレスは送りません。ダッシュボードの専用リンクは、元に戻せない形（ハッシュ）でのみ保存します。通知とリンクのメールはResend（EUリージョン）から送信します。法的根拠は契約の履行です（GDPR第6条1項(b)）。稼働状況の統計と通知は90日後に削除し、すべてのデータは契約終了から30日後に削除します。ご依頼があれば、それより早く削除します。</p>
 
   <h2>あなたの権利</h2>
   <p>ご自身の情報の開示、訂正、削除、利用への異議を求めることができます。<a href="mailto:tommy@slettvold.org">tommy@slettvold.org</a>までご連絡ください。また、各国のデータ保護機関（ノルウェーではDatatilsynet）に苦情を申し立てることもできます。</p>

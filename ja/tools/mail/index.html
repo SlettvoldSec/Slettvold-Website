@@ -18,15 +18,16 @@
 <script>try{var p=JSON.parse(localStorage.getItem('prefs')||'{}'),d=document.documentElement;if(p.size)d.dataset.size=p.size;if(p.font)d.dataset.font=p.font;if(p.calm)d.classList.add('calm')}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI=' 'sha256-vmiflRfgCRauMUaJOwyI7tp2nbqr9TsWn2/Em5jUBs0=' 'sha256-SD0DTIYuFO45hEZUDsqItcgfsmsRXk/Ch774tXx+/mw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co https://cloudflare-dns.com https://dns.google; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zznl0XDD6rxfW160DMmYGS996goNv89dUejjAXgn1xI=' 'sha256-vmiflRfgCRauMUaJOwyI7tp2nbqr9TsWn2/Em5jUBs0=' 'sha256-SD0DTIYuFO45hEZUDsqItcgfsmsRXk/Ch774tXx+/mw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://wavaynaaqsfsitxhdpbs.supabase.co; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex">
 <meta name="theme-color" content="#0b0507">
 <meta name="color-scheme" content="dark">
-<title>Mail Shield：SPF・DKIM・DMARC診断 · スレットボルド・トミー</title>
-<meta name="description" content="あなたのドメインが、なりすましメールに悪用されないか無料で診断。SPF・DKIM・DMARC・MTA-STSなどを確認し、分かりやすい対処法を表示します。入力内容は保存しません。">
+<title>Sentinelに移動しました · スレットボルド・トミー</title>
+<meta name="description" content="Mail ShieldはSentinelの一部になりました。新しいページに移動します…">
 <link rel="canonical" href="https://slettvold.org/ja/tools/mail/">
-<meta property="og:title" content="Mail Shield：SPF・DKIM・DMARC診断 · スレットボルド・トミー">
-<meta property="og:description" content="あなたのドメインが、なりすましメールに悪用されないか無料で診断。SPF・DKIM・DMARC・MTA-STSなどを確認し、分かりやすい対処法を表示します。入力内容は保存しません。">
+<meta property="og:title" content="Sentinelに移動しました · スレットボルド・トミー">
+<meta property="og:description" content="Mail ShieldはSentinelの一部になりました。新しいページに移動します…">
 <meta property="og:url" content="https://slettvold.org/ja/tools/mail/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="slettvold.org">
@@ -47,7 +48,7 @@
 <link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/zenkaku-400-a.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=f3d70b77">
-<link rel="stylesheet" href="/assets/site.css?v=40be0771">
+<link rel="stylesheet" href="/assets/site.css?v=b7bf467f">
 <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/docs/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body class="page-projects lang-ja" data-lang="ja" data-other="/tools/mail/">
@@ -58,43 +59,8 @@
   <nav><a href="/ja/japan/">日本<i>Japan</i></a><a href="/ja/work/">仕事<i>Work</i></a><a href="/ja/projects/" class=on>作品<i>Projects</i></a><a href="/ja/school/">学校<i>School</i></a><a href="/ja/hobbies/">趣味<i>Hobbies</i></a><a href="/ja/notes/">メモ<i>Notes</i></a><a href="/ja/shop/">店<i>Shop</i></a><a href="/ja/contact/">連絡<i>Contact</i></a><a class="lang-switch" href="/tools/mail/" hreflang="en" data-set-lang="en">English</a></nav>
 </div></header>
 <main class="wrap" id="main">
-<div class="kicker">無料ツール · メールセキュリティ</div>
-<h1>Mail Shield<span class="jp">なりすましメール診断</span></h1>
-<p class="lead">あなたの会社の名前で、第三者がメールを送れる状態になっていませんか？ドメインを入力すると、SPF・DKIM・DMARCの設定状況と、問題ごとの分かりやすい対処法を表示します。</p>
-
-<form class="form ms-form" id="ms-form" novalidate>
-  <label class="sr" for="ms-domain">ドメイン</label>
-  <div class="ms-row">
-    <input id="ms-domain" name="domain" placeholder="例：example.co.jp" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="url">
-    <button class="btn red" id="ms-go" type="submit">診断する</button>
-  </div>
-  <details class="ms-more"><summary>DKIMセレクタを指定（任意・カンマ区切り）</summary>
-    <input id="ms-selectors" name="selectors" placeholder="s1, mycompany2026" autocomplete="off" spellcheck="false"></details>
-  <p class="small">DNSの公開情報だけを、お使いのブラウザから直接確認します。入力したドメインは保存せず、私にも送信されません。通信先はDNS-over-HTTPS（Cloudflare、予備としてGoogle）のみです。</p>
-</form>
-
-<noscript><p class="ms-msg">この診断はブラウザ上で動くため、JavaScriptが必要です。</p></noscript>
-<div id="ms-out" aria-live="polite"></div>
-
-<section class="ms-plans-wrap" id="monitoring">
-<h2>毎日の監視<span class="jp">Monitoring</span></h2>
-<p class="lead">設定は気づかないうちに壊れます。新しいメールサービスの追加、DNSの変更、期限切れの鍵。Mail Shieldが毎日ドメインを確認し、弱くなったときにメールでお知らせします。</p>
-<div class="ms-plans">
-  <div class="card ms-plan"><div class="g">一</div><h3>1ドメイン</h3><p class="ms-price">$4 <span>/ 月</span></p>
-    <ul><li>SPF・DKIM・DMARC・MTA-STSなどを毎日確認</li><li>評価が下がったり、レコードが消えたりしたらメールで通知</li><li>通知は日本語または英語</li></ul>
-    <a class="btn red" href="https://buy.stripe.com/dRmfZ96bH3nm4IM8hx2ZO09">監視を始める</a></div>
-  <div class="card ms-plan"><div class="g">五</div><h3>5ドメイン</h3><p class="ms-price">$15 <span>/ 月</span></p>
-    <ul><li>1ドメインプランのすべての機能</li><li>複数のブランドを持つ会社やITコンサルタント向け</li><li>ドメインはいつでも追加・削除できます</li></ul>
-    <a class="btn red" href="https://buy.stripe.com/bJe14f57De20b7a55l2ZO0a">監視を始める</a></div>
-</div>
-<p class="small">価格は税込みです。お支払いはStripeが販売者として処理します。いつでも解約できます。<a href="/ja/tools/mail/terms/">利用規約</a> · <a href="/ja/privacy/">プライバシーポリシー</a> · ご契約中の方は<a href="/ja/tools/mail/manage/">ドメインの管理</a></p>
-</section>
-
-<div class="prose">
-<h2>評価の見方</h2>
-<p>他のメールサーバーに「なりすましメールを受け取らないで」と伝えるのはDMARCなので、評価ではDMARCを最も重視しています。DMARCがないドメインはD以下、監視のみ（<code>p=none</code>）の場合はC以下になります。DKIMの鍵はよく使われるセレクタ名から探すため、見つからなくても未設定とは限りません。</p>
-<p>初めての方は、先に<a href="/ja/notes/dmarc/">小さな会社のためのなりすましメール対策</a>をお読みください。</p>
-</div>
+<div class="kicker">Sentinel</div>
+<p class="lead"><a id="moved" href="/ja/tools/sentinel/mail/">Mail ShieldはSentinelの一部になりました。新しいページに移動します…</a></p>
 </main>
 <footer><div class="wrap">
   <div><b>トミー・アンドレ・スレットボルド</b>（平原 智明）· ノルウェー → 日本</div>
@@ -103,6 +69,6 @@
 </div></footer>
 <script src="/assets/fx.js?v=23785e8a" defer></script>
 <script src="/assets/prefs.js?v=68a6de10" defer></script>
-<script src="/assets/mailshield.js?v=fd1d8d7d" defer></script>
+<script src="/assets/moved.js?v=97b9daa2"></script>
 </body>
 </html>
