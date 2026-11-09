@@ -1,18 +1,10 @@
 {
- "games": 1705,
- "hours": 15368,
+ "games": 1706,
+ "hours": 15369,
  "level": 53,
  "badges": 52,
  "xp": 17362,
- "recent": [
-  {
-   "appid": 892970,
-   "name": "Valheim",
-   "hours": 1272,
-   "img": "/steam/img/892970.jpg",
-   "hours2w": 8.8
-  }
- ],
+ "recent": [],
  "mostPlayed": [
   {
    "appid": 892970,
@@ -141,10 +133,10 @@
   }
  ],
  "japanese": {
-  "games": 552,
+  "games": 553,
   "voice": 135,
-  "checked": 1705,
-  "total": 1705
+  "checked": 1706,
+  "total": 1706
  },
- "updated": "2026-11-08T05:04:24.726Z"
+ "updated": "2026-11-09T05:21:14.194Z"
 }
