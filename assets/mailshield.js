@@ -253,9 +253,13 @@
     }
     let score = 15;
     res.findings.push(f('good', 'dkim_found', { list: live.map(x => x.selector).join(', ') }));
-    const weak = live.filter(x => x.bits && x.bits < 2048);
-    if (weak.length) { score -= weak.some(x => x.bits <= 512) ? 10 : 5; res.findings.push(f('warn', 'dkim_weak', { list: weak.map(x => x.selector + ' (' + x.bits + ' bit)').join(', ') })); }
+    // Only keys under 1024 bits lose points. 1024-bit keys are still what several large mail services publish
+    // (the domain owner cannot change them), so they get a note and no penalty.
+    const weak = live.filter(x => x.bits && x.bits < 1024);
+    const mid = live.filter(x => x.bits && x.bits >= 1024 && x.bits < 2048);
+    if (weak.length) { score -= 10; res.findings.push(f('warn', 'dkim_weak', { list: weak.map(x => x.selector + ' (' + x.bits + ' bit)').join(', ') })); }
     else score += 5;
+    if (mid.length) res.findings.push(f('info', 'dkim_1024', { list: mid.map(x => x.selector).join(', ') }));
     if (live.some(x => /t=[^;]*y/i.test(x.record))) res.findings.push(f('warn', 'dkim_testing'));
     res.score = Math.max(0, Math.min(score, res.max));
     return res;
@@ -409,7 +413,8 @@
       dkim_wildcard: { t: 'すべてのセレクタに同じ鍵が返されます（ワイルドカード）', d: '*._domainkey にワイルドカードが設定されています。個別のセレクタが正しく設定されているか、メールのヘッダーで確認してください。' },
       dkim_wildcard_none: { t: 'DKIM鍵がないことを明示しています', d: 'すべてのセレクタに空の鍵（p=）を返す設定です。メールを送信しないドメインでは良い設定です。' },
       dkim_revoked_only: { t: '無効化されたDKIM鍵のみ見つかりました', d: 'p= が空の鍵は無効です。', fix: 'メールサービスの管理画面で新しいDKIM鍵を発行し、DNSに登録してください。' },
-      dkim_weak: { t: '短い鍵があります：{list}', d: '2048ビット未満のRSA鍵は弱いとされています。', fix: 'メールサービスで2048ビットの鍵に更新してください。' },
+      dkim_weak: { t: '短い鍵があります：{list}', d: '1024ビット未満のRSA鍵は弱く、偽造されるおそれがあります。', fix: 'メールサービスで2048ビットの鍵に更新してください。' },
+      dkim_1024: { t: '1024ビットの鍵：{list}', d: '現在も広く使われており、評価は下がりません。メールサービスが対応していれば、2048ビットの鍵がより安全です。' },
       dkim_testing: { t: 'テストモード（t=y）の鍵があります', d: '受信側が署名の失敗を無視する場合があります。', fix: '動作確認が済んだら t=y を外してください。' },
       mx_ok: { t: '受信サーバー：{list}', d: '' },
       mx_none: { t: 'MXレコードがありません', d: 'このドメインではメールを受信しないようです。送信もしない場合は、SPF「v=spf1 -all」とDMARC「p=reject」でなりすましを防げます。' },
@@ -543,7 +548,8 @@
       dkim_wildcard: { t: 'Every selector returns the same key (wildcard)', d: 'A wildcard is set on *._domainkey. Check a sent message\'s headers to confirm your real selector works.' },
       dkim_wildcard_none: { t: 'Declares that no DKIM keys exist', d: 'Every selector returns an empty key (p=). This is good practice for a domain that never sends mail.' },
       dkim_revoked_only: { t: 'Only revoked DKIM keys found', d: 'A key with an empty p= is disabled.', fix: 'Create a new DKIM key in your mail service and publish it in DNS.' },
-      dkim_weak: { t: 'Short keys: {list}', d: 'RSA keys under 2048 bits are considered weak.', fix: 'Rotate to a 2048-bit key in your mail service.' },
+      dkim_weak: { t: 'Short keys: {list}', d: 'RSA keys under 1024 bits are weak and can be forged.', fix: 'Rotate to a 2048-bit key in your mail service.' },
+      dkim_1024: { t: '1024-bit keys: {list}', d: 'Still widely used and accepted, so this does not lower the grade. A 2048-bit key is stronger if your mail service offers one.' },
       dkim_testing: { t: 'A key is in test mode (t=y)', d: 'Receivers may ignore failed signatures.', fix: 'Remove t=y once you have verified it works.' },
       mx_ok: { t: 'Receiving servers: {list}', d: '' },
       mx_none: { t: 'No MX record', d: 'This domain does not seem to receive mail. If it also never sends mail, publish SPF "v=spf1 -all" and DMARC "p=reject" to stop spoofing.' },
