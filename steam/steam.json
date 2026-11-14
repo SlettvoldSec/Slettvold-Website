@@ -1,6 +1,6 @@
 {
  "games": 1706,
- "hours": 15369,
+ "hours": 15378,
  "level": 53,
  "badges": 52,
  "xp": 17362,
@@ -8,9 +8,16 @@
   {
    "appid": 39210,
    "name": "FINAL FANTASY XIV Online",
-   "hours": 1031,
+   "hours": 1039,
    "img": "/steam/img/39210.jpg",
-   "hours2w": 0.6
+   "hours2w": 9
+  },
+  {
+   "appid": 330160,
+   "name": "Substance Designer 5",
+   "hours": 0,
+   "img": "/steam/img/330160.jpg",
+   "hours2w": 0
   }
  ],
  "mostPlayed": [
@@ -23,7 +30,7 @@
   {
    "appid": 39210,
    "name": "FINAL FANTASY XIV Online",
-   "hours": 1031,
+   "hours": 1039,
    "img": "/steam/img/39210.jpg"
   },
   {
@@ -50,7 +57,7 @@
   },
   {
    "appid": 39210,
-   "hours": 1031
+   "hours": 1039
   },
   {
    "appid": 306130,
@@ -146,5 +153,5 @@
   "checked": 1706,
   "total": 1706
  },
- "updated": "2026-11-12T12:47:46.168Z"
+ "updated": "2026-11-14T11:31:36.555Z"
 }
