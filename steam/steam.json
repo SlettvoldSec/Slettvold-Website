@@ -1,6 +1,6 @@
 {
  "games": 1706,
- "hours": 15396,
+ "hours": 15419,
  "level": 53,
  "badges": 52,
  "xp": 17362,
@@ -8,9 +8,9 @@
   {
    "appid": 39210,
    "name": "FINAL FANTASY XIV Online",
-   "hours": 1057,
+   "hours": 1080,
    "img": "/steam/img/39210.jpg",
-   "hours2w": 26.9
+   "hours2w": 50
   },
   {
    "appid": 330160,
@@ -30,7 +30,7 @@
   {
    "appid": 39210,
    "name": "FINAL FANTASY XIV Online",
-   "hours": 1057,
+   "hours": 1080,
    "img": "/steam/img/39210.jpg"
   },
   {
@@ -57,7 +57,7 @@
   },
   {
    "appid": 39210,
-   "hours": 1057
+   "hours": 1080
   },
   {
    "appid": 306130,
@@ -153,5 +153,5 @@
   "checked": 1706,
   "total": 1706
  },
- "updated": "2026-11-15T11:58:46.738Z"
+ "updated": "2026-11-16T12:48:55.302Z"
 }
