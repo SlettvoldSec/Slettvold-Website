@@ -1,6 +1,6 @@
 {
  "games": 1706,
- "hours": 15598,
+ "hours": 15621,
  "level": 53,
  "badges": 52,
  "xp": 17362,
@@ -8,9 +8,9 @@
   {
    "appid": 39210,
    "name": "FINAL FANTASY XIV Online",
-   "hours": 1260,
+   "hours": 1283,
    "img": "/steam/img/39210.jpg",
-   "hours2w": 228.8
+   "hours2w": 251.1
   },
   {
    "appid": 330160,
@@ -22,16 +22,16 @@
  ],
  "mostPlayed": [
   {
+   "appid": 39210,
+   "name": "FINAL FANTASY XIV Online",
+   "hours": 1283,
+   "img": "/steam/img/39210.jpg"
+  },
+  {
    "appid": 892970,
    "name": "Valheim",
    "hours": 1272,
    "img": "/steam/img/892970.jpg"
-  },
-  {
-   "appid": 39210,
-   "name": "FINAL FANTASY XIV Online",
-   "hours": 1260,
-   "img": "/steam/img/39210.jpg"
   },
   {
    "appid": 570,
@@ -57,7 +57,7 @@
   },
   {
    "appid": 39210,
-   "hours": 1260
+   "hours": 1283
   },
   {
    "appid": 306130,
@@ -111,7 +111,7 @@
    "game": "Valheim",
    "name": "Top of the World",
    "desc": "Build something very high up.",
-   "pct": 0.1,
+   "pct": 0.2,
    "icon": "/steam/img/ach-892970-BuildHighWorld.jpg"
   },
   {
@@ -153,5 +153,5 @@
   "checked": 1706,
   "total": 1706
  },
- "updated": "2026-11-26T13:56:47.810Z"
+ "updated": "2026-11-27T13:55:28.225Z"
 }
